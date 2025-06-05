@@ -4,11 +4,15 @@ import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoDistributore;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DistributoreTipicita extends Venditore {
 
-
+	private List<Prodotto> pacchetto;
 	public DistributoreTipicita(String nome, String email, String password) {
 		super(nome, email, password);
+		pacchetto = new ArrayList<Prodotto>();
 	}
 
 	/**
@@ -20,8 +24,7 @@ public class DistributoreTipicita extends Venditore {
 	 * @param listaProdotti
 	 */
 	public ProdottoDistributore creaPacchetto(String nome, float prezzo, boolean stato, String descrizione, Prodotto listaProdotti) {
-		// TODO - implement DistributoreTipicita.creaPacchetto
-		throw new UnsupportedOperationException();
+		return new ProdottoDistributore(nome, prezzo, stato, descrizione, pacchetto);
 	}
 
 	/**
@@ -29,8 +32,7 @@ public class DistributoreTipicita extends Venditore {
 	 * @param prodotto
 	 */
 	public void aggiungiProdottoAlPacchetto(Prodotto prodotto) {
-		// TODO - implement DistributoreTipicita.aggiungiProdottoAlPacchetto
-		throw new UnsupportedOperationException();
+		pacchetto.add(prodotto);
 	}
 
 	/**
@@ -38,8 +40,7 @@ public class DistributoreTipicita extends Venditore {
 	 * @param prodotto
 	 */
 	public void eliminaProdottoDalPacchetto(Prodotto prodotto) {
-		// TODO - implement DistributoreTipicita.eliminaProdottoDalPacchetto
-		throw new UnsupportedOperationException();
+		pacchetto.remove(prodotto);
 	}
 
 }

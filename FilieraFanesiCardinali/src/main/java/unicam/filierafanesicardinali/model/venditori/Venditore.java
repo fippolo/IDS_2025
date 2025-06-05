@@ -22,8 +22,7 @@ public class Venditore {
 	 * @param descrizione
 	 */
 	public Prodotto creaProdotto(String nome, float prezzo, boolean stato, String descrizione) {
-		// TODO - implement Venditore.creaProdotto
-		throw new UnsupportedOperationException();
+		return new Prodotto(nome, prezzo, stato, descrizione);
 	}
 
 }
