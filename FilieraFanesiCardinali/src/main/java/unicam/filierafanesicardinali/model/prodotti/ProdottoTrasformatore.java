@@ -4,9 +4,13 @@ public class ProdottoTrasformatore extends Prodotto {
 
 	private String ProcessoDiTrasformazione;
 
+	public ProdottoTrasformatore(String nome, float prezzo, boolean stato, String descrizione, String processoDiTrasformazione) {
+		super(nome, prezzo, stato, descrizione);
+		this.ProcessoDiTrasformazione = processoDiTrasformazione;
+	}
+
 	public String getProcessoDiTrasformazione() {
-		// TODO - implement ProdottoTrasformatore.getProcessoDiTrasformazione
-		throw new UnsupportedOperationException();
+		return ProcessoDiTrasformazione;
 	}
 
 	/**
@@ -14,8 +18,7 @@ public class ProdottoTrasformatore extends Prodotto {
 	 * @param processoDiTrasformazione
 	 */
 	public void setProcessoDiTrasformazione(String processoDiTrasformazione) {
-		// TODO - implement ProdottoTrasformatore.setProcessoDiTrasformazione
-		throw new UnsupportedOperationException();
+		this.ProcessoDiTrasformazione = processoDiTrasformazione;
 	}
 
 }

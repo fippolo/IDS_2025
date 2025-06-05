@@ -4,10 +4,16 @@ import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 
 public class Venditore {
 
-	private int nome;
+	private String nome;
 	private Prodotto listaProdotti;
 	private String email;
+	private String password;
 
+	public Venditore(String nome, String email, String password) {
+		this.nome = nome;
+		this.email = email;
+		this.password = password;
+	}
 	/**
 	 * 
 	 * @param nome
