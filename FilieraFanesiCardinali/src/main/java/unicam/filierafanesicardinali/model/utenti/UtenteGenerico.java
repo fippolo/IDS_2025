@@ -1,5 +1,7 @@
 package unicam.filierafanesicardinali.model.utenti;
 
+import java.util.Objects;
+
 public class UtenteGenerico {
 
 	private String nome;
@@ -46,6 +48,27 @@ public class UtenteGenerico {
 	public void richiediRuolo() {
 		// TODO - implement UtenteGenerico.richiediRuolo
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (getClass() != obj.getClass()) return false;
+		if(obj==null && this==null) return true;
+		UtenteGenerico that = (UtenteGenerico) obj;
+		if (this.nome == that.nome && this.email == that.email) return false;
+		return true;
+
+	}
+
+	/**
+	 * Calcola l'hash code per questo utente basato sulla email.
+	 *
+	 * @return il valore hash code
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, nome);
 	}
 
 }

@@ -9,6 +9,13 @@ public class Evento {
 	private String ora;
 	private Indirizzo luogo;
 
+	public Evento(String nome, String data, String ora, Indirizzo luogo) {
+		this.nome = nome;
+		this.data = data;
+		this.ora = ora;
+		this.luogo = luogo;
+	}
+
 	public String getNome() {
 		return this.nome;
 	}
@@ -45,18 +52,16 @@ public class Evento {
 		this.ora = ora;
 	}
 
-	public String getLuogo() {
-		// TODO - implement Evento.getLuogo
-		throw new UnsupportedOperationException();
+	public Indirizzo getLuogo() {
+		return this.luogo;
 	}
 
 	/**
 	 * 
 	 * @param luogo
 	 */
-	public void setLuogo(String luogo) {
-		// TODO - implement Evento.setLuogo
-		throw new UnsupportedOperationException();
+	public void setLuogo(Indirizzo luogo) {
+		this.luogo = luogo;
 	}
 
 }

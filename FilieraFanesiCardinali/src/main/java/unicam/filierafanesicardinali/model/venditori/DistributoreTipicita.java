@@ -6,6 +6,11 @@ import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 public class DistributoreTipicita extends Venditore {
 
+
+	public DistributoreTipicita(String nome, String email, String password) {
+		super(nome, email, password);
+	}
+
 	/**
 	 * 
 	 * @param nome

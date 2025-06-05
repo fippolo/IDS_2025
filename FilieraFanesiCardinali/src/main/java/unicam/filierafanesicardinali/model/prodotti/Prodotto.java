@@ -10,14 +10,17 @@ public class Prodotto {
 	private boolean stato;
 	private String descrizione;
 
+	public Prodotto(String nome, float prezzo, boolean stato, String descrizione) {
+		this.nome = nome;
+		this.prezzo = prezzo;
+		this.stato = stato;
+		this.descrizione = descrizione;
+	}
+
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * 
-	 * @param nome
-	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -26,10 +29,7 @@ public class Prodotto {
 		return this.prezzo;
 	}
 
-	/**
-	 * 
-	 * @param prezzo
-	 */
+
 	public void setPrezzo(float prezzo) {
 		this.prezzo = prezzo;
 	}
@@ -38,10 +38,6 @@ public class Prodotto {
 		return this.stato;
 	}
 
-	/**
-	 * 
-	 * @param stato
-	 */
 	public void setStato(boolean stato) {
 		this.stato = stato;
 	}
@@ -50,14 +46,9 @@ public class Prodotto {
 		return this.descrizione;
 	}
 
-	/**
-	 * 
-	 * @param descrizione
-	 */
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-
 
 
 	@Override

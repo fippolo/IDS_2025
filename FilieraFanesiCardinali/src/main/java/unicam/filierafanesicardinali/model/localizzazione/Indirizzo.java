@@ -6,42 +6,28 @@ public class Indirizzo {
 	private String CAP;
 	private String civico;
 	private String citta;
-	private int provincia;
+	private String provincia;
 
 	public String getVia() {
 		return this.via;
 	}
 
-	/**
-	 * 
-	 * @param via
-	 */
 	public void setVia(String via) {
 		this.via = via;
 	}
 
 	public String getCAP() {
-		// TODO - implement Indirizzo.getCAP
-		throw new UnsupportedOperationException();
+		return this.CAP;
 	}
 
-	/**
-	 * 
-	 * @param CAP
-	 */
 	public void setCap(String CAP) {
-		// TODO - implement Indirizzo.setCap
-		throw new UnsupportedOperationException();
+		this.CAP = CAP;
 	}
 
 	public String getCivico() {
 		return this.civico;
 	}
 
-	/**
-	 * 
-	 * @param civico
-	 */
 	public void setCivico(String civico) {
 		this.civico = civico;
 	}
@@ -50,26 +36,16 @@ public class Indirizzo {
 		return this.citta;
 	}
 
-	/**
-	 * 
-	 * @param citta
-	 */
 	public void setCitta(String citta) {
 		this.citta = citta;
 	}
 
 	public String getProvincia() {
-		// TODO - implement Indirizzo.getProvincia
-		throw new UnsupportedOperationException();
+		return this.provincia + "";
 	}
 
-	/**
-	 * 
-	 * @param provincia
-	 */
 	public void setProvincia(String provincia) {
-		// TODO - implement Indirizzo.setProvincia
-		throw new UnsupportedOperationException();
+		this.provincia = provincia;
 	}
 
 }

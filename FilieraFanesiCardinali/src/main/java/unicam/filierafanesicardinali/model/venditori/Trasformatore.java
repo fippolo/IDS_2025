@@ -1,8 +1,13 @@
 package unicam.filierafanesicardinali.model.venditori;
 
+import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoTrasformatore;
 
 public class Trasformatore extends Venditore {
+
+	public Trasformatore(String nome, String email, String password) {
+		super(nome, email, password);
+	}
 
 	/**
 	 * 
@@ -13,8 +18,8 @@ public class Trasformatore extends Venditore {
 	 * @param descrizione
 	 */
 	public ProdottoTrasformatore creaProdotto(String nome, float prezzo, boolean stato, String processoDiTrasformazione, String descrizione) {
-		// TODO - implement Trasformatore.creaProdotto
-		throw new UnsupportedOperationException();
+		ProdottoTrasformatore nuovoProdotto = new ProdottoTrasformatore(nome,prezzo,stato,descrizione,processoDiTrasformazione);
+		return nuovoProdotto;
 	}
 
 }
