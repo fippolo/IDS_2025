@@ -1,17 +1,25 @@
 package unicam.filierafanesicardinali.model.utenti;
 
+import unicam.filierafanesicardinali.model.acquisto.Carello;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 
 public class Acquirente {
 
 	private String nome;
+	private Carello carello;
+
+
+	public Acquirente(String nome) {
+		this.nome = nome;
+		carello = new Carello();
+	}
 
 	/**
 	 * 
 	 * @param prodotto
 	 */
 	public void aggiungiProdotto(Prodotto prodotto) {
-		// TODO - implement Acquirente.aggiungiProdotto
+		carello.aggiungiProdotto(prodotto);
 		throw new UnsupportedOperationException();
 	}
 
@@ -20,13 +28,11 @@ public class Acquirente {
 	 * @param prodotto
 	 */
 	public void eliminaProdotto(Prodotto prodotto) {
-		// TODO - implement Acquirente.eliminaProdotto
-		throw new UnsupportedOperationException();
+		carello.rimuoviProdotto(prodotto);
 	}
 
 	public void svuotaCarrello() {
-		// TODO - implement Acquirente.svuotaCarrello
-		throw new UnsupportedOperationException();
+		carello.svuotaCarello();
 	}
 
 }
