@@ -7,9 +7,9 @@ public class ProdottoDistributore extends Prodotto {
 
 	private List<Prodotto> listaProdotti;
 
-	public ProdottoDistributore(String nome, float prezzo, boolean stato, String descrizione) {
+	public ProdottoDistributore(String nome, float prezzo, boolean stato, String descrizione, List<Prodotto> listaProdotti) {
 		super(nome, prezzo, stato, descrizione);
-		listaProdotti = new ArrayList<Prodotto>();
+		this.listaProdotti = listaProdotti;
 	}
 
 	public List<Prodotto> getListaProdotti() {

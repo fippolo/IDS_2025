@@ -18,8 +18,7 @@ public class Produttore extends Venditore {
 	 * @param descrizione
 	 */
 	public ProdottoProduttore creaProdotto(String nome, float prezzo, boolean stato, String metodoDiColtivazione, String descrizione) {
-		// TODO - implement Produttore.creaProdotto
-		throw new UnsupportedOperationException();
+		return new ProdottoProduttore(nome, prezzo, stato, descrizione ,metodoDiColtivazione);
 	}
 
 }
