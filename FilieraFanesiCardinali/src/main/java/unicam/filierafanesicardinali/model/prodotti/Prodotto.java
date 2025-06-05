@@ -1,6 +1,8 @@
 package unicam.filierafanesicardinali.model.prodotti;
 
 
+import java.util.Objects;
+
 public class Prodotto {
 
 	private String nome;
@@ -56,4 +58,23 @@ public class Prodotto {
 		this.descrizione = descrizione;
 	}
 
+
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Prodotto prodotto = (Prodotto) o;
+		if (Float.compare(prodotto.prezzo, prezzo) != 0) return false;
+		if (stato != prodotto.stato) return false;
+		if (nome.compareTo(prodotto.nome) != 0) return false;
+		if (descrizione.compareTo(prodotto.descrizione) != 0) return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = Objects.hash(nome, prezzo, stato, descrizione);
+		return result;
+	}
 }
