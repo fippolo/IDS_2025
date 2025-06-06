@@ -51,10 +51,30 @@ public class Piattaforma {
 	public void addDistributoreTipicita(DistributoreTipicita distributoreTipicita) {
 		this.listaDistributoreTipicita.add(distributoreTipicita);
 	}
+
 	public void addCuratore(Curatore curatore) {
 		this.listaCuratore.add(curatore);
 	}
+
 	public void addAcquirente(Acquirente acquirente) {
 		this.listaAcquirente.add(acquirente);
+	}
+
+
+	public void addUtenteGenerico(UtenteGenerico utente) {
+		this.listaUtenti.add(utente);
+	}
+
+
+	public void addProduttore(Produttore produttore) {
+		this.listaProduttori.add(produttore);
+	}
+
+	public void addTrasformatore(Trasformatore trasformatore) {
+		this.listaTrasformatori.add(trasformatore);
+	}
+
+	public List<Prodotto> showProdotti() {
+		return this.listaProdotti;
 	}
 }

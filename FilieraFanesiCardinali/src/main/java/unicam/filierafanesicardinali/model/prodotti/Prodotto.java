@@ -10,10 +10,10 @@ public class Prodotto {
 	private boolean stato;
 	private String descrizione;
 
-	public Prodotto(String nome, float prezzo, boolean stato, String descrizione) {
+	public Prodotto(String nome, float prezzo, String descrizione) {
 		this.nome = nome;
 		this.prezzo = prezzo;
-		this.stato = stato;
+		this.stato = false;
 		this.descrizione = descrizione;
 	}
 

@@ -19,12 +19,11 @@ public class DistributoreTipicita extends Venditore {
 	 * 
 	 * @param nome
 	 * @param prezzo
-	 * @param stato
 	 * @param descrizione
 	 * @param listaProdotti
 	 */
-	public ProdottoDistributore creaPacchetto(String nome, float prezzo, boolean stato, String descrizione, Prodotto listaProdotti) {
-		return new ProdottoDistributore(nome, prezzo, stato, descrizione, pacchetto);
+	public ProdottoDistributore creaPacchetto(String nome, float prezzo, String descrizione, Prodotto listaProdotti) {
+		return new ProdottoDistributore(nome, prezzo, descrizione, pacchetto);
 	}
 
 	/**
