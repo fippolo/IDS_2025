@@ -32,16 +32,19 @@ public class GestorePiattaforma {
 	private void approvaUtente(UtenteGenerico daApprovare, short roleID) {
 		if(roleID>5 && roleID<0) throw new UnsupportedOperationException();
 
-		switch (roleID) {
-			case 0: piattaforma.addUtenteGenerico((UtenteGenerico) daApprovare);
-			case 1: piattaforma.addProduttore(new Produttore(daApprovare.getNome(),daApprovare.getEmail(),daApprovare.getPassword()));
-			case 2: piattaforma.addTrasformatore(new Trasformatore(daApprovare.getNome(),daApprovare.getEmail(),daApprovare.getPassword()));
-			case 3: piattaforma.addDistributoreTipicita(new DistributoreTipicita(daApprovare.getNome(),daApprovare.getEmail(),daApprovare.getPassword()));
-			case 4: piattaforma.addCuratore(new Curatore(daApprovare.getNome(),daApprovare.getEmail(),daApprovare.getPassword()));
-			case 5: piattaforma.addAcquirente(new Acquirente(daApprovare.getNome()));
-		}
+
 
 		if (this.listaUtentiDaApprovare.contains(daApprovare)) {
+
+			switch (roleID) {
+				case 0: piattaforma.addUtenteGenerico((UtenteGenerico) daApprovare);
+				case 1: piattaforma.addProduttore(new Produttore(daApprovare.getNome(),daApprovare.getEmail(),daApprovare.getPassword()));
+				case 2: piattaforma.addTrasformatore(new Trasformatore(daApprovare.getNome(),daApprovare.getEmail(),daApprovare.getPassword()));
+				case 3: piattaforma.addDistributoreTipicita(new DistributoreTipicita(daApprovare.getNome(),daApprovare.getEmail(),daApprovare.getPassword()));
+				case 4: piattaforma.addCuratore(new Curatore(daApprovare.getNome(),daApprovare.getEmail(),daApprovare.getPassword()));
+				case 5: piattaforma.addAcquirente(new Acquirente(daApprovare.getNome()));
+			}
+
 			this.listaUtentiDaApprovare.remove(daApprovare);
 		}
 

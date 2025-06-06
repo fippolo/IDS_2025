@@ -13,12 +13,11 @@ public class Produttore extends Venditore {
 	 * 
 	 * @param nome
 	 * @param prezzo
-	 * @param stato
 	 * @param metodoDiColtivazione
 	 * @param descrizione
 	 */
-	public ProdottoProduttore creaProdotto(String nome, float prezzo, boolean stato, String metodoDiColtivazione, String descrizione) {
-		return new ProdottoProduttore(nome, prezzo, stato, descrizione ,metodoDiColtivazione);
+	public ProdottoProduttore creaProdotto(String nome, float prezzo, String metodoDiColtivazione, String descrizione) {
+		return new ProdottoProduttore(nome, prezzo ,metodoDiColtivazione,descrizione);
 	}
 
 }

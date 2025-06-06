@@ -18,11 +18,10 @@ public class Venditore {
 	 * 
 	 * @param nome
 	 * @param prezzo
-	 * @param stato
 	 * @param descrizione
 	 */
-	public Prodotto creaProdotto(String nome, float prezzo, boolean stato, String descrizione) {
-		return new Prodotto(nome, prezzo, stato, descrizione);
+	public Prodotto creaProdotto(String nome, float prezzo, String descrizione) {
+		return new Prodotto(nome, prezzo, descrizione);
 	}
 
 }
