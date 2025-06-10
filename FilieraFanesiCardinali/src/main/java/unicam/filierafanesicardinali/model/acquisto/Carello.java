@@ -1,17 +1,24 @@
 package unicam.filierafanesicardinali.model.acquisto;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class Carello {
 
 	private List<Prodotto> listaProdotti;
+    @Id
+    private Long id;
 
 	public Carello() {
 		listaProdotti = new ArrayList<Prodotto>();
 	}
+	@OneToMany(cascade = CascadeType.ALL)
 	public Carello(List<Prodotto> listaProdotti) {
 		this.listaProdotti = listaProdotti;
 	}
@@ -32,4 +39,11 @@ public class Carello {
 		listaProdotti.clear();
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
+	}
 }
