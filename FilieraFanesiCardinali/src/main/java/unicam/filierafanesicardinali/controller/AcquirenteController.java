@@ -1,6 +1,7 @@
 package unicam.filierafanesicardinali.controller;
 
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,36 +10,73 @@ import unicam.filierafanesicardinali.model.utenti.Acquirente;
 import unicam.filierafanesicardinali.repository.AcquirenteRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/acquirenti")
 public class AcquirenteController {
 
     private final AcquirenteRepository acquirenteRepository;
+    
 
     @Autowired
-    public AcquirenteController(AcquirenteRepository acquirenteRepository) {
+    public AcquirenteController(AcquirenteRepository acquirenteRepository, HttpSession httpSession) {
         this.acquirenteRepository = acquirenteRepository;
+
     }
 
+    /**
+     * Crea un acquirente
+     * @param acquirente oggetto da salvare
+     * @return stauts code created e body dell'oggetto salvato
+     */
     @PostMapping
-    public ResponseEntity<Acquirente> createAcquirente(@RequestBody Acquirente acquirente) {
-        Acquirente saved = this.acquirenteRepository.save(acquirente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    public ResponseEntity<Acquirente> createAcquirente(@RequestBody Acquirente acquirente){
+        Acquirente newAcquirente = acquirenteRepository.save(acquirente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newAcquirente);
     }
 
+    /**
+     * Ritorna un acquirente con l'id specificato
+     * @param id id da recuperare
+     * @return Acquirente
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Acquirente> getAcquirenteById(@PathVariable Long id) {
+        Optional<Acquirente> acquirente = acquirenteRepository.findById(id);
+        return acquirente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Funzione per esaminare la lista di acquirenti
+     * @return Lista di acquirenti e 200
+     */
     @GetMapping
-    public ResponseEntity<List<Acquirente>> getAllAcquirente() {
-        List<Acquirente> acquirenti = this.acquirenteRepository.findAll();
-        return ResponseEntity.ok(acquirenti);
+    public ResponseEntity<List<Acquirente>> getAllAcquirente(){
+        List<Acquirente> acquirente = acquirenteRepository.findAll();
+        return ResponseEntity.ok(acquirente);
     }
 
-    @GetMapping
-    @RequestMapping("/random")
-    public ResponseEntity<Acquirente> generateRandomAcquirente() {
-        Acquirente saved = this.acquirenteRepository.save(new Acquirente());
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    /**
+     * Metodo per cancellare un acquirente con un determinato id
+     * @param id id dell'utente da cancellare
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Acquirente> deleteAcquirenteById(@PathVariable Long id){
+        Optional<Acquirente> acquirente = acquirenteRepository.findById(id);
+        if(acquirente.isPresent()){
+            acquirenteRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<Acquirente> TestAcquirente(){
+        Acquirente acquirente = new Acquirente();
+        Acquirente newAcquirente = acquirenteRepository.save(acquirente);
+        return ResponseEntity.ok(newAcquirente);
 
+    }
 }
