@@ -1,5 +1,10 @@
 package unicam.filierafanesicardinali.model.prodotti;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("produttore")
 public class ProdottoProduttore extends Prodotto {
 
 	private String metodoDiColtivazione;
@@ -7,6 +12,10 @@ public class ProdottoProduttore extends Prodotto {
 	public ProdottoProduttore(String nome, float prezzo, String descrizione,String metodoDiColtivazione) {
 		super(nome, prezzo, descrizione);
 		this.metodoDiColtivazione = metodoDiColtivazione;
+	}
+
+	public ProdottoProduttore() {
+
 	}
 
 	public String getMetodoDiColtivazione() {

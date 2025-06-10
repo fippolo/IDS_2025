@@ -1,9 +1,6 @@
 package unicam.filierafanesicardinali.model.acquisto;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 
 import java.util.ArrayList;
@@ -12,8 +9,11 @@ import java.util.List;
 public class Carello {
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "carrello_id")
 	private List<Prodotto> listaProdotti;
+
     @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 	public Carello() {
