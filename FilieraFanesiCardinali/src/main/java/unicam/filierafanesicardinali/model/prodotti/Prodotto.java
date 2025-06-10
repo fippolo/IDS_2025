@@ -25,7 +25,6 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_prodotto", discriminatorType = DiscriminatorType.STRING)
-
 public class Prodotto {
 
 
