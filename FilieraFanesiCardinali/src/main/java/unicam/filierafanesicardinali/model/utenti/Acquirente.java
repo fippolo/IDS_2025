@@ -11,6 +11,7 @@ import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 public class Acquirente {
 
 	private String nome;
+
 	@ManyToOne
 	@JoinColumn(name = "carello_id")
 	private Carello carello;

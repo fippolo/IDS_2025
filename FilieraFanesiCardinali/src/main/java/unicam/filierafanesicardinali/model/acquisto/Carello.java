@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 public class Carello {
 
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Prodotto> listaProdotti;
     @Id
     private Long id;
@@ -18,7 +19,6 @@ public class Carello {
 	public Carello() {
 		listaProdotti = new ArrayList<Prodotto>();
 	}
-	@OneToMany(cascade = CascadeType.ALL)
 	public Carello(List<Prodotto> listaProdotti) {
 		this.listaProdotti = listaProdotti;
 	}
