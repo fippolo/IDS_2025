@@ -33,6 +33,12 @@ public class AcquirenteController {
         return ResponseEntity.ok(acquirenti);
     }
 
+    @GetMapping
+    @RequestMapping("/random")
+    public ResponseEntity<Acquirente> generateRandomAcquirente() {
+        Acquirente saved = this.acquirenteRepository.save(new Acquirente());
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
 
 
 }

@@ -12,24 +12,15 @@ public class Acquirente {
 
 	private String nome;
 
-	@ManyToOne
-	@JoinColumn(name = "carello_id")
-	private Carello carello;
+
     @Id
     private Long id;
 
-	public Carello getCarello() {
-		return carello;
-	}
 
-	public void setCarello(Carello carello) {
-		this.carello = carello;
-	}
 
 
 	public Acquirente(String nome) {
 		this.nome = nome;
-		carello = new Carello();
 	}
 
 	public Acquirente() {
@@ -44,26 +35,7 @@ public class Acquirente {
 		return id;
 	}
 
-	/**
-	 * 
-	 * @param prodotto
-	 */
-	public void aggiungiProdotto(Prodotto prodotto) {
-		carello.aggiungiProdotto(prodotto);
-		throw new UnsupportedOperationException();
-	}
 
-	/**
-	 * 
-	 * @param prodotto
-	 */
-	public void eliminaProdotto(Prodotto prodotto) {
-		carello.rimuoviProdotto(prodotto);
-	}
-
-	public void svuotaCarrello() {
-		carello.svuotaCarello();
-	}
 
 
 }
