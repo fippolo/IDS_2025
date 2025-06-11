@@ -4,6 +4,8 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import unicam.filierafanesicardinali.model.venditori.DistributoreTipicita;
+import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 import java.util.List;
 
@@ -14,8 +16,8 @@ public class ProdottoDistributore extends Prodotto {
     @OneToMany(cascade = CascadeType.ALL)
 	private List<Prodotto> listaProdotti;
 
-	public ProdottoDistributore(String nome, float prezzo, String descrizione, List<Prodotto> listaProdotti) {
-		super(nome, prezzo, descrizione);
+	public ProdottoDistributore(String nome, float prezzo, String descrizione, Venditore venditore, List<Prodotto> listaProdotti) {
+		super(nome, prezzo, descrizione,venditore);
 		this.listaProdotti = listaProdotti;
 	}
 

@@ -32,17 +32,27 @@ public class Prodotto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	@ManyToOne
+	private Venditore venditore;
 	private String nome;
 	private float prezzo;
 	private boolean stato;
 	private String descrizione;
 
-	public Prodotto(String nome, float prezzo, String descrizione) {
+	public Venditore getVenditore() {
+		return venditore;
+	}
+
+	public void setVenditore(Venditore venditore) {
+		this.venditore = venditore;
+	}
+
+	public Prodotto(String nome, float prezzo, String descrizione, Venditore venditore) {
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.stato = false;
 		this.descrizione = descrizione;
+		this.venditore = venditore;
 	}
 
 	public Prodotto() {}

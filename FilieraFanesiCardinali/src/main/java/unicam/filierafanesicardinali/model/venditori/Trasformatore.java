@@ -24,7 +24,7 @@ public class Trasformatore extends Venditore {
 	 * @param descrizione
 	 */
 	public ProdottoTrasformatore creaProdotto(String nome, float prezzo, String processoDiTrasformazione, String descrizione) {
-		ProdottoTrasformatore nuovoProdotto = new ProdottoTrasformatore(nome,prezzo,descrizione,processoDiTrasformazione);
+		ProdottoTrasformatore nuovoProdotto = new ProdottoTrasformatore(nome,prezzo,descrizione,this,processoDiTrasformazione);
 		return nuovoProdotto;
 	}
 

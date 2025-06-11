@@ -23,8 +23,9 @@ public class Produttore extends Venditore {
 	 * @param metodoDiColtivazione
 	 * @param descrizione
 	 */
-	public ProdottoProduttore creaProdotto(String nome, float prezzo, String metodoDiColtivazione, String descrizione) {
-		return new ProdottoProduttore(nome, prezzo ,metodoDiColtivazione,descrizione);
+	public ProdottoProduttore creaProdotto(String nome, float prezzo, String descrizione, String metodoDiColtivazione) {
+		return new ProdottoProduttore(nome, prezzo,descrizione,
+				this, metodoDiColtivazione);
 	}
 
 }

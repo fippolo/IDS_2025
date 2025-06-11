@@ -24,6 +24,7 @@ public class Venditore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
+
 	private String nome;
 //	private Prodotto listaProdotti;
 	private String email;
@@ -43,7 +44,7 @@ public class Venditore {
 	 * @param descrizione
 	 */
 	public Prodotto creaProdotto(String nome, float prezzo, String descrizione) {
-		return new Prodotto(nome, prezzo, descrizione);
+		return new Prodotto(nome, prezzo, descrizione, this);
 	}
 
 }

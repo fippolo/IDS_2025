@@ -94,9 +94,9 @@ public class VenditoreController {
         Trasformatore testTrasformatore = new Trasformatore("testT", "testT", "testT");
         DistributoreTipicita testDistributore = new DistributoreTipicita("testD", "testD", "testD");
         List<Venditore> testList = new ArrayList<>();
-        testList.add(venditoreRepository.save(testProduttore));
-        testList.add(venditoreRepository.save(testTrasformatore));
-        testList.add(venditoreRepository.save(testDistributore));
+        testList.add(venditoreRepository.save((Venditore) testProduttore));
+        testList.add(venditoreRepository.save((Venditore) testTrasformatore));
+        testList.add(venditoreRepository.save((Venditore) testDistributore));
         return ResponseEntity.ok(testList);
     }
 }
