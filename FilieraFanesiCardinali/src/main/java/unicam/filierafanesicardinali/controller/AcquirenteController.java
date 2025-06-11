@@ -72,11 +72,4 @@ public class AcquirenteController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<Acquirente> TestAcquirente(){
-        Acquirente acquirente = new Acquirente();
-        Acquirente newAcquirente = acquirenteRepository.save(acquirente);
-        return ResponseEntity.ok(newAcquirente);
-
-    }
 }

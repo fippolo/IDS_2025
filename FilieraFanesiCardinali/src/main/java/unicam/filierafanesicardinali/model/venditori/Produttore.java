@@ -1,12 +1,19 @@
 package unicam.filierafanesicardinali.model.venditori;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoProduttore;
 
-
+@Entity
+@DiscriminatorValue("produttore")
 public class Produttore extends Venditore {
 
 	public Produttore(String nome, String email, String password) {
 		super(nome, email, password);
+	}
+
+	public Produttore() {
+
 	}
 
 	/**
