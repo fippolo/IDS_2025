@@ -4,6 +4,7 @@ package unicam.filierafanesicardinali.model.prodotti;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
+import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 import java.util.Objects;
 
@@ -79,6 +80,11 @@ public class Prodotto {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+
+	//public Venditore getVenditore(){ return this.venditore;	}
+	//public void setVenditore(Venditore venditore){ this.venditore=venditore; }
+
+
 
 
 	@Override

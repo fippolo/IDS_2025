@@ -12,8 +12,7 @@ public class HandlerDistributore extends HandlerVenditore{
         super(prodottoRepository);
     }
 
-    public ProdottoDistributore creaProdotto (DistributoreTipicita distributoreTipicita, String nome, float prezzo, String descrizione){
-        ProdottoDistributore prodottoDistributore = (ProdottoDistributore) distributoreTipicita.creaProdotto(nome,prezzo, descrizione);
+    public ProdottoDistributore creaProdotto (ProdottoDistributore prodottoDistributore){
         return prodottoRepository.save(prodottoDistributore);
     }
 }
