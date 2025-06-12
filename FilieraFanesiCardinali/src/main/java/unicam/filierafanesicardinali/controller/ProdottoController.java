@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unicam.filierafanesicardinali.model.venditori.Produttore;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 import unicam.filierafanesicardinali.repository.VenditoreRepository;
@@ -87,7 +88,11 @@ public class ProdottoController {
     @GetMapping("/test")
     public ResponseEntity<List<Prodotto>> listaProdottiTest(){
         List<Venditore> venditori = venditoreRepository.findAll();
-        
+        ProdottoProduttore prodotto = new ProdottoProduttore("testp",11,"testp", (Produttore) venditori.get(0), "testP");
+        creaProdottoProduttore(prodotto);
+        List<Prodotto> prodotti = prodottoRepository.findAll();
+        return ResponseEntity.ok(prodotti);
+
     }
 
 }
