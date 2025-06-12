@@ -109,6 +109,10 @@ public class Prodotto {
 		return true;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	@Override
 	public int hashCode() {
 		int result = Objects.hash(id,nome, prezzo, stato, descrizione);

@@ -1,15 +1,22 @@
 package unicam.filierafanesicardinali.model.amministrazione;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.amministrazione.Piattaforma;
 
+@Entity
 public class Curatore {
 
 	private String nome;
 	private String email;
 	private String password;
-	private Prodotto prodotto;
-	private Piattaforma piattaforma;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
 	public Curatore(String nome, String email, String password) {
 		this.nome = nome;
@@ -17,10 +24,14 @@ public class Curatore {
 		this.password = password;
 	}
 
-	/**
+	public Curatore() {
+
+	}
+
+	/*
 	 * 
 	 * @param prodotto
-	 */
+
 	private void approvaProdotto(Prodotto prodotto) {
 		// TODO - implement Curatore.approvaProdotto
 		if(piattaforma.showProdotti().contains(prodotto)){
@@ -33,5 +44,13 @@ public class Curatore {
 		}
 		throw new UnsupportedOperationException();
 	}
+	 */
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
+	}
 }
