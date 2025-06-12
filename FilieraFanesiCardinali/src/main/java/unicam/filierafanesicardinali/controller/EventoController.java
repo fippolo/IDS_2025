@@ -13,7 +13,7 @@ import unicam.filierafanesicardinali.service.HandlerAnimatore;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/Eventi")
+@RequestMapping("/api/v1/eventi")
 public class EventoController {
     private final HandlerAnimatore handlerAnimatore;
     private final EventoRepository eventoRepository;

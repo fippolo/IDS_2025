@@ -12,4 +12,8 @@ public interface VenditoreRepository extends JpaRepository<Venditore, Long> {
     FileChannel findByEmail(String email);
 
     List<Venditore> findByNome(String nome);
+
+    List<Venditore> findByStatoFalse();
+
+    List<Venditore> findByStatoTrue();
 }

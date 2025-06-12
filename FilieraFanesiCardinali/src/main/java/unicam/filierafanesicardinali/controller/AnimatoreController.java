@@ -11,7 +11,7 @@ import unicam.filierafanesicardinali.repository.AnimatoreRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/Animatori")
+@RequestMapping("/api/v1/animatori")
 public class AnimatoreController {
     private final AnimatoreRepository animatoreRepository;
 

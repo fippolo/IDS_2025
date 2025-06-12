@@ -13,7 +13,7 @@ public class Evento {
 	@ManyToOne
 	private Animatore animatore;
 
-	@Embedded
+	@ManyToOne
 	private Indirizzo luogo;
 
 	@Id

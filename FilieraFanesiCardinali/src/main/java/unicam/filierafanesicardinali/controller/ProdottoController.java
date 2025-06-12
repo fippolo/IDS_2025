@@ -50,7 +50,10 @@ public class ProdottoController {
     @PostMapping("/distributori")
     public ResponseEntity<Prodotto> creaProdottoDistributore(@RequestBody ProdottoDistributore prodotto) {
 
-        if(prodotto.getVenditore() == null) {return ResponseEntity.badRequest().build();}
+        if(prodotto.getVenditore() == null
+                || venditoreRepository.existsById(prodotto.getVenditore().getId())
+                || !prodotto.getVenditore().isStato())
+                {return ResponseEntity.badRequest().build();}
 
         Prodotto creato = handlerDistributore.creaProdotto(prodotto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
@@ -59,7 +62,10 @@ public class ProdottoController {
     @PostMapping("/produttori")
     public ResponseEntity<Prodotto> creaProdottoProduttore(@RequestBody ProdottoProduttore prodotto) {
 
-        if(prodotto.getVenditore() == null) {return ResponseEntity.badRequest().build();}
+        if(prodotto.getVenditore() == null
+                || venditoreRepository.existsById(prodotto.getVenditore().getId())
+                || !prodotto.getVenditore().isStato())
+                {return ResponseEntity.badRequest().build();}
 
         Prodotto creato = handlerProduttore.creaProdotto(prodotto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
@@ -68,7 +74,10 @@ public class ProdottoController {
     @PostMapping("/trasformatori")
     public ResponseEntity<Prodotto> creaProdottoTrasformatore(@RequestBody ProdottoTrasformatore prodotto) {
 
-        if(prodotto.getVenditore() == null) {return ResponseEntity.badRequest().build();}
+        if(prodotto.getVenditore() == null
+                || venditoreRepository.existsById(prodotto.getVenditore().getId())
+                || !prodotto.getVenditore().isStato())
+                {return ResponseEntity.badRequest().build();}
 
         Prodotto creato = handlerTrasformatore.creaProdotto(prodotto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);

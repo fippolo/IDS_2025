@@ -13,7 +13,7 @@ import unicam.filierafanesicardinali.repository.VenditoreRepository;
 import unicam.filierafanesicardinali.service.HandlerCuratore;
 
 @RestController
-@RequestMapping("/api/v1/Curatori")
+@RequestMapping("/api/v1/curatori")
 public class CuratoreController {
     private final CuratoreRepository curatoreRepository;
     private final HandlerCuratore handlerCuratore;
@@ -29,11 +29,11 @@ public class CuratoreController {
     }
 
 
-    @GetMapping("Curatore")
+    @GetMapping("curatore")
     public ResponseEntity<Curatore> registraCuratore(@RequestBody Curatore curatore) {
         try {
             Curatore newCuratore = curatoreRepository.save(curatore);
-            return ResponseEntity.status(HttpStatus.CREATED).body(curatore);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newCuratore);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
         }

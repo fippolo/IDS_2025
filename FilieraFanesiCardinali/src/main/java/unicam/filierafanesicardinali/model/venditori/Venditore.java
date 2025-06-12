@@ -29,11 +29,13 @@ public class Venditore {
 //	private Prodotto listaProdotti;
 	private String email;
 	private String password;
+	private boolean stato;
 
 	public Venditore(String nome, String email, String password) {
 		this.nome = nome;
 		this.email = email;
 		this.password = password;
+		this.stato = false;
 	}
 
 	public Venditore(){}
@@ -47,4 +49,15 @@ public class Venditore {
 		return new Prodotto(nome, prezzo, descrizione, this);
 	}
 
+	public Long getId() {
+		return Id;
+	}
+
+	public boolean isStato() {
+		return stato;
+	}
+
+	public void setStato(boolean stato) {
+		this.stato = stato;
+	}
 }
