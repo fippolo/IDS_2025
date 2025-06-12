@@ -92,7 +92,6 @@ public class ProdottoController {
         creaProdottoProduttore(prodotto);
         List<Prodotto> prodotti = prodottoRepository.findAll();
         return ResponseEntity.ok(prodotti);
-
     }
 
 }

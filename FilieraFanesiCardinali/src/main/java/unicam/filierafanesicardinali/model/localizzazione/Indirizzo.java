@@ -1,5 +1,10 @@
 package unicam.filierafanesicardinali.model.localizzazione;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Embeddable
 public class Indirizzo {
 
 	private String via;
@@ -7,6 +12,8 @@ public class Indirizzo {
 	private String civico;
 	private String citta;
 	private String provincia;
+    @Id
+    private Long id;
 
 	public String getVia() {
 		return this.via;
@@ -48,4 +55,11 @@ public class Indirizzo {
 		this.provincia = provincia;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
+	}
 }

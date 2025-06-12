@@ -32,7 +32,7 @@ public class DistributoreTipicita extends Venditore {
 	 * @param descrizione
 	 * @param listaProdotti
 	 */
-	public ProdottoDistributore creaPacchetto(String nome, float prezzo, String descrizione, Prodotto listaProdotti) {
+	public ProdottoDistributore creaPacchetto(String nome, float prezzo, String descrizione, List<Prodotto> listaProdotti) {
 		return new ProdottoDistributore(nome, prezzo, descrizione, this, pacchetto);
 	}
 

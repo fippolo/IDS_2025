@@ -1,19 +1,35 @@
 package unicam.filierafanesicardinali.model.eventi;
 
+import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
 
+@Entity
 public class Evento {
 
 	private String nome;
 	private String data;
 	private String ora;
+
+	@ManyToOne
+	private Animatore animatore;
+
+	@Embedded
 	private Indirizzo luogo;
 
-	public Evento(String nome, String data, String ora, Indirizzo luogo) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+	public Evento(String nome, String data, String ora, Indirizzo luogo, Animatore animatore) {
 		this.nome = nome;
 		this.data = data;
 		this.ora = ora;
 		this.luogo = luogo;
+		this.animatore = animatore;
+	}
+
+	public Evento() {
+
 	}
 
 	public String getNome() {
@@ -64,4 +80,13 @@ public class Evento {
 		this.luogo = luogo;
 	}
 
+
+
+	public Long getId() {
+		return id;
+	}
+
+	public Animatore getAnimatore() {
+		return animatore;
+	}
 }

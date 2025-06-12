@@ -12,8 +12,16 @@ public class HandlerProduttore extends HandlerVenditore{
         super(prodottoRepository);
     }
 
-    public ProdottoProduttore creaProdotto(ProdottoProduttore prodottoProduttore){
-        return prodottoRepository.save(prodottoProduttore);
+    public ProdottoProduttore creaProdotto(ProdottoProduttore prodotto){
+        if(prodotto.getVenditore() == null) throw new IllegalArgumentException("Venditore non trovato");
+
+        Produttore produttoreProdotto = (Produttore) prodotto.getVenditore();
+
+        ProdottoProduttore toReturn = produttoreProdotto.creaProdotto(prodotto.getNome()
+                                                        ,prodotto.getPrezzo()
+                                                        ,prodotto.getDescrizione()
+                                                        ,prodotto.getMetodoDiColtivazione());
+        return prodottoRepository.save(toReturn);
 
     }
 
