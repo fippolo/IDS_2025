@@ -129,6 +129,23 @@ public class ProdottoController {
         return ResponseEntity.ok(prodotti);
     }
 
-    
+    @GetMapping("/test/distributori")
+    public ResponseEntity<Prodotto> listaProdottiTestDistributori(){
+        DistributoreTipicita testDistributore = new DistributoreTipicita("testD", "testD", "testD");
+        testDistributore.setStato(true);
+        venditoreRepository.save(testDistributore);
+
+        ProdottoDistributore pro = new ProdottoDistributore("test", 11, "testP", testDistributore, null);
+
+        Prodotto prodotto = creaProdottoDistributore(pro).getBody();
+
+        testDistributore = creaBundle(testDistributore.getId(), "test", 11F, "test").getBody();
+
+        testDistributore = aggiungiProdotto(testDistributore.getId(),prodotto).getBody();
+
+        ProdottoDistributore prodot = salvabundle(testDistributore.getId()).getBody();
+
+        return ResponseEntity.ok(prodot);
+    }
 
 }
