@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 
-import unicam.filierafanesicardinali.model.venditori.Venditore;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 
 @Service

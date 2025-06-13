@@ -4,8 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.eventi.Evento;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
-import unicam.filierafanesicardinali.model.prodotti.ProdottoDistributore;
 import unicam.filierafanesicardinali.repository.AnimatoreRepository;
 import unicam.filierafanesicardinali.repository.EventoRepository;
 import unicam.filierafanesicardinali.service.HandlerAnimatore;

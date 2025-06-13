@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
-import unicam.filierafanesicardinali.model.amministrazione.Piattaforma;
 
 @Entity
 public class Curatore {

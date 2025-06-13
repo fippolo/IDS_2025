@@ -4,15 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import unicam.filierafanesicardinali.model.utenti.Acquirente;
-import unicam.filierafanesicardinali.model.utenti.UtenteGenerico;
-import unicam.filierafanesicardinali.model.venditori.DistributoreTipicita;
-import unicam.filierafanesicardinali.model.venditori.Produttore;
-import unicam.filierafanesicardinali.model.venditori.Trasformatore;
-
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 public class GestorePiattaforma {
 

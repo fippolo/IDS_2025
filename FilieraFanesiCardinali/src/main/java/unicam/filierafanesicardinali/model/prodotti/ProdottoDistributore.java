@@ -4,7 +4,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import unicam.filierafanesicardinali.model.venditori.DistributoreTipicita;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 import java.util.List;
@@ -24,6 +23,11 @@ public class ProdottoDistributore extends Prodotto {
 	public ProdottoDistributore() {
 
 	}
+
+	public void aggiungiProdotto(Prodotto prodotto) {
+		listaProdotti.add(prodotto);
+	}
+
 
 	public List<Prodotto> getListaProdotti() {
 		return listaProdotti;

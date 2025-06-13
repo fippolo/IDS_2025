@@ -2,10 +2,6 @@ package unicam.filierafanesicardinali.model.utenti;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import unicam.filierafanesicardinali.model.acquisto.Carello;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 
 @Entity
 public class Acquirente {

@@ -2,7 +2,6 @@ package unicam.filierafanesicardinali.model.venditori;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoTrasformatore;
 @Entity
 @DiscriminatorValue("trasformatore")

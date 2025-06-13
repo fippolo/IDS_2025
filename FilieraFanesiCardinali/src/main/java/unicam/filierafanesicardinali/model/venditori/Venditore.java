@@ -18,7 +18,7 @@ import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_venditore", discriminatorType = DiscriminatorType.STRING)
-public class Venditore {
+public class Venditore implements IVenditore {
 
 
 	@Id

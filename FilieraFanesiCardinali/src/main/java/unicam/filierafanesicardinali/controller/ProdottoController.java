@@ -1,14 +1,10 @@
 package unicam.filierafanesicardinali.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unicam.filierafanesicardinali.model.venditori.DistributoreTipicita;
 import unicam.filierafanesicardinali.model.venditori.Produttore;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
@@ -18,12 +14,7 @@ import unicam.filierafanesicardinali.service.HandlerProduttore;
 import unicam.filierafanesicardinali.service.HandlerTrasformatore;
 import unicam.filierafanesicardinali.model.prodotti.*;
 
-import java.nio.channels.FileChannel;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-
 
 @RestController
 @RequestMapping("/api/v1/prodotti")
@@ -47,7 +38,10 @@ public class ProdottoController {
         this.handlerTrasformatore = handlerTrasformatore;
     }
 
-    @PostMapping("/distributori")
+
+    // --- metodi distributore
+
+    @PostMapping("/distributori/creaprodotto")
     public ResponseEntity<Prodotto> creaProdottoDistributore(@RequestBody ProdottoDistributore prodotto) {
 
         if(prodotto.getVenditore() == null
@@ -59,11 +53,43 @@ public class ProdottoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
     }
 
-    @PostMapping("/produttori")
+    @PostMapping("/distributori/{Id}/creabundle")
+    public ResponseEntity<DistributoreTipicita> creaBundle (@PathVariable Long Id, @RequestBody String nome,
+                                                            @RequestBody Float prezzo,@RequestBody String descrizione) {
+        if(!venditoreRepository.existsById(Id)){return ResponseEntity.badRequest().build();}
+        DistributoreTipicita distributoreTipicita = (DistributoreTipicita) venditoreRepository.findById(Id).get();
+        distributoreTipicita = handlerDistributore.iniziaPacchetto(distributoreTipicita, nome, prezzo, descrizione);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(distributoreTipicita);
+    }
+
+    @PostMapping("/distributori/{Id}/aggiungiabundle")
+    public ResponseEntity<DistributoreTipicita> aggiungiProdotto (@PathVariable Long Id, @RequestBody Prodotto prodotto) {
+        if(!venditoreRepository.existsById(Id)){return ResponseEntity.badRequest().build();}
+        DistributoreTipicita distributoreTipicita = (DistributoreTipicita) venditoreRepository.findById(Id).get();
+
+        distributoreTipicita=handlerDistributore.aggiungiProdotto(distributoreTipicita, prodotto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(distributoreTipicita);
+    }
+
+    @PostMapping("/distributori/{Id}/salvabundle")
+    public ResponseEntity<ProdottoDistributore> salvabundle (@PathVariable Long Id) {
+        if(!venditoreRepository.existsById(Id)){return ResponseEntity.badRequest().build();}
+        DistributoreTipicita distributoreTipicita = (DistributoreTipicita) venditoreRepository.findById(Id).get();
+        ProdottoDistributore prodottoDistributore= handlerDistributore.salvaBundle(distributoreTipicita);
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(prodottoDistributore);
+
+    }
+
+
+    @PostMapping("/produttori/creaprodotto")
     public ResponseEntity<Prodotto> creaProdottoProduttore(@RequestBody ProdottoProduttore prodotto) {
 
         if(prodotto.getVenditore() == null
-                || venditoreRepository.existsById(prodotto.getVenditore().getId())
+                || !venditoreRepository.existsById(prodotto.getVenditore().getId())
                 || !prodotto.getVenditore().isStato())
                 {return ResponseEntity.badRequest().build();}
 
@@ -71,7 +97,7 @@ public class ProdottoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
     }
 
-    @PostMapping("/trasformatori")
+    @PostMapping("/trasformatori/creaprodotto")
     public ResponseEntity<Prodotto> creaProdottoTrasformatore(@RequestBody ProdottoTrasformatore prodotto) {
 
         if(prodotto.getVenditore() == null
@@ -102,5 +128,7 @@ public class ProdottoController {
         List<Prodotto> prodotti = prodottoRepository.findAll();
         return ResponseEntity.ok(prodotti);
     }
+
+    
 
 }

@@ -3,7 +3,6 @@ package unicam.filierafanesicardinali.service;
 import org.springframework.stereotype.Service;
 import unicam.filierafanesicardinali.model.eventi.Animatore;
 import unicam.filierafanesicardinali.model.eventi.Evento;
-import unicam.filierafanesicardinali.repository.AnimatoreRepository;
 import unicam.filierafanesicardinali.repository.EventoRepository;
 
 @Service

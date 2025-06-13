@@ -1,7 +1,6 @@
 package unicam.filierafanesicardinali.service;
 
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.amministrazione.Curatore;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
 import unicam.filierafanesicardinali.repository.VenditoreRepository;
 

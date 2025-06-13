@@ -1,62 +1,50 @@
 package unicam.filierafanesicardinali.model.venditori;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoDistributore;
-import unicam.filierafanesicardinali.model.venditori.Venditore;
-
-import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 @DiscriminatorValue("distributore")
-public class DistributoreTipicita extends Venditore {
+public class DistributoreTipicita extends Venditore implements IBuilder {
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Prodotto> pacchetto;
+
+	@Transient
+	private ProdottoDistributore bundle = null;
+
 	public DistributoreTipicita(String nome, String email, String password) {
 		super(nome, email, password);
-		pacchetto = new ArrayList<Prodotto>();
 	}
 
 	public DistributoreTipicita() {
 
 	}
 
-	/**
-	 * 
-	 * @param nome
-	 * @param prezzo
-	 * @param descrizione
-	 * @param listaProdotti
-	 */
-	public ProdottoDistributore creaPacchetto(String nome, float prezzo, String descrizione, List<Prodotto> listaProdotti) {
-		return new ProdottoDistributore(nome, prezzo, descrizione, this, pacchetto);
+	public ProdottoDistributore creaProdotto(String nome, float prezzo, String descrizione) {
+		return new ProdottoDistributore(nome, prezzo, descrizione, this, null);
 	}
 
-	/**
-	 * 
-	 * @param prodotto
-	 */
-	public void aggiungiProdottoAlPacchetto(Prodotto prodotto) {
-		pacchetto.add(prodotto);
+
+	public void startBundle(String nome, float prezzo,String descrizione){
+		bundle = new ProdottoDistributore(nome, prezzo,descrizione, this, null);
+
 	}
 
-	/**
-	 * 
-	 * @param prodotto
-	 */
-	public void eliminaProdottoDalPacchetto(Prodotto prodotto) {
-		pacchetto.remove(prodotto);
+	public void aggiungiProdotto(Prodotto prodotto){
+		if(bundle != null && prodotto != null){
+			this.bundle.aggiungiProdotto(prodotto);
+
+		}
+		else throw new NullPointerException("Prodotto non trovato");
 	}
 
-	public List<Prodotto> getPacchetto() {
-		return pacchetto;
+	public ProdottoDistributore endBundle(){
+		ProdottoDistributore prodotto = bundle;
+		bundle = null;
+		return prodotto;
 	}
 
-	public void setPacchetto(List<Prodotto> pacchetto) {
-		this.pacchetto = pacchetto;
-	}
+
+
 }
