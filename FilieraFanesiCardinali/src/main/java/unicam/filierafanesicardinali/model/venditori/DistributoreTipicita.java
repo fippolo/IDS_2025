@@ -3,6 +3,8 @@ package unicam.filierafanesicardinali.model.venditori;
 import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoDistributore;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +29,7 @@ public class DistributoreTipicita extends Venditore implements IBuilder {
 
 
 	public void startBundle(String nome, float prezzo,String descrizione){
-		bundle = new ProdottoDistributore(nome, prezzo,descrizione, this, null);
+		bundle = new ProdottoDistributore(nome, prezzo,descrizione, this, new ArrayList<>());
 
 	}
 

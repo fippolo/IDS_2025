@@ -45,7 +45,7 @@ public class ProdottoController {
     public ResponseEntity<Prodotto> creaProdottoDistributore(@RequestBody ProdottoDistributore prodotto) {
 
         if(prodotto.getVenditore() == null
-                || venditoreRepository.existsById(prodotto.getVenditore().getId())
+                || !venditoreRepository.existsById(prodotto.getVenditore().getId())
                 || !prodotto.getVenditore().isStato())
                 {return ResponseEntity.badRequest().build();}
 
@@ -101,7 +101,7 @@ public class ProdottoController {
     public ResponseEntity<Prodotto> creaProdottoTrasformatore(@RequestBody ProdottoTrasformatore prodotto) {
 
         if(prodotto.getVenditore() == null
-                || venditoreRepository.existsById(prodotto.getVenditore().getId())
+                || !venditoreRepository.existsById(prodotto.getVenditore().getId())
                 || !prodotto.getVenditore().isStato())
                 {return ResponseEntity.badRequest().build();}
 
