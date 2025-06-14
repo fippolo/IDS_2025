@@ -61,10 +61,14 @@ public class Social {
     /**
      * Aggiunge un nuovo contenuto social alla lista.
      *
-     * @param social il {@code ContenutoSocial} da aggiungere
+     * @param contenutoSocial il {@code ContenutoSocial} da aggiungere
      */
-    public void addContenutoSocial(ContenutoSocial social) {
-        this.listaContenutiSocial.add(social);
+    public void addContenutoSocial(ContenutoSocial contenutoSocial) {
+        this.listaContenutiSocial.add(contenutoSocial);
+    }
+
+    public void removeContenutoSocial(ContenutoSocial contenutoSocial) {
+        this.listaContenutiSocial.remove(contenutoSocial);
     }
 
 }

@@ -1,9 +1,6 @@
 package unicam.filierafanesicardinali.model.utenti;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.acquisto.Carrello;
 import unicam.filierafanesicardinali.repository.CarrelloRepository;
 
@@ -16,7 +13,7 @@ public class Acquirente {
     @Id
     private Long id;
 
-	@ManyToOne
+	@OneToOne
 	private Carrello carrello;
 
 

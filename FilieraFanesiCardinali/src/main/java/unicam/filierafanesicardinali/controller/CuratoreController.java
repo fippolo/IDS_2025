@@ -44,7 +44,7 @@ public class CuratoreController {
         if (prodottoRepository.existsById(prodotto.getId()) && curatoreRepository.existsById(id) &&
             prodottoRepository.findById(prodotto.getId()).isPresent() && curatoreRepository.findById(id).isPresent()) {
             Curatore curatore = curatoreRepository.findById(id).get();
-            return new ResponseEntity.ok(handlerCuratore.verificaProdotto(prodotto, curatore));
+            return ResponseEntity.ok(handlerCuratore.verificaProdotto(prodotto, curatore));
         }
 
         return ResponseEntity.badRequest().build();

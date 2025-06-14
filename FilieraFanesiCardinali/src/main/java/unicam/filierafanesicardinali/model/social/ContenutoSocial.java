@@ -1,12 +1,10 @@
 package unicam.filierafanesicardinali.model.social;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
 
+@Entity
 public class ContenutoSocial {
     /**
      * Identificativo univoco del contenuto social.

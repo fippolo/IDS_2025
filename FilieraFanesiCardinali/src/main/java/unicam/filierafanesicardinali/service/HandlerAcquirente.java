@@ -14,41 +14,13 @@ import java.util.List;
 @Service
 public class HandlerAcquirente {
 
-    private Carrello carrello;
+
     private final ProdottoRepository prodottoRepository;
 
     @Autowired
     public HandlerAcquirente(ProdottoRepository prodottoRepository) {
         this.prodottoRepository = prodottoRepository;
-        this.carrello = new Carrello();
-    }
 
-    /**
-     *
-     * @param prodotto
-     */
-    public void aggiungiProdotto(Prodotto prodotto) {
-        carrello.aggiungiProdotto(prodotto);
-    }
-
-    /**
-     *
-     * @param prodotto
-     */
-    public void eliminaProdotto(Prodotto prodotto) {
-        carrello.rimuoviProdotto(prodotto);
-    }
-
-    public void svuotaCarrello() {
-        carrello.svuotaCarello();
-    }
-
-    public Carrello getCarrello() {
-        return carrello;
-    }
-
-    public void setCarrello(Carrello carrello) {
-        this.carrello = carrello;
     }
 
     public List<Prodotto> consultaProdotti() {
