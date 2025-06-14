@@ -2,6 +2,10 @@ package unicam.filierafanesicardinali.model.utenti;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import unicam.filierafanesicardinali.model.acquisto.Carrello;
+import unicam.filierafanesicardinali.repository.CarrelloRepository;
 
 @Entity
 public class Acquirente {
@@ -12,16 +16,31 @@ public class Acquirente {
     @Id
     private Long id;
 
+	@ManyToOne
+	private Carrello carrello;
 
+
+
+	public Carrello getCarrello() {
+		return carrello;
+	}
+
+	public void setCarrello(Carrello carrello) {
+		this.carrello = carrello;
+	}
 
 
 	public Acquirente(String nome) {
 		this.nome = nome;
-	}
+        carrello = new Carrello();
+
+
+    }
 
 	public Acquirente() {
 
-	}
+
+    }
 
 	public void setId(Long id) {
 		this.id = id;

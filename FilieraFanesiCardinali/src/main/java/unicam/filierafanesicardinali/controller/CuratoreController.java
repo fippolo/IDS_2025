@@ -17,7 +17,7 @@ import unicam.filierafanesicardinali.service.HandlerCuratore;
 public class CuratoreController {
     private final CuratoreRepository curatoreRepository;
     private final HandlerCuratore handlerCuratore;
-    //test
+
     private final ProdottoRepository prodottoRepository;
     private final VenditoreRepository venditoreRepository;
 
@@ -29,7 +29,7 @@ public class CuratoreController {
     }
 
 
-    @GetMapping("curatore")
+    @PostMapping("/curatore")
     public ResponseEntity<Curatore> registraCuratore(@RequestBody Curatore curatore) {
         try {
             Curatore newCuratore = curatoreRepository.save(curatore);
@@ -40,9 +40,14 @@ public class CuratoreController {
     }
 
     @PostMapping("/verifica/{id}")
-    public ResponseEntity<Prodotto> verificaProdotto(@PathVariable Long id) {
-        Prodotto prodottoVerificato = handlerCuratore.verificaProdotto(id);
-        return ResponseEntity.ok(prodottoVerificato);
+    public ResponseEntity<Prodotto> verificaProdotto(@PathVariable Long id, @RequestBody Prodotto prodotto) {
+        if (prodottoRepository.existsById(prodotto.getId()) && curatoreRepository.existsById(id) &&
+            prodottoRepository.findById(prodotto.getId()).isPresent() && curatoreRepository.findById(id).isPresent()) {
+            Curatore curatore = curatoreRepository.findById(id).get();
+            return new ResponseEntity.ok(handlerCuratore.verificaProdotto(prodotto, curatore));
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
 
@@ -54,7 +59,5 @@ public class CuratoreController {
         prodottoRepository.save(testProdotto);
         return ResponseEntity.ok(testProdotto.getId());
     }
-
-
 
 }

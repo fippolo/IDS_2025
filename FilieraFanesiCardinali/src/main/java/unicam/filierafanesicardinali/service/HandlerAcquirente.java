@@ -3,25 +3,24 @@ package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.acquisto.Carello;
+import unicam.filierafanesicardinali.model.acquisto.Carrello;
 import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
 import unicam.filierafanesicardinali.model.localizzazione.Mappa;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class HandlerAcquirente {
 
-    private Carello carello;
+    private Carrello carrello;
     private final ProdottoRepository prodottoRepository;
 
     @Autowired
     public HandlerAcquirente(ProdottoRepository prodottoRepository) {
         this.prodottoRepository = prodottoRepository;
-        this.carello = new Carello();
+        this.carrello = new Carrello();
     }
 
     /**
@@ -29,7 +28,7 @@ public class HandlerAcquirente {
      * @param prodotto
      */
     public void aggiungiProdotto(Prodotto prodotto) {
-        carello.aggiungiProdotto(prodotto);
+        carrello.aggiungiProdotto(prodotto);
     }
 
     /**
@@ -37,19 +36,19 @@ public class HandlerAcquirente {
      * @param prodotto
      */
     public void eliminaProdotto(Prodotto prodotto) {
-        carello.rimuoviProdotto(prodotto);
+        carrello.rimuoviProdotto(prodotto);
     }
 
     public void svuotaCarrello() {
-        carello.svuotaCarello();
+        carrello.svuotaCarello();
     }
 
-    public Carello getCarello() {
-        return carello;
+    public Carrello getCarrello() {
+        return carrello;
     }
 
-    public void setCarello(Carello carello) {
-        this.carello = carello;
+    public void setCarrello(Carrello carrello) {
+        this.carrello = carrello;
     }
 
     public List<Prodotto> consultaProdotti() {

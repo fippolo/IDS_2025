@@ -2,6 +2,7 @@ package unicam.filierafanesicardinali.service;
 
 
 import org.springframework.stereotype.Service;
+import unicam.filierafanesicardinali.model.amministrazione.Curatore;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 
@@ -14,11 +15,8 @@ public class HandlerCuratore {
         this.prodottoRepository = prodottoRepository;
     }
 
-    public Prodotto verificaProdotto(Long prodottoId) {
-        Prodotto prodotto = prodottoRepository.findById(prodottoId)
-                .orElseThrow(() -> new RuntimeException("Prodotto non trovato con id: " + prodottoId));
-        prodotto.setStato(true);
-        return prodottoRepository.save(prodotto);
+    public Prodotto verificaProdotto(Prodotto prodotto, Curatore curatore) {
+        return prodottoRepository.save(curatore.approvaProdotto(prodotto));
     }
 
 }

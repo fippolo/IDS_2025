@@ -81,6 +81,6 @@ public class UtenteGenericoController {
     @GetMapping("/consultamappa")
     public ResponseEntity<List<Indirizzo>> consultaMappa(){
         List<Indirizzo> listaindirizzo = handlerUtenteGenerico.consultaMappa();
-        return ResponseEntity.ok(listaProdotti);
+        return ResponseEntity.ok(listaindirizzo);
     }
 }

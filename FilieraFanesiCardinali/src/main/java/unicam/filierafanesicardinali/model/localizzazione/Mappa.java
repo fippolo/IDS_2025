@@ -2,6 +2,9 @@ package unicam.filierafanesicardinali.model.localizzazione;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class Mappa {
 
@@ -19,7 +22,7 @@ public class Mappa {
      * Costruttore privato per implementare il pattern Singleton.
      * Inizializza la lista degli indirizzi.
      */
-    private Mappa() {
+    public Mappa() {
         listaIndirizzi = new ArrayList<>();
     }
 
@@ -67,7 +70,7 @@ public class Mappa {
     /**
      * Imposta una nuova lista di indirizzi.
      *
-     * @param listOfAddresses Nuova lista di indirizzi.
+     * @param listaIndirizzi Nuova lista di indirizzi.
      */
     public void setListaIndirizzi(List<Indirizzo> listaIndirizzi) {
         this.listaIndirizzi = listaIndirizzi;

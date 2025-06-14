@@ -62,4 +62,7 @@ public class Indirizzo {
 	public Long getId() {
 		return id;
 	}
+
+
+
 }

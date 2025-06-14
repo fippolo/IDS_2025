@@ -10,6 +10,7 @@ import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
 import unicam.filierafanesicardinali.model.utenti.Acquirente;
 import unicam.filierafanesicardinali.repository.AcquirenteRepository;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.repository.CarrelloRepository;
 import unicam.filierafanesicardinali.service.HandlerAcquirente;
 
 import java.util.List;
@@ -21,12 +22,14 @@ public class AcquirenteController {
 
     private final AcquirenteRepository acquirenteRepository;
     private final HandlerAcquirente handlerAcquirente;
+    private final CarrelloRepository carrelloRepository;
 
     @Autowired
-    public AcquirenteController(AcquirenteRepository acquirenteRepository, HttpSession httpSession, HandlerAcquirente handlerAcquirente) {
+    public AcquirenteController(AcquirenteRepository acquirenteRepository, HttpSession httpSession, HandlerAcquirente handlerAcquirente, CarrelloRepository carrelloRepository) {
         this.acquirenteRepository = acquirenteRepository;
 
         this.handlerAcquirente = handlerAcquirente;
+        this.carrelloRepository = carrelloRepository;
     }
 
     /**
@@ -37,6 +40,8 @@ public class AcquirenteController {
     @PostMapping
     public ResponseEntity<Acquirente> createAcquirente(@RequestBody Acquirente acquirente){
         Acquirente newAcquirente = acquirenteRepository.save(acquirente);
+
+        carrelloRepository.save(acquirente.getCarrello());
         return ResponseEntity.status(HttpStatus.CREATED).body(newAcquirente);
     }
 

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 
 @Entity
 public class Curatore {
@@ -26,23 +27,11 @@ public class Curatore {
 
 	}
 
-	/*
-	 * 
-	 * @param prodotto
-
-	private void approvaProdotto(Prodotto prodotto) {
-		// TODO - implement Curatore.approvaProdotto
-		if(piattaforma.showProdotti().contains(prodotto)){
-			for(Prodotto p : piattaforma.showProdotti())
-			{
-				if(p.equals(prodotto)){
-					p.setStato(true);
-				}
-			}
-		}
-		throw new UnsupportedOperationException();
+	public Prodotto approvaProdotto(Prodotto prodotto) {
+		prodotto.setStato(true);
+		return prodotto;
 	}
-	 */
+
 
 	public void setId(Long id) {
 		this.id = id;

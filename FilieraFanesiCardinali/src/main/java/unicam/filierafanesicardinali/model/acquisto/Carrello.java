@@ -6,20 +6,19 @@ import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-public class Carello {
+public class Carrello {
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "carrello_id")
 	private List<Prodotto> listaProdotti;
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	public Carello() {
+	public Carrello() {
 		listaProdotti = new ArrayList<Prodotto>();
 	}
-	public Carello(List<Prodotto> listaProdotti) {
+	public Carrello(List<Prodotto> listaProdotti) {
 		this.listaProdotti = listaProdotti;
 	}
 	public List<Prodotto> getListaProdotti() {
