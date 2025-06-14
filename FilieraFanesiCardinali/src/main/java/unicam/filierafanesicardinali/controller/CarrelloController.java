@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.acquisto.Carrello;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.utenti.Acquirente;
 import unicam.filierafanesicardinali.repository.AcquirenteRepository;
 import unicam.filierafanesicardinali.repository.CarrelloRepository;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 import unicam.filierafanesicardinali.service.HandlerCarrello;
+import unicam.filierafanesicardinali.service.HandlerSistemaPagamento;
 
 @RestController
 @RequestMapping("/api/v1/carrelli")
@@ -19,14 +21,16 @@ public class CarrelloController {
     private final CarrelloRepository carrelloRepository;
     private final ProdottoRepository prodottoRepository;
     private final HandlerCarrello handlerCarrello;
+    private final HandlerSistemaPagamento handlerSistemaPagamento;
 
     @Autowired
-    public CarrelloController(AcquirenteRepository acquirenteRepository, CarrelloRepository carrelloRepository, ProdottoRepository prodottoRepository, HandlerCarrello handlerCarrello) {
+    public CarrelloController(AcquirenteRepository acquirenteRepository, CarrelloRepository carrelloRepository, ProdottoRepository prodottoRepository, HandlerCarrello handlerCarrello, HandlerSistemaPagamento handlerSistemaPagamento) {
         this.acquirenteRepository = acquirenteRepository;
         this.carrelloRepository = carrelloRepository;
 
         this.prodottoRepository = prodottoRepository;
         this.handlerCarrello = handlerCarrello;
+        this.handlerSistemaPagamento = handlerSistemaPagamento;
     }
 
     @PostMapping("/carrello")
@@ -63,7 +67,7 @@ public class CarrelloController {
         return ResponseEntity.ok(carrello);
     }
 
-    @DeleteMapping("{id}/svuotacarrello")
+    @DeleteMapping("/{id}/svuotacarrello")
     public ResponseEntity<Carrello> svuotaCarrello(@PathVariable Long id) {
         if(!acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
 
@@ -73,6 +77,15 @@ public class CarrelloController {
         return ResponseEntity.ok(carrello);
     }
 
+    @PostMapping("/{id}/acquistoprodotto")
+    public ResponseEntity<Carrello> acquistoProdotto(@PathVariable Long id, Prodotto prodotto) {
+        if(prodotto == null || !acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
+
+        Acquirente acquirente = acquirenteRepository.findById(id).get();
+        Prodotto prodottoacq = prodottoRepository.findById(prodotto.getId()).get();
+        Carrello carrello = handlerSistemaPagamento.acquistoProdotto(prodottoacq, acquirente);
+        return ResponseEntity.ok(carrello);
+    }
 
 
 
