@@ -14,7 +14,7 @@ public class HandlerGestore {
 
     public Venditore approvaVenditore(Long idVenditore){
         Venditore venditore = venditoreRepository.findById(idVenditore)
-                .orElseThrow(() -> new RuntimeException("Prodotto non trovato con id: " + idVenditore));
+                .orElseThrow(() -> new RuntimeException("Venditore non trovato con id: " + idVenditore));
         venditore.setStato(true);
         return venditoreRepository.save(venditore);
     }

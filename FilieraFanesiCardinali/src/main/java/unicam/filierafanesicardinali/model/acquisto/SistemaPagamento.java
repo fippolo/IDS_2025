@@ -34,13 +34,13 @@ public class SistemaPagamento {
         this.prodotto = prodotto;
     }
 
-    public Venditore getVenditore() {
-        return venditore;
-    }
+//    public Venditore getVenditore() {
+//        return venditore;
+//    }
 
-    public void setVenditore(Venditore venditore) {
-        this.venditore = venditore;
-    }
+//    public void setVenditore(Venditore venditore) {
+//        this.venditore = venditore;
+//    }
 
 
     public void setId(Long id) {
