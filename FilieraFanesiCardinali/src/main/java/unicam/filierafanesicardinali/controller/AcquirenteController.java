@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
 import unicam.filierafanesicardinali.model.utenti.Acquirente;
 import unicam.filierafanesicardinali.repository.AcquirenteRepository;
+import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.service.HandlerAcquirente;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +20,13 @@ import java.util.Optional;
 public class AcquirenteController {
 
     private final AcquirenteRepository acquirenteRepository;
-    
+    private final HandlerAcquirente handlerAcquirente;
 
     @Autowired
-    public AcquirenteController(AcquirenteRepository acquirenteRepository, HttpSession httpSession) {
+    public AcquirenteController(AcquirenteRepository acquirenteRepository, HttpSession httpSession, HandlerAcquirente handlerAcquirente) {
         this.acquirenteRepository = acquirenteRepository;
 
+        this.handlerAcquirente = handlerAcquirente;
     }
 
     /**
@@ -71,5 +75,19 @@ public class AcquirenteController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/consultaprodotti")
+    public ResponseEntity<List<Prodotto>> consultaProdotti(){
+        List<Prodotto> listaProdotti = handlerAcquirente.consultaProdotti();
+        return ResponseEntity.ok(listaProdotti);
+    }
+
+
+    @GetMapping("/consultamappa")
+    public ResponseEntity<List<Indirizzo>> consultaMappa(){
+        List<Indirizzo> listaIndirizzi = handlerAcquirente.consultaMappa();
+        return ResponseEntity.ok(listaIndirizzi);
+    }
+
 
 }
