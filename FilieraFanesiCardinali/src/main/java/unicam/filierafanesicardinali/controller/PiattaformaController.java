@@ -27,6 +27,11 @@ public class PiattaformaController {
         return ResponseEntity.ok().body(listaProdotti);
     }
 
+    /**
+     * Ritorna un prodotto tramite l'id
+     * @param id del prodotto
+     * @return il prodotto
+     */
     @GetMapping("/prodotto/{id}")
     public ResponseEntity<Prodotto> getProdotto(@PathVariable Long id){
         if(id == null){return ResponseEntity.badRequest().build();}
@@ -41,6 +46,11 @@ public class PiattaformaController {
         return ResponseEntity.ok().body(listaEventi);
     }
 
+    /**
+     * Ritorna un evento tramite l'id
+     * @param id dell'evento
+     * @return l'evento
+     */
     @GetMapping("/evento/{id}")
     public ResponseEntity<Evento> getEvento(@PathVariable Long id){
         if(id == null){return ResponseEntity.badRequest().build();}

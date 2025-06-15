@@ -40,6 +40,12 @@ public class CuratoreController {
         }
     }
 
+    /**
+     * Un curatore verifica un prodotto
+     * @param id del curatore
+     * @param prodotto da verificare
+     * @return il prodotto verificato
+     */
     @PostMapping("/verifica/{id}")
     public ResponseEntity<Prodotto> verificaProdotto(@PathVariable Long id, @RequestBody Prodotto prodotto) {
         if (prodottoRepository.existsById(prodotto.getId()) && curatoreRepository.existsById(id) &&
@@ -51,6 +57,11 @@ public class CuratoreController {
         return ResponseEntity.badRequest().build();
     }
 
+    /**
+     * Elimina un curatore
+     * @param id del curatore
+     * @return il curatore eliminato
+     */
     @PostMapping("/{id}")
     public ResponseEntity<Curatore> deleteCuratore(@PathVariable Long id){
         if(curatoreRepository.existsById(id)){

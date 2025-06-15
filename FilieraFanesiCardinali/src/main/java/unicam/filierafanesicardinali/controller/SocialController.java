@@ -29,6 +29,12 @@ public class SocialController {
     }
 
 
+    /**
+     * Un venditore aggiunge un contunuto social
+     * @param id del venditore
+     * @param contenutoSocial
+     * @return il social aggiornato
+     */
     @PostMapping("/{id}/aggiungicontenuto")
     public ResponseEntity<Social> aggiungicontenutoSocial(@PathVariable Long id, @RequestBody ContenutoSocial contenutoSocial) {
         if(contenutoSocial == null
@@ -47,9 +53,15 @@ public class SocialController {
 
     }
 
+    /**
+     * Un venditore rimuove un suo contenuto social
+     * @param id del venditore
+     * @param contenutoSocial
+     * @return il social aggiornato
+     */
     @DeleteMapping("/{id}/rimuovi")
     public ResponseEntity<Social> rimuoviContenutoSocial(@PathVariable Long id, @RequestBody ContenutoSocial contenutoSocial) {
-        if(contenutoSocial == null || !venditoreRepository.existsById(id))
+        if(contenutoSocial == null || !venditoreRepository.existsById(id) || contenutoSocial.getVenditore().getId() != id)
         {return ResponseEntity.badRequest().build();}
 
         return ResponseEntity.ok(handlerSocial.eliminaContenuto(contenutoSocial));

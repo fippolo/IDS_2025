@@ -4,6 +4,7 @@ package unicam.filierafanesicardinali.model.prodotti;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
+import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 import java.util.Objects;
@@ -38,6 +39,8 @@ public class Prodotto {
 	private float prezzo;
 	private boolean stato;
 	private String descrizione;
+	@OneToOne
+	private Indirizzo indirizzo;
 
 	public Venditore getVenditore() {
 		return venditore;
@@ -47,12 +50,13 @@ public class Prodotto {
 		this.venditore = venditore;
 	}
 
-	public Prodotto(String nome, float prezzo, String descrizione, Venditore venditore) {
+	public Prodotto(String nome, float prezzo, String descrizione, Venditore venditore, Indirizzo indirizzo) {
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.stato = false;
 		this.descrizione = descrizione;
 		this.venditore = venditore;
+		this.indirizzo = indirizzo;
 	}
 
 	public Prodotto() {}
@@ -91,11 +95,13 @@ public class Prodotto {
 		this.descrizione = descrizione;
 	}
 
-	//public Venditore getVenditore(){ return this.venditore;	}
-	//public void setVenditore(Venditore venditore){ this.venditore=venditore; }
+	public Indirizzo getIndirizzo() {
+		return indirizzo;
+	}
 
-
-
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
+	}
 
 	@Override
 	public boolean equals(Object o) {

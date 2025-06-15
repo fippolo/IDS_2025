@@ -85,12 +85,17 @@ public class VenditoreController {
      * @return ResponseEntity con il venditore se trovato
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Venditore> getVenditoreById(@PathVariable Long id) {
+    public ResponseEntity<Venditore> getVenditore(@PathVariable Long id) {
         return venditoreRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Elimina un venditore tramite l'id
+     * @param id del venditore
+     * @return il venditore eliminato
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Venditore> eliminaVenditore(@PathVariable Long id) {
         if (!venditoreRepository.existsById(id)) {return ResponseEntity.badRequest().build(); }

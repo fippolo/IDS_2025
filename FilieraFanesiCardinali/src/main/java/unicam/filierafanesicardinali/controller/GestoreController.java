@@ -36,6 +36,11 @@ public class GestoreController {
         }
     }
 
+    /**
+     * Verifica un venditore
+     * @param venditore da verificare
+     * @return il venditore verificato
+     */
     @PostMapping("/verifica")
     public ResponseEntity<Venditore> approvaVenditore(@PathVariable Venditore venditore) {
         if(venditore.getId() == null|| venditore.isStato()) {return ResponseEntity.badRequest().build();}

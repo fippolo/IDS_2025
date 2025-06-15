@@ -40,6 +40,11 @@ public class EventoController {
         return ResponseEntity.ok(eventi);
     }
 
+    /**
+     * Elimina un evento
+     * @param id dell'evento
+     * @return l'evento eliminato
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Evento> deleteEvento(@PathVariable Long id){
         if(eventoRepository.existsById(id)){

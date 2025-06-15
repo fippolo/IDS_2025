@@ -1,6 +1,7 @@
 package unicam.filierafanesicardinali.model.venditori;
 
 import jakarta.persistence.*;
+import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoDistributore;
 
@@ -23,13 +24,13 @@ public class DistributoreTipicita extends Venditore implements IBuilder {
 
 	}
 
-	public ProdottoDistributore creaProdotto(String nome, float prezzo, String descrizione) {
-		return new ProdottoDistributore(nome, prezzo, descrizione, this, null);
+	public ProdottoDistributore creaProdotto(String nome, float prezzo, String descrizione, Indirizzo indirizzo) {
+		return new ProdottoDistributore(nome, prezzo, descrizione, this,indirizzo, null);
 	}
 
 
-	public void startBundle(String nome, float prezzo,String descrizione){
-		bundle = new ProdottoDistributore(nome, prezzo,descrizione, this, new ArrayList<>());
+	public void startBundle(String nome, float prezzo, String descrizione, Indirizzo indirizzo){
+		bundle = new ProdottoDistributore(nome, prezzo,descrizione, this,indirizzo, new ArrayList<>());
 
 	}
 

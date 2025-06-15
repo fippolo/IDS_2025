@@ -20,6 +20,11 @@ public class AnimatoreController {
 
     }
 
+    /**
+     * Crea un nuovo animatore
+     * @param animatore
+     * @return animatore appena creato
+     */
     @PostMapping("/produttore")
     public ResponseEntity<Animatore> registraAnimatore(@RequestBody Animatore animatore) {
         try {
@@ -37,10 +42,10 @@ public class AnimatoreController {
     }
 
     /**
-     * Recupera un venditore per ID.
+     * Recupera un animatore per ID.
      *
-     * @param id ID del venditore
-     * @return ResponseEntity con il venditore se trovato
+     * @param id ID del animatore
+     * @return ResponseEntity con l'animatore se trovato
      */
     @GetMapping("/{id}")
     public ResponseEntity<Animatore> getAnimatoreById(@PathVariable Long id) {
@@ -49,6 +54,11 @@ public class AnimatoreController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Elimina un animatore
+     * @param id dell'animatore
+     * @return l'animatore eliminato
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Animatore> deleteAnimatore(@PathVariable Long id){
         if(animatoreRepository.existsById(id)){

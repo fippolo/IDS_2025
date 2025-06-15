@@ -3,6 +3,7 @@ package unicam.filierafanesicardinali.model.venditori;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
+import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 
 @JsonTypeInfo(
@@ -45,8 +46,8 @@ public class Venditore implements IVenditore {
 	 * @param prezzo
 	 * @param descrizione
 	 */
-	public Prodotto creaProdotto(String nome, float prezzo, String descrizione) {
-		return new Prodotto(nome, prezzo, descrizione, this);
+	public Prodotto creaProdotto(String nome, float prezzo, String descrizione, Indirizzo indirizzo) {
+		return new Prodotto(nome, prezzo, descrizione, this, indirizzo);
 	}
 
 	public Long getId() {

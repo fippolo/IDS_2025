@@ -14,8 +14,8 @@ import java.util.List;
 public class HandlerVenditore {
 
     protected final ProdottoRepository prodottoRepository;
-    private final VenditoreRepository venditoreRepository;
-    private final HandlerProdotto handlerProdotto;
+    protected final VenditoreRepository venditoreRepository;
+    protected final HandlerProdotto handlerProdotto;
 
     @Autowired
     public HandlerVenditore(ProdottoRepository prodottoRepository, VenditoreRepository venditoreRepository, HandlerProdotto handlerProdotto) {

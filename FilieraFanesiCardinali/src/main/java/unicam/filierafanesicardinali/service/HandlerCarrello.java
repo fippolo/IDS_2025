@@ -17,8 +17,10 @@ public class HandlerCarrello {
     }
 
     /**
-     *
+     *Aggiunge un prodotto al carrello
      * @param prodotto
+     * @param carrello
+     * @return il carrello aggiornato
      */
     public Carrello aggiungiProdotto(Prodotto prodotto, Carrello carrello) {
         carrello.aggiungiProdotto(prodotto);
@@ -26,14 +28,21 @@ public class HandlerCarrello {
     }
 
     /**
-     *
+     *Elimina un prodotto dal carrello
      * @param prodotto
+     * @param carrello
+     * @return il carrello aggiornato
      */
     public Carrello eliminaProdotto(Prodotto prodotto, Carrello carrello) {
         carrello.rimuoviProdotto(prodotto);
         return carrelloRepository.save(carrello);
     }
 
+    /**
+     * Svuota il carrello
+     * @param carrello
+     * @return il carrello aggiornato
+     */
     public Carrello svuotaCarrello(Carrello carrello) {
         carrello.svuotaCarello();
         return carrelloRepository.save(carrello);

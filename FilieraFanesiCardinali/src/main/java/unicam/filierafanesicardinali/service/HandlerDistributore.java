@@ -2,6 +2,7 @@ package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoDistributore;
 import unicam.filierafanesicardinali.model.venditori.DistributoreTipicita;
@@ -14,12 +15,12 @@ import java.util.Optional;
 @Service
 public class HandlerDistributore extends HandlerVenditore{
 
-    VenditoreRepository venditoreRepository;
+    //private final VenditoreRepository venditoreRepository;
 
     @Autowired
-    public HandlerDistributore(ProdottoRepository prodottoRepository, VenditoreRepository venditoreRepository) {
-        super(prodottoRepository);
-        this.venditoreRepository = venditoreRepository;
+    public HandlerDistributore(ProdottoRepository prodottoRepository, VenditoreRepository venditoreRepository, HandlerProdotto handlerProdotto) {
+        super(prodottoRepository, venditoreRepository, handlerProdotto);
+
     }
 
     public ProdottoDistributore creaProdotto (ProdottoDistributore prodotto){
@@ -29,11 +30,12 @@ public class HandlerDistributore extends HandlerVenditore{
 
         ProdottoDistributore toReturn = distributoreProdotto.creaProdotto(prodotto.getNome()
                                                             ,prodotto.getPrezzo()
-                                                            ,prodotto.getDescrizione());
+                                                            ,prodotto.getDescrizione()
+                                                            ,prodotto.getIndirizzo());
         return prodottoRepository.save(toReturn);
     }
 
-    public DistributoreTipicita iniziaPacchetto (DistributoreTipicita venditore, String nome, Float prezzo, String descrizione){
+    public DistributoreTipicita iniziaPacchetto (DistributoreTipicita venditore, String nome, Float prezzo, String descrizione, Indirizzo indirizzo){
         if(venditore == null) throw new IllegalArgumentException("Venditore non trovato");
         DistributoreTipicita distributoreTipicita;
         Optional<Venditore> optionalVenditore = venditoreRepository.findById(venditore.getId());
@@ -41,7 +43,7 @@ public class HandlerDistributore extends HandlerVenditore{
             distributoreTipicita = (DistributoreTipicita) optionalVenditore.get();
         }
         else throw new IllegalArgumentException("Venditore non trovato");
-        distributoreTipicita.startBundle(nome, prezzo, descrizione);
+        distributoreTipicita.startBundle(nome, prezzo, descrizione, indirizzo);
         return venditoreRepository.save(distributoreTipicita);
     }
 

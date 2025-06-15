@@ -33,6 +33,7 @@ public class CarrelloController {
         this.handlerSistemaPagamento = handlerSistemaPagamento;
     }
 
+
     @PostMapping("/carrello")
     public ResponseEntity<Carrello> registraCarrello(@RequestBody Carrello carrello) {
         try {
@@ -43,7 +44,11 @@ public class CarrelloController {
         }
     }
 
-
+    /**
+     * Aggiunge un prodotto al carrello dell'acquirente.
+     * @param id ID dell'acquirente
+     * @param prodotto prodotto da eliminare
+     */
     @PostMapping("/{id}/aggiungiprodotto")
     public ResponseEntity<Carrello> aggiungiProdotto(@RequestBody Long id, Prodotto prodotto) {
         if(prodotto == null || !acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
@@ -55,7 +60,11 @@ public class CarrelloController {
         return ResponseEntity.ok(carrello);
     }
 
-
+    /**
+     * Elimina un prodotto al carrello dell'acquirente.
+     * @param id ID dell'acquirente
+     * @param prodotto prodotto da eliminare
+     */
     @DeleteMapping("/{id}/eliminaprodotto")
     public ResponseEntity<Carrello> eliminaProdotto(@PathVariable Long id, Prodotto prodotto) {
         if(prodotto == null || !acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
@@ -67,6 +76,10 @@ public class CarrelloController {
         return ResponseEntity.ok(carrello);
     }
 
+    /**
+     * Svuota il carrello dell'acquirente.
+     * @param id ID dell'acquirente
+     */
     @DeleteMapping("/{id}/svuotacarrello")
     public ResponseEntity<Carrello> svuotaCarrello(@PathVariable Long id) {
         if(!acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
@@ -77,6 +90,12 @@ public class CarrelloController {
         return ResponseEntity.ok(carrello);
     }
 
+    /**
+     * Acquista un prodotto dal carrello
+     * @param id dell'animatore
+     * @param prodotto da comprare presente nel carrello
+     * @return Carrello aggiurnato
+     */
     @PostMapping("/{id}/acquistoprodotto")
     public ResponseEntity<Carrello> acquistoProdotto(@PathVariable Long id, Prodotto prodotto) {
         if(prodotto == null || !acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
