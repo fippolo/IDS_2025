@@ -63,7 +63,7 @@ public class UtenteGenericoController {
      * @return
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<UtenteGenerico> deleteUtenteGenericoById(@PathVariable Long id){
+    public ResponseEntity<UtenteGenerico> deleteUtenteGenerico(@PathVariable Long id){
         Optional<UtenteGenerico> utente = utenteGenericoRepository.findById(id);
         if(utente.isPresent()){
             utenteGenericoRepository.deleteById(id);

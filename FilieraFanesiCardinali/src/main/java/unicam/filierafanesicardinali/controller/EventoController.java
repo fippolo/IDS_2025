@@ -3,6 +3,7 @@ package unicam.filierafanesicardinali.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unicam.filierafanesicardinali.model.eventi.Animatore;
 import unicam.filierafanesicardinali.model.eventi.Evento;
 import unicam.filierafanesicardinali.repository.AnimatoreRepository;
 import unicam.filierafanesicardinali.repository.EventoRepository;
@@ -37,6 +38,15 @@ public class EventoController {
     public ResponseEntity<List<Evento>> listaEventi() {
         List<Evento> eventi = eventoRepository.findAll();
         return ResponseEntity.ok(eventi);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Evento> deleteEvento(@PathVariable Long id){
+        if(eventoRepository.existsById(id)){
+            eventoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

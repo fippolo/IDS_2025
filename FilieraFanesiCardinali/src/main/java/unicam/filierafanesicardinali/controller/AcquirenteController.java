@@ -27,7 +27,6 @@ public class AcquirenteController {
     @Autowired
     public AcquirenteController(AcquirenteRepository acquirenteRepository, HttpSession httpSession, HandlerAcquirente handlerAcquirente, CarrelloRepository carrelloRepository) {
         this.acquirenteRepository = acquirenteRepository;
-
         this.handlerAcquirente = handlerAcquirente;
         this.carrelloRepository = carrelloRepository;
     }
@@ -72,7 +71,7 @@ public class AcquirenteController {
      * @return
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Acquirente> deleteAcquirenteById(@PathVariable Long id){
+    public ResponseEntity<Acquirente> deleteAcquirente(@PathVariable Long id){
         Optional<Acquirente> acquirente = acquirenteRepository.findById(id);
         if(acquirente.isPresent()){
             acquirenteRepository.deleteById(id);

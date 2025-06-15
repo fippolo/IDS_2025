@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.amministrazione.Curatore;
+import unicam.filierafanesicardinali.model.eventi.Animatore;
 import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoProduttore;
 import unicam.filierafanesicardinali.model.venditori.Produttore;
@@ -48,6 +49,15 @@ public class CuratoreController {
         }
 
         return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<Curatore> deleteCuratore(@PathVariable Long id){
+        if(curatoreRepository.existsById(id)){
+            curatoreRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 

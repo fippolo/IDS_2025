@@ -9,6 +9,7 @@ import unicam.filierafanesicardinali.model.venditori.Produttore;
 import unicam.filierafanesicardinali.model.venditori.Trasformatore;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
 import unicam.filierafanesicardinali.repository.VenditoreRepository;
+import unicam.filierafanesicardinali.service.HandlerVenditore;
 
 
 import java.util.ArrayList;
@@ -25,10 +26,12 @@ import java.util.List;
 public class VenditoreController {
 
     private final VenditoreRepository venditoreRepository;
+    private final HandlerVenditore handlerVenditore;
 
     @Autowired
-    public VenditoreController(VenditoreRepository venditoreRepository) {
+    public VenditoreController(VenditoreRepository venditoreRepository, HandlerVenditore handlerVenditore) {
         this.venditoreRepository = venditoreRepository;
+        this.handlerVenditore = handlerVenditore;
     }
 
 
@@ -86,6 +89,15 @@ public class VenditoreController {
         return venditoreRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Venditore> eliminaVenditore(@PathVariable Long id) {
+        if (!venditoreRepository.existsById(id)) {return ResponseEntity.badRequest().build(); }
+
+        Venditore venditoreDel = venditoreRepository.getById(id);
+        handlerVenditore.rimuoviVenditore(venditoreDel);
+        return ResponseEntity.status(HttpStatus.OK).body(venditoreDel);
     }
 
     @GetMapping("/test")

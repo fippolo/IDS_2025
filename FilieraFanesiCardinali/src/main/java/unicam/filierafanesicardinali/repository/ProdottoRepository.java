@@ -13,4 +13,5 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
 
     List<Prodotto> findByStatoFalse(); //restituisce i prodotti non verificati
 
+    List<Prodotto> findByVenditoreId(Long venditoreId);//restituisce i prodotti verificati di un venditore
 }

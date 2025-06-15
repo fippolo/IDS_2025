@@ -10,6 +10,7 @@ import unicam.filierafanesicardinali.model.venditori.Venditore;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 import unicam.filierafanesicardinali.repository.VenditoreRepository;
 import unicam.filierafanesicardinali.service.HandlerDistributore;
+import unicam.filierafanesicardinali.service.HandlerProdotto;
 import unicam.filierafanesicardinali.service.HandlerProduttore;
 import unicam.filierafanesicardinali.service.HandlerTrasformatore;
 import unicam.filierafanesicardinali.model.prodotti.*;
@@ -24,18 +25,20 @@ public class ProdottoController {
     private final HandlerProduttore handlerProduttore;
     private final HandlerTrasformatore handlerTrasformatore;
     private final ProdottoRepository prodottoRepository;
+    private final HandlerProdotto handlerProdotto;
     //per test
     private final VenditoreRepository venditoreRepository;
 
     @Autowired
-    public ProdottoController(ProdottoRepository prodottoRepository,VenditoreRepository venditoreRepository,
+    public ProdottoController(ProdottoRepository prodottoRepository, VenditoreRepository venditoreRepository,
                               HandlerDistributore handlerDistributore, HandlerProduttore handlerProduttore,
-                              HandlerTrasformatore handlerTrasformatore) {
+                              HandlerTrasformatore handlerTrasformatore, HandlerProdotto handlerProdotto) {
         this.prodottoRepository = prodottoRepository;
         this.venditoreRepository = venditoreRepository;
         this.handlerDistributore = handlerDistributore;
         this.handlerProduttore = handlerProduttore;
         this.handlerTrasformatore = handlerTrasformatore;
+        this.handlerProdotto = handlerProdotto;
     }
 
 
@@ -117,6 +120,15 @@ public class ProdottoController {
     public ResponseEntity<List<Prodotto>> listaProdotti() {
         List<Prodotto> prodotti = prodottoRepository.findAll();
         return ResponseEntity.ok(prodotti);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Prodotto> eliminaProdotto(@PathVariable Long id) {
+        if(!prodottoRepository.existsById(id)){return ResponseEntity.badRequest().build();}
+
+        Prodotto prodottoDel = prodottoRepository.findById(id).get();
+        handlerProdotto.rimuoviProdotto(prodottoDel);
+        return ResponseEntity.status(HttpStatus.OK).body(prodottoDel);
     }
 
     //per test

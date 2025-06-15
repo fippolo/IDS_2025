@@ -26,4 +26,7 @@ public class HandlerAnimatore {
 
         return eventoRepository.save(eventoAnimatore);
     }
+
+
+
 }
