@@ -7,14 +7,3 @@ La piattaforma permette la tracciabilità di ogni prodotto attraverso i diversi 
 Il progetto deve essere sviluppato in Java e successivamente portato su Spring Boot.
 Lo strato di presentazione può essere sviluppato con strumenti a scelta dello studente ed eventualmente può limitarsi alla linea di comando e/o API REST.
 Si raccomanda di utilizzare almeno due design pattern (diverso dal Singleton).
-
-## development milestones
-- [x] prima iterazione analisi e progettazione
-- [ ] implementazione prima iterazione di progettazione 
-- [ ] seconda iterazione analisi e progettazione (design patterns, system calsses)
-- [ ] implementazione seconda iterazione di progettazione
-- [ ] terza iterazione analisi e progettazione (design patterns, system calsses)
-- [ ] implementazione terza iterazione di progettazione 
-- [ ] testing 
-- [ ] UI
-- [ ] UI testing
