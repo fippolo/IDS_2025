@@ -15,6 +15,16 @@ public class Indirizzo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+	public Indirizzo() {
+
+	}
+
+	public Indirizzo(String via, String civico, String citta, String provincia) {
+		this.via = via;
+		this.civico = civico;
+		this.citta = citta;
+		this.provincia = provincia;
+	}
 	public String getVia() {
 		return this.via;
 	}
