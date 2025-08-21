@@ -6,14 +6,15 @@
 | acquisto carrello aggiungere condizioni pre e post (riguardare pre e post su ogni usecase) | X |
 | adeguare i flow of events alle precondizioni | X |
 | aggregare le azioni del system | X |
-| aggiunta prodotto da sviscerare per ogni venditore |X |
+| aggiunta prodotto da sviscerare per ogni venditore | X |
+| aggiunta prodotto da generalizzare | X |
+| consultazione prodotto deve avere l'eventualità nella quale non ci sono prodotti disponibili |??|
+| aggiunta e approvazione pre e post condizioni | X |
+| pianifica evento ha bisogno degli inviti da mandare | X |
+| rivedere tutti gli exit scenario e cercare di evitarli | X |
+| riguardare il flow of events per il sistema di pagamento (deve dare una risposta) | X |
+| invito evento | X |
 | adeguare i diagrammi di sequenza ai flow of events revisionati | |
-| invito evento | |
-| pianifica evento ha bisogno degli inviti da mandare | |
-| rivedere tutti gli exit scenario e cercare di evitarli | |
-| riguardare il flow of events per il sistema di pagamento (deve dare una risposta) | |
-| aggiunta e approvazione pre e post condizioni | |
-| consultazione prodotto deve avere l'eventualità nella quale non ci sono prodotti disponibili | |
 
 ### DIAGRAMMA DI CLASSI:
 | Task | Status |
