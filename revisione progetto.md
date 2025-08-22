@@ -19,7 +19,7 @@
 ### DIAGRAMMA DI CLASSI:
 | Task | Status |
 |------|--------|
-| problema liste su diagramma di analisi (evitare) | |
+| problema liste su diagramma di analisi (evitare) |X |
 | su diag. prog. aggiungere intermediario fra sys pag e prodotto | |
 | organizzare prodotti aggregarli il più possibile | |
 
