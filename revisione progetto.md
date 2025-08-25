@@ -14,6 +14,7 @@
 | rivedere tutti gli exit scenario e cercare di evitarli | X |
 | riguardare il flow of events per il sistema di pagamento (deve dare una risposta) | X |
 | invito evento | X |
+| aggiungere use cases consulta inviti e eventi | | 
 | adeguare i diagrammi di sequenza ai flow of events revisionati | |
 
 ### DIAGRAMMA DI CLASSI:
