@@ -22,13 +22,14 @@
 |------|--------|
 | problema liste su diagramma di analisi (evitare) | X |
 | su diag. prog. aggiungere intermediario fra sys pag e prodotto | X |
-| organizzare prodotti aggregarli il più possibile | |
-| gestione inviti eventi | |
+| organizzare prodotti aggregarli il più possibile | X |
+| gestione inviti eventi | X |
+| implementa design patterns |ongoing|
 
 ### CODICE:
 | Task | Status |
 |------|--------|
-| implementare completamente indirizzo | |
-| collaudare con postman | |
-| rivedere parametri POST nel caricamento di un prodotto | |
+| implementare completamente nuova iterazione | |
 | Normalizzare data checking per ogni metodo degli endpoint | |
+| rivedere parametri POST nel caricamento di un prodotto | |
+| collaudare con postman | |
