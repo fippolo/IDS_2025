@@ -24,6 +24,11 @@
 | su diag. prog. aggiungere intermediario fra sys pag e prodotto | X |
 | organizzare prodotti aggregarli il più possibile | X |
 | gestione inviti eventi | X |
+| associazioni ||
+| cardinalità ||
+| includere interfacce jpa ||
+| gestire vari sellers (forese usiamo decorator)| |
+| enumeratore ruolo, guardare se si può usare la discrimination value per risparmiare risorse||
 | implementa design patterns |ongoing|
 
 ### CODICE:
@@ -31,5 +36,4 @@
 |------|--------|
 | implementare completamente nuova iterazione | |
 | Normalizzare data checking per ogni metodo degli endpoint | |
-| rivedere parametri POST nel caricamento di un prodotto | |
 | collaudare con postman | |

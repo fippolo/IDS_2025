@@ -2,3 +2,4 @@
 /vpp/*.lck*
 /vpp/*.lock*
 /vpp/.vpprefdata
+/.idea
