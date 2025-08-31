@@ -24,8 +24,9 @@
 | su diag. prog. aggiungere intermediario fra sys pag e prodotto | X |
 | organizzare prodotti aggregarli il più possibile | X |
 | gestione inviti eventi | X |
-| associazioni ||
+| associazioni | X |
 | cardinalità ||
+| progettazione mappa ||
 | includere interfacce jpa ||
 | gestire vari sellers (forese usiamo decorator)| |
 | enumeratore ruolo, guardare se si può usare la discrimination value per risparmiare risorse||
