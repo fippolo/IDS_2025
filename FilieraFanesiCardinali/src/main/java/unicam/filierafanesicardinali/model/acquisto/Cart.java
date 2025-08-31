@@ -18,4 +18,12 @@ public class Cart {
 	public Cart() {
 		CartItemList = new ArrayList<CartItem>();
 	}
+
+	public List<CartItem> getCartItemList() {
+		return CartItemList;
+	}
+
+	public void emptyCart() {
+		CartItemList.clear();
+	}
 }

@@ -23,4 +23,8 @@ public class Bundle extends Product {
         super(name, price, descrizione, sellerId, productionSite);
         this.listaProdotti = listaProdotti;
     }
+
+    public void addProduct(Product p){
+        listaProdotti.add(p);
+    }
 }

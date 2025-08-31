@@ -49,4 +49,8 @@ public class Order {
     public boolean isPaid() {
         return isPaid;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

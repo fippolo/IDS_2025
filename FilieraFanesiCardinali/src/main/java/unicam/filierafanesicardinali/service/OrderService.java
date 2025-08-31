@@ -1,4 +1,4 @@
-package unicam.filierafanesicardinali.controller;
+package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +22,33 @@ public class OrderService {
     }
 
     public Order createOrder(List<CartItem> products, Long buyerID){
-        return builderProvider.getObject()
+        return orderRepository.save(
+                builderProvider.getObject()
                 .setBuyer(buyerID)
                 .withInsertionDate(java.time.LocalDateTime.now())
                 .addProducts(products)
-                .build();
+                .build());
     }
 
     public Order GetOrder(Long id){
-        return orderRepository.findById(id).orElseThrow(RuntimeException::new);
+        return orderRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
     }
 
     public List<Order> getBuyersOrders(Long id){
-        return orderRepository.findByIdBuyer(id).orElseThrow(RuntimeException::new);
+        return orderRepository.findByIdBuyer(id).
+                orElseThrow(() -> new RuntimeException("Buyer not found with id: " + id));
     }
 
     public boolean getOrderStatus(Long id){
-        return orderRepository.findById(id).orElseThrow(RuntimeException::new).isPaid();
+        return orderRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Order not found with id: " + id))
+                .isPaid();
     }
 
     public Order updateOrderStatus(Long id, boolean status){
-        Order order = orderRepository.findById(id).orElseThrow(RuntimeException::new);
+        Order order = orderRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
         order.setPaid(status);
         return orderRepository.save(order);
     }
