@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d11f717-91c1-4751-a3c2-fd4f15b9832a" name="Changes" comment="" />
+    <list default="true" id="2d11f717-91c1-4751-a3c2-fd4f15b9832a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/FilieraFanesiCardinali/src/main/java/unicam/filierafanesicardinali/model/utenti/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/FilieraFanesiCardinali/src/main/java/unicam/filierafanesicardinali/model/utenti/User.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,6 +86,7 @@
       <workItem from="1756211338978" duration="4669000" />
       <workItem from="1756568291007" duration="65000" />
       <workItem from="1756568416964" duration="122000" />
+      <workItem from="1756653115930" duration="198000" />
     </task>
     <servers />
   </component>

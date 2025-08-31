@@ -7,29 +7,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.acquisto.Cart;
 import unicam.filierafanesicardinali.model.prodotti.Product;
-import unicam.filierafanesicardinali.model.utenti.Acquirente;
-import unicam.filierafanesicardinali.repository.AcquirenteRepository;
-import unicam.filierafanesicardinali.repository.CarrelloRepository;
-import unicam.filierafanesicardinali.repository.ProdottoRepository;
-import unicam.filierafanesicardinali.service.HandlerCarrello;
+import unicam.filierafanesicardinali.model.utenti.Buyer;
+import unicam.filierafanesicardinali.service.CartService;
 import unicam.filierafanesicardinali.service.HandlerSistemaPagamento;
 
 @RestController
 @RequestMapping("/api/v1/carrelli")
-public class CarrelloController {
-    private final AcquirenteRepository   acquirenteRepository;
-    private final CarrelloRepository carrelloRepository;
-    private final ProdottoRepository prodottoRepository;
-    private final HandlerCarrello handlerCarrello;
+public class CartController {
+    private final CartService cartService;
     private final HandlerSistemaPagamento handlerSistemaPagamento;
 
     @Autowired
-    public CarrelloController(AcquirenteRepository acquirenteRepository, CarrelloRepository carrelloRepository, ProdottoRepository prodottoRepository, HandlerCarrello handlerCarrello, HandlerSistemaPagamento handlerSistemaPagamento) {
+    public CartController() {
         this.acquirenteRepository = acquirenteRepository;
         this.carrelloRepository = carrelloRepository;
 
         this.prodottoRepository = prodottoRepository;
-        this.handlerCarrello = handlerCarrello;
+        this.cartService = cartService;
         this.handlerSistemaPagamento = handlerSistemaPagamento;
     }
 
@@ -55,7 +49,7 @@ public class CarrelloController {
 
         Cart cart = acquirenteRepository.findById(id).get().getCarrello();
         Product prodottoadd = prodottoRepository.findById(product.getId()).get();
-        cart = handlerCarrello.aggiungiProdotto(prodottoadd, cart);
+        cart = cartService.addToCart(prodottoadd, cart);
 
         return ResponseEntity.ok(cart);
     }
@@ -71,7 +65,7 @@ public class CarrelloController {
 
         Cart cart = acquirenteRepository.findById(id).get().getCarrello();
         Product prodottodel = prodottoRepository.findById(product.getId()).get();
-        cart = handlerCarrello.eliminaProdotto(prodottodel, cart);
+        cart = cartService.eliminaProdotto(prodottodel, cart);
 
         return ResponseEntity.ok(cart);
     }
@@ -85,7 +79,7 @@ public class CarrelloController {
         if(!acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
 
         Cart cart = acquirenteRepository.findById(id).get().getCarrello();
-        cart = handlerCarrello.svuotaCarrello(cart);
+        cart = cartService.svuotaCarrello(cart);
 
         return ResponseEntity.ok(cart);
     }
@@ -100,9 +94,9 @@ public class CarrelloController {
     public ResponseEntity<Cart> acquistoProdotto(@PathVariable Long id, Product product) {
         if(product == null || !acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
 
-        Acquirente acquirente = acquirenteRepository.findById(id).get();
+        Buyer buyer = acquirenteRepository.findById(id).get();
         Product prodottoacq = prodottoRepository.findById(product.getId()).get();
-        Cart cart = handlerSistemaPagamento.acquistoProdotto(prodottoacq, acquirente);
+        Cart cart = handlerSistemaPagamento.acquistoProdotto(prodottoacq, buyer);
         return ResponseEntity.ok(cart);
     }
 

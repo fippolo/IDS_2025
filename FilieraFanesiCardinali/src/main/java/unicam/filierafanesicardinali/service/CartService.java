@@ -4,16 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import unicam.filierafanesicardinali.model.acquisto.Cart;
 import unicam.filierafanesicardinali.model.prodotti.Product;
+import unicam.filierafanesicardinali.repository.BuyerRepository;
 import unicam.filierafanesicardinali.repository.CarrelloRepository;
 
 @Service
-public class HandlerCarrello {
+public class CartService {
 
-    private final CarrelloRepository carrelloRepository;
+    private final BuyerRepository buyerRepository;
 
     @Autowired
-    public HandlerCarrello(CarrelloRepository carrelloRepository) {
-        this.carrelloRepository = carrelloRepository;
+    public CartService(BuyerRepository buyerRepository) {
+        this.buyerRepository = buyerRepository;
     }
 
     /**
@@ -22,8 +23,8 @@ public class HandlerCarrello {
      * @param cart
      * @return il carrello aggiornato
      */
-    public Cart aggiungiProdotto(Product product, Cart cart) {
-        cart.aggiungiProdotto(product);
+    public Cart addToCart(Long buyerId, Long ProductId, int qty) {
+
         return carrelloRepository.save(cart);
     }
 

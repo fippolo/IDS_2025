@@ -3,7 +3,6 @@ package unicam.filierafanesicardinali.model.prodotti;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
-import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 @Entity
 @DiscriminatorValue("simple")

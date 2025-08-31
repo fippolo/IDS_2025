@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.model.prodotti.Product;
-import unicam.filierafanesicardinali.model.utenti.Acquirente;
+import unicam.filierafanesicardinali.model.utenti.Buyer;
 import unicam.filierafanesicardinali.repository.AcquirenteRepository;
 import unicam.filierafanesicardinali.repository.CarrelloRepository;
 import unicam.filierafanesicardinali.service.HandlerAcquirente;
@@ -33,15 +33,15 @@ public class AcquirenteController {
 
     /**
      * Crea un acquirente
-     * @param acquirente oggetto da salvare
+     * @param buyer oggetto da salvare
      * @return stauts code created e body dell'oggetto salvato
      */
     @PostMapping
-    public ResponseEntity<Acquirente> createAcquirente(@RequestBody Acquirente acquirente){
-        Acquirente newAcquirente = acquirenteRepository.save(acquirente);
+    public ResponseEntity<Buyer> createAcquirente(@RequestBody Buyer buyer){
+        Buyer newBuyer = acquirenteRepository.save(buyer);
 
-        carrelloRepository.save(acquirente.getCarrello());
-        return ResponseEntity.status(HttpStatus.CREATED).body(newAcquirente);
+        carrelloRepository.save(buyer.getCarrello());
+        return ResponseEntity.status(HttpStatus.CREATED).body(newBuyer);
     }
 
     /**
@@ -50,8 +50,8 @@ public class AcquirenteController {
      * @return Acquirente
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Acquirente> getAcquirenteById(@PathVariable Long id) {
-        Optional<Acquirente> acquirente = acquirenteRepository.findById(id);
+    public ResponseEntity<Buyer> getAcquirenteById(@PathVariable Long id) {
+        Optional<Buyer> acquirente = acquirenteRepository.findById(id);
         return acquirente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -60,9 +60,9 @@ public class AcquirenteController {
      * @return Lista di acquirenti e 200
      */
     @GetMapping
-    public ResponseEntity<List<Acquirente>> getAllAcquirente(){
-        List<Acquirente> acquirente = acquirenteRepository.findAll();
-        return ResponseEntity.ok(acquirente);
+    public ResponseEntity<List<Buyer>> getAllAcquirente(){
+        List<Buyer> buyer = acquirenteRepository.findAll();
+        return ResponseEntity.ok(buyer);
     }
 
     /**
@@ -71,8 +71,8 @@ public class AcquirenteController {
      * @return
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Acquirente> deleteAcquirente(@PathVariable Long id){
-        Optional<Acquirente> acquirente = acquirenteRepository.findById(id);
+    public ResponseEntity<Buyer> deleteAcquirente(@PathVariable Long id){
+        Optional<Buyer> acquirente = acquirenteRepository.findById(id);
         if(acquirente.isPresent()){
             acquirenteRepository.deleteById(id);
             return ResponseEntity.ok().build();

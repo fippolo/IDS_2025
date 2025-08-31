@@ -4,7 +4,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
-import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +13,7 @@ public class Bundle extends Product {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Product> listaProdotti;
+
     public Bundle() {
         super();
         this.listaProdotti = new ArrayList<>();

@@ -3,7 +3,6 @@ package unicam.filierafanesicardinali.model.prodotti;
 
 import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
-import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 
 @Entity
@@ -13,6 +12,8 @@ public abstract class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(name = "product_type", insertable = false, updatable = false)
+	private String productType;
 
 	private String name;
 	private double price;
@@ -34,5 +35,8 @@ public abstract class Product {
 
 	public Product() {
 	}
-	// getters and setters
+
+	public double getPrice() {
+		return price;
+	}
 }
