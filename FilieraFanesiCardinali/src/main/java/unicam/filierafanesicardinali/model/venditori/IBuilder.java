@@ -1,11 +1,11 @@
 package unicam.filierafanesicardinali.model.venditori;
 
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 
 public interface IBuilder {
     
-    void startBundle(String nome, float prezzo,String descrizione, Indirizzo indirizzo);
-    void aggiungiProdotto(Prodotto prodotto);
-    Prodotto endBundle();
+    void startBundle(String nome, float prezzo,String descrizione, Position position);
+    void aggiungiProdotto(Product product);
+    Product endBundle();
 }

@@ -2,8 +2,8 @@ package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.eventi.Evento;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.eventi.Event;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.repository.EventoRepository;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 
@@ -22,23 +22,23 @@ public class HandlerPiattaforma {
     }
 
 
-    public List<Prodotto> getAllProdotto() {
+    public List<Product> getAllProdotto() {
         return prodottoRepository.findAll();
 
     }
 
-    public List<Evento> getAllEvento() {
+    public List<Event> getAllEvento() {
         return eventoRepository.findAll();
     }
 
-    public Prodotto getProdottoById(Long id) {
+    public Product getProdottoById(Long id) {
         if(prodottoRepository.existsById(id)) {
             return prodottoRepository.getOne(id);
         }
         throw new IllegalArgumentException("Prodotto non trovato");
     }
 
-    public Evento getEventoById(Long id) {
+    public Event getEventoById(Long id) {
         if(eventoRepository.existsById(id)) {
             return eventoRepository.getOne(id);
         }

@@ -2,7 +2,7 @@ package unicam.filierafanesicardinali.model.venditori;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoProduttore;
 
 @Entity
@@ -23,10 +23,10 @@ public class Produttore extends Venditore {
 	 * @param prezzo
 	 * @param metodoDiColtivazione
 	 * @param descrizione
-	 * @param indirizzo
+	 * @param position
 	 */
-	public ProdottoProduttore creaProdotto(String nome, float prezzo, String descrizione, String metodoDiColtivazione, Indirizzo indirizzo) {
-		return new ProdottoProduttore(nome, prezzo,descrizione,this,indirizzo, metodoDiColtivazione);
+	public ProdottoProduttore creaProdotto(String nome, float prezzo, String descrizione, String metodoDiColtivazione, Position position) {
+		return new ProdottoProduttore(nome, prezzo,descrizione,this, position, metodoDiColtivazione);
 	}
 
 }

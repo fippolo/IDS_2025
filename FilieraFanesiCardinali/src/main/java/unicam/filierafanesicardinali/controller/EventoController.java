@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.eventi.Animatore;
-import unicam.filierafanesicardinali.model.eventi.Evento;
+import unicam.filierafanesicardinali.model.eventi.Event;
 import unicam.filierafanesicardinali.repository.AnimatoreRepository;
 import unicam.filierafanesicardinali.repository.EventoRepository;
 import unicam.filierafanesicardinali.service.HandlerAnimatore;
@@ -26,17 +26,17 @@ public class EventoController {
 
 
     @PostMapping
-    public ResponseEntity<Evento> creaEvento(@RequestBody Evento evento) {
-        if(evento.getAnimatore() == null || animatoreRepository.existsById(evento.getAnimatore().getId())  ) {return ResponseEntity.badRequest().build(); }
+    public ResponseEntity<Event> creaEvento(@RequestBody Event event) {
+        if(event.getAnimatore() == null || animatoreRepository.existsById(event.getAnimatore().getId())  ) {return ResponseEntity.badRequest().build(); }
 
-        Evento eventoCreato = handlerAnimatore.CreaEvento(evento);
+        Event eventCreato = handlerAnimatore.CreaEvento(event);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventoCreato);
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventCreato);
     }
 
     @GetMapping
-    public ResponseEntity<List<Evento>> listaEventi() {
-        List<Evento> eventi = eventoRepository.findAll();
+    public ResponseEntity<List<Event>> listaEventi() {
+        List<Event> eventi = eventoRepository.findAll();
         return ResponseEntity.ok(eventi);
     }
 
@@ -46,7 +46,7 @@ public class EventoController {
      * @return l'evento eliminato
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Evento> deleteEvento(@PathVariable Long id){
+    public ResponseEntity<Event> deleteEvento(@PathVariable Long id){
         if(eventoRepository.existsById(id)){
             eventoRepository.deleteById(id);
             return ResponseEntity.ok().build();

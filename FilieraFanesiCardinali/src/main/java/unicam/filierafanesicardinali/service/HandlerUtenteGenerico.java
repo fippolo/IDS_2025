@@ -1,9 +1,9 @@
 package unicam.filierafanesicardinali.service;
 
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.model.localizzazione.Mappa;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 import unicam.filierafanesicardinali.repository.UtenteGenericoRepository;
 
@@ -20,14 +20,14 @@ public class HandlerUtenteGenerico {
     }
 
 
-    public List<Prodotto> consultaProdotti() {
-        List<Prodotto> listaProdotti = prodottoRepository.findAll();
+    public List<Product> consultaProdotti() {
+        List<Product> listaProdotti = prodottoRepository.findAll();
         return listaProdotti;
     }
 
-    public List<Indirizzo> consultaMappa() {
+    public List<Position> consultaMappa() {
         Mappa mappa = new Mappa();
-        List<Indirizzo> listaIndirizzi = mappa.getListaIndirizzi();
+        List<Position> listaIndirizzi = mappa.getListaIndirizzi();
         return listaIndirizzi;
     }
 

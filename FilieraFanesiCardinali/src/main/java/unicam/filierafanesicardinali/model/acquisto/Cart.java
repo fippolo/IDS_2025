@@ -1,37 +1,37 @@
 package unicam.filierafanesicardinali.model.acquisto;
 
 import jakarta.persistence.*;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-public class Carrello {
+public class Cart {
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Prodotto> listaProdotti;
+	private List<Product> listaProdotti;
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	public Carrello() {
-		listaProdotti = new ArrayList<Prodotto>();
+	public Cart() {
+		listaProdotti = new ArrayList<Product>();
 	}
-	public Carrello(List<Prodotto> listaProdotti) {
+	public Cart(List<Product> listaProdotti) {
 		this.listaProdotti = listaProdotti;
 	}
-	public List<Prodotto> getListaProdotti() {
+	public List<Product> getListaProdotti() {
 		return listaProdotti;
 	}
-	public void setListaProdotti(List<Prodotto> listaProdotti) {
+	public void setListaProdotti(List<Product> listaProdotti) {
 		this.listaProdotti = listaProdotti;
 	}
-	public void aggiungiProdotto(Prodotto prodotto) {
-		listaProdotti.add(prodotto);
+	public void aggiungiProdotto(Product product) {
+		listaProdotti.add(product);
 	}
-	public void rimuoviProdotto(Prodotto prodotto) {
-		listaProdotti.remove(prodotto);
+	public void rimuoviProdotto(Product product) {
+		listaProdotti.remove(product);
 	}
 
 	public void svuotaCarello() {

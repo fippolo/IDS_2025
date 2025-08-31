@@ -2,8 +2,8 @@ package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.acquisto.Carrello;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.acquisto.Cart;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.repository.CarrelloRepository;
 
 @Service
@@ -18,34 +18,34 @@ public class HandlerCarrello {
 
     /**
      *Aggiunge un prodotto al carrello
-     * @param prodotto
-     * @param carrello
+     * @param product
+     * @param cart
      * @return il carrello aggiornato
      */
-    public Carrello aggiungiProdotto(Prodotto prodotto, Carrello carrello) {
-        carrello.aggiungiProdotto(prodotto);
-        return carrelloRepository.save(carrello);
+    public Cart aggiungiProdotto(Product product, Cart cart) {
+        cart.aggiungiProdotto(product);
+        return carrelloRepository.save(cart);
     }
 
     /**
      *Elimina un prodotto dal carrello
-     * @param prodotto
-     * @param carrello
+     * @param product
+     * @param cart
      * @return il carrello aggiornato
      */
-    public Carrello eliminaProdotto(Prodotto prodotto, Carrello carrello) {
-        carrello.rimuoviProdotto(prodotto);
-        return carrelloRepository.save(carrello);
+    public Cart eliminaProdotto(Product product, Cart cart) {
+        cart.rimuoviProdotto(product);
+        return carrelloRepository.save(cart);
     }
 
     /**
      * Svuota il carrello
-     * @param carrello
+     * @param cart
      * @return il carrello aggiornato
      */
-    public Carrello svuotaCarrello(Carrello carrello) {
-        carrello.svuotaCarello();
-        return carrelloRepository.save(carrello);
+    public Cart svuotaCarrello(Cart cart) {
+        cart.svuotaCarello();
+        return carrelloRepository.save(cart);
     }
 
 

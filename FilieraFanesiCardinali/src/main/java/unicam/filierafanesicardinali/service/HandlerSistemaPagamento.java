@@ -2,9 +2,9 @@ package unicam.filierafanesicardinali.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.acquisto.Carrello;
+import unicam.filierafanesicardinali.model.acquisto.Cart;
 import unicam.filierafanesicardinali.model.acquisto.SistemaPagamento;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.utenti.Acquirente;
 import unicam.filierafanesicardinali.repository.CarrelloRepository;
 import unicam.filierafanesicardinali.repository.SistemaPagamentoRepository;
@@ -23,15 +23,15 @@ public class HandlerSistemaPagamento {
     }
 
 
-    public Carrello acquistoProdotto(Prodotto prodotto, Acquirente acquirente) {
-        if(acquirente == null || prodotto == null) {throw new IllegalArgumentException("Prodotto nullo o acquirente nullo");}
+    public Cart acquistoProdotto(Product product, Acquirente acquirente) {
+        if(acquirente == null || product == null) {throw new IllegalArgumentException("Prodotto nullo o acquirente nullo");}
 
-        Carrello carrello = carrelloRepository.findById(acquirente.getCarrello().getId())
+        Cart cart = carrelloRepository.findById(acquirente.getCarrello().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Carrello not found"));
-        SistemaPagamento pagamento = new SistemaPagamento(acquirente, prodotto);
+        SistemaPagamento pagamento = new SistemaPagamento(acquirente, product);
         sistemaPagamentoRepository.save(pagamento);
-        carrello.rimuoviProdotto(prodotto);
-        return carrelloRepository.save(carrello);
+        cart.rimuoviProdotto(product);
+        return carrelloRepository.save(cart);
 
     }
 }

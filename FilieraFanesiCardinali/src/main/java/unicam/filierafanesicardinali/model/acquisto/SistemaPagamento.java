@@ -1,9 +1,8 @@
 package unicam.filierafanesicardinali.model.acquisto;
 
 import jakarta.persistence.*;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.utenti.Acquirente;
-import unicam.filierafanesicardinali.model.venditori.Venditore;
 
 @Entity
 public class SistemaPagamento {
@@ -15,23 +14,23 @@ public class SistemaPagamento {
     private Acquirente acquirente;
 
     @ManyToOne
-    private Prodotto prodotto;
+    private Product product;
 
-    public SistemaPagamento(Acquirente acquirente, Prodotto prodotto) {
+    public SistemaPagamento(Acquirente acquirente, Product product) {
         this.acquirente = acquirente;
-        this.prodotto = prodotto;
+        this.product = product;
     }
 
     public SistemaPagamento() {
 
     }
 
-    public Prodotto getProdotto() {
-        return prodotto;
+    public Product getProdotto() {
+        return product;
     }
 
-    public void setProdotto(Prodotto prodotto) {
-        this.prodotto = prodotto;
+    public void setProdotto(Product product) {
+        this.product = product;
     }
 
 //    public Venditore getVenditore() {

@@ -2,8 +2,8 @@ package unicam.filierafanesicardinali.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import unicam.filierafanesicardinali.model.acquisto.Carrello;
+import unicam.filierafanesicardinali.model.acquisto.Cart;
 
 @Repository
-public interface CarrelloRepository extends JpaRepository<Carrello, Long> {
+public interface CarrelloRepository extends JpaRepository<Cart, Long> {
 }

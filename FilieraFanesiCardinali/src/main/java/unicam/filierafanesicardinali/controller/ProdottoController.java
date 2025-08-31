@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.model.venditori.DistributoreTipicita;
 import unicam.filierafanesicardinali.model.venditori.Produttore;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
@@ -46,14 +46,14 @@ public class ProdottoController {
     // --- metodi distributore
 
     @PostMapping("/distributori/creaprodotto")
-    public ResponseEntity<Prodotto> creaProdottoDistributore(@RequestBody ProdottoDistributore prodotto) {
+    public ResponseEntity<Product> creaProdottoDistributore(@RequestBody ProdottoDistributore prodotto) {
 
         if(prodotto.getVenditore() == null
                 || !venditoreRepository.existsById(prodotto.getVenditore().getId())
                 || !prodotto.getVenditore().isStato())
                 {return ResponseEntity.badRequest().build();}
 
-        Prodotto creato = handlerDistributore.creaProdotto(prodotto);
+        Product creato = handlerDistributore.creaProdotto(prodotto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
     }
 
@@ -63,16 +63,16 @@ public class ProdottoController {
      * @param nome del prodotto
      * @param prezzo del prodotto
      * @param descrizione del prodotto
-     * @param indirizzo del prodotto
+     * @param position del prodotto
      * @return il bundle creato
      */
     @PostMapping("/distributori/{Id}/creabundle")
     public ResponseEntity<DistributoreTipicita> creaBundle (@PathVariable Long Id, @RequestBody String nome,
                                                             @RequestBody Float prezzo,@RequestBody String descrizione,
-                                                            @RequestBody Indirizzo indirizzo) {
+                                                            @RequestBody Position position) {
         if(!venditoreRepository.existsById(Id)){return ResponseEntity.badRequest().build();}
         DistributoreTipicita distributoreTipicita = (DistributoreTipicita) venditoreRepository.findById(Id).get();
-        distributoreTipicita = handlerDistributore.iniziaPacchetto(distributoreTipicita, nome, prezzo, descrizione, indirizzo);
+        distributoreTipicita = handlerDistributore.iniziaPacchetto(distributoreTipicita, nome, prezzo, descrizione, position);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(distributoreTipicita);
     }
@@ -80,15 +80,15 @@ public class ProdottoController {
     /**
      * Aggiunge un prodotto al bundle
      * @param Id del distributore di tipicità
-     * @param prodotto da aggiungere
+     * @param product da aggiungere
      * @return il distributore di tipicità aggiornato
      */
     @PostMapping("/distributori/{Id}/aggiungiabundle")
-    public ResponseEntity<DistributoreTipicita> aggiungiProdotto (@PathVariable Long Id, @RequestBody Prodotto prodotto) {
+    public ResponseEntity<DistributoreTipicita> aggiungiProdotto (@PathVariable Long Id, @RequestBody Product product) {
         if(!venditoreRepository.existsById(Id)){return ResponseEntity.badRequest().build();}
         DistributoreTipicita distributoreTipicita = (DistributoreTipicita) venditoreRepository.findById(Id).get();
 
-        distributoreTipicita=handlerDistributore.aggiungiProdotto(distributoreTipicita, prodotto);
+        distributoreTipicita=handlerDistributore.aggiungiProdotto(distributoreTipicita, product);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(distributoreTipicita);
     }
@@ -111,26 +111,26 @@ public class ProdottoController {
 
 
     @PostMapping("/produttori/creaprodotto")
-    public ResponseEntity<Prodotto> creaProdottoProduttore(@RequestBody ProdottoProduttore prodotto) {
+    public ResponseEntity<Product> creaProdottoProduttore(@RequestBody ProdottoProduttore prodotto) {
 
         if(prodotto.getVenditore() == null
                 || !venditoreRepository.existsById(prodotto.getVenditore().getId())
                 || !prodotto.getVenditore().isStato())
                 {return ResponseEntity.badRequest().build();}
 
-        Prodotto creato = handlerProduttore.creaProdotto(prodotto);
+        Product creato = handlerProduttore.creaProdotto(prodotto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
     }
 
     @PostMapping("/trasformatori/creaprodotto")
-    public ResponseEntity<Prodotto> creaProdottoTrasformatore(@RequestBody ProdottoTrasformatore prodotto) {
+    public ResponseEntity<Product> creaProdottoTrasformatore(@RequestBody ProdottoTrasformatore prodotto) {
 
         if(prodotto.getVenditore() == null
                 || !venditoreRepository.existsById(prodotto.getVenditore().getId())
                 || !prodotto.getVenditore().isStato())
                 {return ResponseEntity.badRequest().build();}
 
-        Prodotto creato = handlerTrasformatore.creaProdotto(prodotto);
+        Product creato = handlerTrasformatore.creaProdotto(prodotto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
     }
 
@@ -139,8 +139,8 @@ public class ProdottoController {
      * @return tutti i prodotti salvati
      */
     @GetMapping
-    public ResponseEntity<List<Prodotto>> listaProdotti() {
-        List<Prodotto> prodotti = prodottoRepository.findAll();
+    public ResponseEntity<List<Product>> listaProdotti() {
+        List<Product> prodotti = prodottoRepository.findAll();
         return ResponseEntity.ok(prodotti);
     }
 
@@ -150,12 +150,12 @@ public class ProdottoController {
      * @return il prodotto eliminato
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Prodotto> eliminaProdotto(@PathVariable Long id) {
+    public ResponseEntity<Product> eliminaProdotto(@PathVariable Long id) {
         if(!prodottoRepository.existsById(id)){return ResponseEntity.badRequest().build();}
 
-        Prodotto prodottoDel = prodottoRepository.findById(id).get();
-        handlerProdotto.rimuoviProdotto(prodottoDel);
-        return ResponseEntity.status(HttpStatus.OK).body(prodottoDel);
+        Product productDel = prodottoRepository.findById(id).get();
+        handlerProdotto.rimuoviProdotto(productDel);
+        return ResponseEntity.status(HttpStatus.OK).body(productDel);
     }
 
     /**
@@ -165,38 +165,38 @@ public class ProdottoController {
      * @return lista prodotti di un vendiore
      */
     @GetMapping("/prodottivenditore/{id}")
-    public ResponseEntity<List<Prodotto>> prodottiVenditore(@PathVariable Long id) {
+    public ResponseEntity<List<Product>> prodottiVenditore(@PathVariable Long id) {
         if(!venditoreRepository.existsById(id)){return ResponseEntity.badRequest().build();}
-        List<Prodotto> listaProdotti = prodottoRepository.findByVenditoreId(id);
+        List<Product> listaProdotti = prodottoRepository.findByVenditoreId(id);
         return ResponseEntity.ok(listaProdotti);
     }
 
 
     //per test
     @GetMapping("/test")
-    public ResponseEntity<List<Prodotto>> listaProdottiTest(){
+    public ResponseEntity<List<Product>> listaProdottiTest(){
         List<Venditore> venditori = venditoreRepository.findAll();
-        Indirizzo indirizzo = new Indirizzo();
-        ProdottoProduttore prodotto = new ProdottoProduttore("testp",11,"testp", (Produttore) venditori.get(0),indirizzo, "testP");
+        Position position = new Position();
+        ProdottoProduttore prodotto = new ProdottoProduttore("testp",11,"testp", (Produttore) venditori.get(0), position, "testP");
         creaProdottoProduttore(prodotto);
-        List<Prodotto> prodotti = prodottoRepository.findAll();
+        List<Product> prodotti = prodottoRepository.findAll();
         return ResponseEntity.ok(prodotti);
     }
 
 
     @GetMapping("/test/distributori")
-    public ResponseEntity<Prodotto> listaProdottiTestDistributori(){
+    public ResponseEntity<Product> listaProdottiTestDistributori(){
         DistributoreTipicita testDistributore = new DistributoreTipicita("testD", "testD", "testD");
         testDistributore.setStato(true);
         venditoreRepository.save(testDistributore);
-        Indirizzo indirizzo = new Indirizzo();
-        ProdottoDistributore pro = new ProdottoDistributore("test", 11, "testP", testDistributore,indirizzo, null);
+        Position position = new Position();
+        ProdottoDistributore pro = new ProdottoDistributore("test", 11, "testP", testDistributore, position, null);
 
-        Prodotto prodotto = creaProdottoDistributore(pro).getBody();
+        Product product = creaProdottoDistributore(pro).getBody();
 
-        testDistributore = creaBundle(testDistributore.getId(), "test", 11F, "test", indirizzo).getBody();
+        testDistributore = creaBundle(testDistributore.getId(), "test", 11F, "test", position).getBody();
 
-        testDistributore = aggiungiProdotto(testDistributore.getId(),prodotto).getBody();
+        testDistributore = aggiungiProdotto(testDistributore.getId(), product).getBody();
 
         ProdottoDistributore prodot = salvabundle(testDistributore.getId()).getBody();
 

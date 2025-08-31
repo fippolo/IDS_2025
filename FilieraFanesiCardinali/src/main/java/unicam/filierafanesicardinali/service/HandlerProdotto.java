@@ -1,7 +1,7 @@
 package unicam.filierafanesicardinali.service;
 
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 
 import java.util.List;
@@ -15,15 +15,15 @@ public class HandlerProdotto {
     }
 
 
-    public void rimuoviListaProdotti(List<Prodotto> prodottiDaRimuovere) {
+    public void rimuoviListaProdotti(List<Product> prodottiDaRimuovere) {
         if(prodottiDaRimuovere.isEmpty())throw new IllegalArgumentException("Lista Vuota");
-        for(Prodotto prodotto : prodottiDaRimuovere){
-            prodottoRepository.delete(prodotto);
+        for(Product product : prodottiDaRimuovere){
+            prodottoRepository.delete(product);
         }
     }
 
-    public void rimuoviProdotto(Prodotto prodotto) {
-        if(!prodottoRepository.existsById(prodotto.getId())) throw new IllegalArgumentException("Prodotto non trovato");
-        prodottoRepository.delete(prodotto);
+    public void rimuoviProdotto(Product product) {
+        if(!prodottoRepository.existsById(product.getId())) throw new IllegalArgumentException("Prodotto non trovato");
+        prodottoRepository.delete(product);
     }
 }

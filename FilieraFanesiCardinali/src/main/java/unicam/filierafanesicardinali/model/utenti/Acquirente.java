@@ -1,8 +1,7 @@
 package unicam.filierafanesicardinali.model.utenti;
 
 import jakarta.persistence.*;
-import unicam.filierafanesicardinali.model.acquisto.Carrello;
-import unicam.filierafanesicardinali.repository.CarrelloRepository;
+import unicam.filierafanesicardinali.model.acquisto.Cart;
 
 @Entity
 public class Acquirente {
@@ -14,22 +13,22 @@ public class Acquirente {
     private Long id;
 
 	@OneToOne
-	private Carrello carrello;
+	private Cart cart;
 
 
 
-	public Carrello getCarrello() {
-		return carrello;
+	public Cart getCarrello() {
+		return cart;
 	}
 
-	public void setCarrello(Carrello carrello) {
-		this.carrello = carrello;
+	public void setCarrello(Cart cart) {
+		this.cart = cart;
 	}
 
 
 	public Acquirente(String nome) {
 		this.nome = nome;
-        carrello = new Carrello();
+        cart = new Cart();
 
 
     }

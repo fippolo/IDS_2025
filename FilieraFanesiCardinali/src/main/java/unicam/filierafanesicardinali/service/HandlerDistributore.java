@@ -2,8 +2,8 @@ package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoDistributore;
 import unicam.filierafanesicardinali.model.venditori.DistributoreTipicita;
 import unicam.filierafanesicardinali.model.venditori.Venditore;
@@ -35,7 +35,7 @@ public class HandlerDistributore extends HandlerVenditore{
         return prodottoRepository.save(toReturn);
     }
 
-    public DistributoreTipicita iniziaPacchetto (DistributoreTipicita venditore, String nome, Float prezzo, String descrizione, Indirizzo indirizzo){
+    public DistributoreTipicita iniziaPacchetto (DistributoreTipicita venditore, String nome, Float prezzo, String descrizione, Position position){
         if(venditore == null) throw new IllegalArgumentException("Venditore non trovato");
         DistributoreTipicita distributoreTipicita;
         Optional<Venditore> optionalVenditore = venditoreRepository.findById(venditore.getId());
@@ -43,11 +43,11 @@ public class HandlerDistributore extends HandlerVenditore{
             distributoreTipicita = (DistributoreTipicita) optionalVenditore.get();
         }
         else throw new IllegalArgumentException("Venditore non trovato");
-        distributoreTipicita.startBundle(nome, prezzo, descrizione, indirizzo);
+        distributoreTipicita.startBundle(nome, prezzo, descrizione, position);
         return venditoreRepository.save(distributoreTipicita);
     }
 
-    public DistributoreTipicita aggiungiProdotto (DistributoreTipicita venditore, Prodotto prodotto){
+    public DistributoreTipicita aggiungiProdotto (DistributoreTipicita venditore, Product product){
         if(venditore == null) throw new IllegalArgumentException("Venditore non trovato");
         DistributoreTipicita distributoreTipicita;
         Optional<Venditore> optionalVenditore = venditoreRepository.findById(venditore.getId());
@@ -55,7 +55,7 @@ public class HandlerDistributore extends HandlerVenditore{
             distributoreTipicita = (DistributoreTipicita) optionalVenditore.get();
         }
         else throw new IllegalArgumentException("Venditore non trovato");
-        distributoreTipicita.aggiungiProdotto(prodotto);
+        distributoreTipicita.aggiungiProdotto(product);
         return venditoreRepository.save(distributoreTipicita);
     }
 

@@ -1,8 +1,18 @@
 package unicam.filierafanesicardinali.model.utenti;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
-public class UtenteGenerico {
+@Entity
+public abstract class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	private String nome;
 	private String email;
@@ -15,10 +25,14 @@ public class UtenteGenerico {
 	 * @param email email utente
 	 * @param password password utente
 	 */
-	UtenteGenerico(String nome, String email, String password) {
+	User(String nome, String email, String password) {
 		this.nome = nome;
 		this.email = email;
 		this.password = password;
+	}
+
+	public User() {
+
 	}
 
 	public String getNome() {
@@ -55,7 +69,7 @@ public class UtenteGenerico {
 		if (this == obj) return true;
 		if (getClass() != obj.getClass()) return false;
 		if(obj==null && this==null) return true;
-		UtenteGenerico that = (UtenteGenerico) obj;
+		User that = (User) obj;
 		if (this.nome == that.nome && this.email == that.email) return false;
 		return true;
 

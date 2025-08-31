@@ -3,10 +3,9 @@ package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.acquisto.Carrello;
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.model.localizzazione.Mappa;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.repository.ProdottoRepository;
 
 import java.util.List;
@@ -23,14 +22,14 @@ public class HandlerAcquirente {
 
     }
 
-    public List<Prodotto> consultaProdotti() {
-        List<Prodotto> listaProdotti = prodottoRepository.findByStatoTrue();
+    public List<Product> consultaProdotti() {
+        List<Product> listaProdotti = prodottoRepository.findByStatoTrue();
         return listaProdotti;
     }
 
-    public List<Indirizzo> consultaMappa() {
+    public List<Position> consultaMappa() {
         Mappa mappa = new Mappa();
-        List<Indirizzo> listaIndirizzi = mappa.getListaIndirizzi();
+        List<Position> listaIndirizzi = mappa.getListaIndirizzi();
         return listaIndirizzi;
     }
 

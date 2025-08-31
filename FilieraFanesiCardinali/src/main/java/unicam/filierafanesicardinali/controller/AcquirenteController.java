@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.utenti.Acquirente;
 import unicam.filierafanesicardinali.repository.AcquirenteRepository;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
 import unicam.filierafanesicardinali.repository.CarrelloRepository;
 import unicam.filierafanesicardinali.service.HandlerAcquirente;
 
@@ -81,15 +81,15 @@ public class AcquirenteController {
     }
 
     @GetMapping("/consultaprodotti")
-    public ResponseEntity<List<Prodotto>> consultaProdotti(){
-        List<Prodotto> listaProdotti = handlerAcquirente.consultaProdotti();
+    public ResponseEntity<List<Product>> consultaProdotti(){
+        List<Product> listaProdotti = handlerAcquirente.consultaProdotti();
         return ResponseEntity.ok(listaProdotti);
     }
 
 
     @GetMapping("/consultamappa")
-    public ResponseEntity<List<Indirizzo>> consultaMappa(){
-        List<Indirizzo> listaIndirizzi = handlerAcquirente.consultaMappa();
+    public ResponseEntity<List<Position>> consultaMappa(){
+        List<Position> listaIndirizzi = handlerAcquirente.consultaMappa();
         return ResponseEntity.ok(listaIndirizzi);
     }
 

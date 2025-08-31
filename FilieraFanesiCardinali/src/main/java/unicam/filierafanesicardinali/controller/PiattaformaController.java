@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import unicam.filierafanesicardinali.model.eventi.Evento;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.eventi.Event;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.service.HandlerPiattaforma;
 
 import java.util.List;
@@ -22,8 +22,8 @@ public class PiattaformaController {
     }
 
     @GetMapping("/prodotti")
-    public ResponseEntity<List<Prodotto>> getProdotti(){
-        List<Prodotto> listaProdotti = handlerPiattaforma.getAllProdotto();
+    public ResponseEntity<List<Product>> getProdotti(){
+        List<Product> listaProdotti = handlerPiattaforma.getAllProdotto();
         return ResponseEntity.ok().body(listaProdotti);
     }
 
@@ -33,16 +33,16 @@ public class PiattaformaController {
      * @return il prodotto
      */
     @GetMapping("/prodotto/{id}")
-    public ResponseEntity<Prodotto> getProdotto(@PathVariable Long id){
+    public ResponseEntity<Product> getProdotto(@PathVariable Long id){
         if(id == null){return ResponseEntity.badRequest().build();}
-        Prodotto prodotto = handlerPiattaforma.getProdottoById(id);
-        return ResponseEntity.ok().body(prodotto);
+        Product product = handlerPiattaforma.getProdottoById(id);
+        return ResponseEntity.ok().body(product);
     }
 
 
     @GetMapping("/evnti")
-    public ResponseEntity<List<Evento>> getEvnti(){
-        List<Evento> listaEventi = handlerPiattaforma.getAllEvento();
+    public ResponseEntity<List<Event>> getEvnti(){
+        List<Event> listaEventi = handlerPiattaforma.getAllEvento();
         return ResponseEntity.ok().body(listaEventi);
     }
 
@@ -52,10 +52,10 @@ public class PiattaformaController {
      * @return l'evento
      */
     @GetMapping("/evento/{id}")
-    public ResponseEntity<Evento> getEvento(@PathVariable Long id){
+    public ResponseEntity<Event> getEvento(@PathVariable Long id){
         if(id == null){return ResponseEntity.badRequest().build();}
-        Evento evento = handlerPiattaforma.getEventoById(id);
-        return ResponseEntity.ok().body(evento);
+        Event event = handlerPiattaforma.getEventoById(id);
+        return ResponseEntity.ok().body(event);
     }
 
 

@@ -1,12 +1,11 @@
 package unicam.filierafanesicardinali.model.venditori;
 
 import jakarta.persistence.*;
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoDistributore;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @DiscriminatorValue("distributore")
@@ -24,19 +23,19 @@ public class DistributoreTipicita extends Venditore implements IBuilder {
 
 	}
 
-	public ProdottoDistributore creaProdotto(String nome, float prezzo, String descrizione, Indirizzo indirizzo) {
-		return new ProdottoDistributore(nome, prezzo, descrizione, this,indirizzo, null);
+	public ProdottoDistributore creaProdotto(String nome, float prezzo, String descrizione, Position position) {
+		return new ProdottoDistributore(nome, prezzo, descrizione, this, position, null);
 	}
 
 
-	public void startBundle(String nome, float prezzo, String descrizione, Indirizzo indirizzo){
-		bundle = new ProdottoDistributore(nome, prezzo,descrizione, this,indirizzo, new ArrayList<>());
+	public void startBundle(String nome, float prezzo, String descrizione, Position position){
+		bundle = new ProdottoDistributore(nome, prezzo,descrizione, this, position, new ArrayList<>());
 
 	}
 
-	public void aggiungiProdotto(Prodotto prodotto){
-		if(bundle != null && prodotto != null){
-			this.bundle.aggiungiProdotto(prodotto);
+	public void aggiungiProdotto(Product product){
+		if(bundle != null && product != null){
+			this.bundle.aggiungiProdotto(product);
 
 		}
 		else throw new NullPointerException("Prodotto non trovato");

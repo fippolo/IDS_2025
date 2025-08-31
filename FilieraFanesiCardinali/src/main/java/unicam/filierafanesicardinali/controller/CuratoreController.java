@@ -4,9 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.amministrazione.Curatore;
-import unicam.filierafanesicardinali.model.eventi.Animatore;
-import unicam.filierafanesicardinali.model.localizzazione.Indirizzo;
-import unicam.filierafanesicardinali.model.prodotti.Prodotto;
+import unicam.filierafanesicardinali.model.localizzazione.Position;
+import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.prodotti.ProdottoProduttore;
 import unicam.filierafanesicardinali.model.venditori.Produttore;
 import unicam.filierafanesicardinali.repository.CuratoreRepository;
@@ -44,15 +43,15 @@ public class CuratoreController {
     /**
      * Un curatore verifica un prodotto
      * @param id del curatore
-     * @param prodotto da verificare
+     * @param product da verificare
      * @return il prodotto verificato
      */
     @PostMapping("/verifica/{id}")
-    public ResponseEntity<Prodotto> verificaProdotto(@PathVariable Long id, @RequestBody Prodotto prodotto) {
-        if (prodottoRepository.existsById(prodotto.getId()) && curatoreRepository.existsById(id) &&
-            prodottoRepository.findById(prodotto.getId()).isPresent() && curatoreRepository.findById(id).isPresent()) {
+    public ResponseEntity<Product> verificaProdotto(@PathVariable Long id, @RequestBody Product product) {
+        if (prodottoRepository.existsById(product.getId()) && curatoreRepository.existsById(id) &&
+            prodottoRepository.findById(product.getId()).isPresent() && curatoreRepository.findById(id).isPresent()) {
             Curatore curatore = curatoreRepository.findById(id).get();
-            return ResponseEntity.ok(handlerCuratore.verificaProdotto(prodotto, curatore));
+            return ResponseEntity.ok(handlerCuratore.verificaProdotto(product, curatore));
         }
 
         return ResponseEntity.badRequest().build();
@@ -77,7 +76,7 @@ public class CuratoreController {
     public ResponseEntity<Long>test(){
         Produttore testProduttore = new Produttore("testP","testP","testP");
         venditoreRepository.save(testProduttore);
-        ProdottoProduttore testProdotto = testProduttore.creaProdotto("test",11,"test","test",new Indirizzo("via test","test","test", "test"));
+        ProdottoProduttore testProdotto = testProduttore.creaProdotto("test",11,"test","test",new Position("via test","test","test", "test"));
         prodottoRepository.save(testProdotto);
         return ResponseEntity.ok(testProdotto.getId());
     }
