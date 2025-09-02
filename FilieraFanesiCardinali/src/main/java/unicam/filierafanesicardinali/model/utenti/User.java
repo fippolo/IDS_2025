@@ -7,6 +7,8 @@ import java.util.ListIterator;
 import java.util.Objects;
 
 @Entity
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 
 	@Id
@@ -17,7 +19,7 @@ public abstract class User {
 	private String email;
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "invitedUser")
 	private List<Invitation> invites;
 
 	User(String nome, String email, String password) {
@@ -28,4 +30,8 @@ public abstract class User {
 	}
 
 	public User() {	}
+
+	public Long getId() {
+		return id;
+	}
 }

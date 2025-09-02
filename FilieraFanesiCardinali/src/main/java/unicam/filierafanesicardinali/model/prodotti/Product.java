@@ -39,4 +39,12 @@ public abstract class Product {
 	public double getPrice() {
 		return price;
 	}
+
+	public Position getProductionSite() {
+		return productionSite;
+	}
+
+	public void setStato(boolean stato) {
+		this.stato = stato;
+	}
 }
