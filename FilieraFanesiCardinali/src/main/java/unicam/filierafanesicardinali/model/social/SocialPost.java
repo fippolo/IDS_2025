@@ -21,6 +21,5 @@ public class SocialPost {
     public SocialPost(Product product, String linkToPost) {
         this.product = product;
         this.linkToPost = linkToPost;
-        this.dataCreazione = java.time.LocalDateTime.now();
     }
 }
