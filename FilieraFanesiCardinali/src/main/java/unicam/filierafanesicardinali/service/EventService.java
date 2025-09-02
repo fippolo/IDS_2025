@@ -27,16 +27,14 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    // TODO: implementare
-    public Event inviteToEvent(Long eventID, Long userID){
-        return null;
-    }
-
     public Event getEvent(Long id){
         return eventRepository.findById(id).orElseThrow(() -> new RuntimeException("Event not found with id: " + id));
     }
-    public void deleteEvent(Long id){
-        eventRepository.deleteById(id);
+    public Event deleteEvent(Long eventId) {
+        Event event = getEvent(eventId);
+        // This will delete the event AND all its invitations due to cascade/orphanRemoval
+        eventRepository.deleteById(eventId);
+        return event;
     }
     public List<Event> getAllEvents(){
         return eventRepository.findAll();
@@ -46,7 +44,7 @@ public class EventService {
     }
 
     //helper methods
-    public Entertainer getEventCreator(Long id){
+    private Entertainer getEventCreator(Long id){
         User user = userService.getUser(id);
         if(user instanceof Entertainer){
             return (Entertainer) user;

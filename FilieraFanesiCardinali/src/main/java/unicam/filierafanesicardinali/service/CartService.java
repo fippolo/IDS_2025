@@ -54,7 +54,7 @@ public class CartService {
         buyerRepository.save(buyer);
         return buyer.getCart();
     }
-    private Receipt buyCart(Long buyerID) {
+    public Receipt buyCart(Long buyerID) {
         Buyer buyer = getBuyer(buyerID);
         Cart cart = buyer.getCart();
         Order order = orderservice.createOrder(cart.getCartItemList(), buyerID);

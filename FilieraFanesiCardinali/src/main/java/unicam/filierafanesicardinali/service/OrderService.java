@@ -30,7 +30,7 @@ public class OrderService {
                 .build());
     }
 
-    public Order GetOrder(Long id){
+    public Order getOrder(Long id){
         return orderRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
     }

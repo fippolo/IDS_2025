@@ -1,105 +1,48 @@
 package unicam.filierafanesicardinali.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.acquisto.Cart;
-import unicam.filierafanesicardinali.model.prodotti.Product;
-import unicam.filierafanesicardinali.model.utenti.Buyer;
+import unicam.filierafanesicardinali.model.acquisto.orders.Receipt;
 import unicam.filierafanesicardinali.service.CartService;
-import unicam.filierafanesicardinali.service.HandlerSistemaPagamento;
 
+import java.util.List;
+//TODO: gestire eccezzioni
 @RestController
-@RequestMapping("/api/v1/carrelli")
+@RequestMapping("/api/v1/Cart")
 public class CartController {
-    private final CartService cartService;
-    private final HandlerSistemaPagamento handlerSistemaPagamento;
+    CartService cartService;
 
     @Autowired
-    public CartController() {
-        this.acquirenteRepository = acquirenteRepository;
-        this.carrelloRepository = carrelloRepository;
-
-        this.prodottoRepository = prodottoRepository;
+    public CartController(CartService cartService){
         this.cartService = cartService;
-        this.handlerSistemaPagamento = handlerSistemaPagamento;
     }
 
 
-    @PostMapping("/carrello")
-    public ResponseEntity<Cart> registraCarrello(@RequestBody Cart cart) {
-        try {
-            Cart newCart = carrelloRepository.save(cart);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newCart);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+    @PostMapping("/{id}/add")
+    public ResponseEntity<Cart> addToCart(@PathVariable Long id, @RequestBody Long productId, @RequestBody int qty){
+        return ResponseEntity.ok(cartService.addToCart(id, productId, qty));
     }
 
-    /**
-     * Aggiunge un prodotto al carrello dell'acquirente.
-     * @param id ID dell'acquirente
-     * @param product prodotto da eliminare
-     */
-    @PostMapping("/{id}/aggiungiprodotto")
-    public ResponseEntity<Cart> aggiungiProdotto(@RequestBody Long id, Product product) {
-        if(product == null || !acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
-
-        Cart cart = acquirenteRepository.findById(id).get().getCarrello();
-        Product prodottoadd = prodottoRepository.findById(product.getId()).get();
-        cart = cartService.addToCart(prodottoadd, cart);
-
-        return ResponseEntity.ok(cart);
+    @PostMapping("/{id}/setItemQty")
+    public ResponseEntity<Cart> setItemQty(@PathVariable Long id,@RequestBody Integer productIndex, @RequestBody Integer qty){
+        return ResponseEntity.ok(cartService.setCartItemQty(id, productIndex, qty));
     }
 
-    /**
-     * Elimina un prodotto al carrello dell'acquirente.
-     * @param id ID dell'acquirente
-     * @param product prodotto da eliminare
-     */
-    @DeleteMapping("/{id}/eliminaprodotto")
-    public ResponseEntity<Cart> eliminaProdotto(@PathVariable Long id, Product product) {
-        if(product == null || !acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
-
-        Cart cart = acquirenteRepository.findById(id).get().getCarrello();
-        Product prodottodel = prodottoRepository.findById(product.getId()).get();
-        cart = cartService.eliminaProdotto(prodottodel, cart);
-
-        return ResponseEntity.ok(cart);
+    @PostMapping("/{id}/buy")
+    public ResponseEntity<Receipt> buyCart(@PathVariable Long id){
+        return ResponseEntity.ok(cartService.buyCart(id));
     }
 
-    /**
-     * Svuota il carrello dell'acquirente.
-     * @param id ID dell'acquirente
-     */
-    @DeleteMapping("/{id}/svuotacarrello")
-    public ResponseEntity<Cart> svuotaCarrello(@PathVariable Long id) {
-        if(!acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
-
-        Cart cart = acquirenteRepository.findById(id).get().getCarrello();
-        cart = cartService.svuotaCarrello(cart);
-
-        return ResponseEntity.ok(cart);
+    @GetMapping("/{id}")
+    public ResponseEntity<Cart> getCart(@PathVariable Long id){
+        return ResponseEntity.ok(cartService.getCart(id));
     }
 
-    /**
-     * Acquista un prodotto dal carrello
-     * @param id dell'animatore
-     * @param product da comprare presente nel carrello
-     * @return Carrello aggiurnato
-     */
-    @PostMapping("/{id}/acquistoprodotto")
-    public ResponseEntity<Cart> acquistoProdotto(@PathVariable Long id, Product product) {
-        if(product == null || !acquirenteRepository.existsById(id)) {return ResponseEntity.badRequest().build();}
-
-        Buyer buyer = acquirenteRepository.findById(id).get();
-        Product prodottoacq = prodottoRepository.findById(product.getId()).get();
-        Cart cart = handlerSistemaPagamento.acquistoProdotto(prodottoacq, buyer);
-        return ResponseEntity.ok(cart);
+    @GetMapping
+    public ResponseEntity<List<Cart>> getAllCarts(){
+        return ResponseEntity.ok(cartService.getAllCarts());
     }
-
-
-
 }

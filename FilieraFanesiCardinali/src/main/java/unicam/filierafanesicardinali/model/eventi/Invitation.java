@@ -27,12 +27,17 @@ public class Invitation {
 
     public Invitation(){}
 
-    public Invitation(User invitedUser, LocalDateTime expirationDate){
+    public Invitation(Event event, User invitedUser, LocalDateTime expirationDate){
+        this.event = event;
         this.invitedUser = invitedUser;
         this.expirationDate = expirationDate;
     }
 
     public LocalDateTime getExpirationDate() {
         return expirationDate;
+    }
+
+    public void setEvent(Event event){
+        this.event = event;
     }
 }

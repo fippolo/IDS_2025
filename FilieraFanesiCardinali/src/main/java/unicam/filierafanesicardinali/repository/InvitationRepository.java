@@ -5,4 +5,5 @@ import unicam.filierafanesicardinali.model.eventi.Invitation;
 
 public interface InvitationRepository extends JpaRepository<Invitation, Long> {
     boolean existsByEventIdAndInvitedUser_Id(Long eventId, Long invitedUserId);
+
 }

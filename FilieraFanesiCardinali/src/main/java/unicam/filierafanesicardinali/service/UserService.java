@@ -31,7 +31,9 @@ public class UserService {
 
     //TODO: role requests
 
-    public void deleteUser(Long id){
-        userRepository.deleteById(id);
+    public User deleteUser(Long id){
+        User user = getUser(id);
+        userRepository.deleteById(user.getId());
+        return user;
     }
 }

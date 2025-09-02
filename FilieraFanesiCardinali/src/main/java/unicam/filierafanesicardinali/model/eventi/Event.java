@@ -2,9 +2,12 @@ package unicam.filierafanesicardinali.model.eventi;
 
 import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
+import unicam.filierafanesicardinali.model.utenti.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Table(name = "events")
@@ -36,4 +39,14 @@ public class Event {
 		this.entertainerID = entertainerID;
 	}
 	public Event() {}
+
+	public Invitation addInvitation (User invitedUser, LocalDateTime expiry){
+	Invitation inv = new Invitation(this, invitedUser, expiry);
+	invitationList.add(inv);
+	return inv;
+	}
+	public void removeInvitation(Invitation inv) {
+		invitationList.remove(inv);
+		inv.setEvent(null);
+	}
 }
