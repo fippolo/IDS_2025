@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.eventi.Event;
-import unicam.filierafanesicardinali.model.utenti.GenericUser;
 import unicam.filierafanesicardinali.model.utenti.User;
 import unicam.filierafanesicardinali.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-//TODO: gestire eccezzioni
+
 @RestController
 @RequestMapping("/api/v1/User")
 public class UserController {
@@ -23,14 +22,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody GenericUser genericUser) {
+    public ResponseEntity<User> createUser(@RequestBody User genericUser) {
         return ResponseEntity.ok(userService.createUser(genericUser));
     }
 
     @PostMapping("/{id}")
     public ResponseEntity<User> assignRole(@PathVariable Long id, @RequestBody byte role){
-        User user=(User) userService.getUser(id);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(userService.assignRole(id,role));
     }
 
     @GetMapping("/{id}")

@@ -1,11 +1,16 @@
 package unicam.filierafanesicardinali.model.prodotti;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
+import unicam.filierafanesicardinali.model.utenti.Seller;
 
-
+//TODO: Product Type Enumerator
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "product_type")
 public abstract class Product {
@@ -19,18 +24,25 @@ public abstract class Product {
 	private double price;
 	private boolean stato;
 	private String descrizione;
-	private Long sellerId;
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "seller_id")
+	@JsonBackReference("seller-products")
+	private Seller seller;
+
 
 	@Embedded
 	private Position productionSite;
 
-	public Product(String name, double price, String descrizione, Long sellerId, Position productionSite) {
+	public Product(String name, double price, String descrizione, Seller seller, Position productionSite, String productType) {
 		this.name = name;
 		this.price = price;
 		this.stato = false;
 		this.descrizione = descrizione;
-		this.sellerId = sellerId;
+		this.seller = seller;
 		this.productionSite = productionSite;
+		this.productType = productType;
 	}
 
 	public Product() {
@@ -84,12 +96,12 @@ public abstract class Product {
 		this.descrizione = descrizione;
 	}
 
-	public Long getSellerId() {
-		return sellerId;
+	public Seller getSeller() {
+		return seller;
 	}
 
-	public void setSellerId(Long sellerId) {
-		this.sellerId = sellerId;
+	public void setSeller(Seller sellerId) {
+		this.seller = sellerId;
 	}
 
 	public void setProductionSite(Position productionSite) {

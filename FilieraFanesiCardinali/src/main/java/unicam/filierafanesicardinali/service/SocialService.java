@@ -19,4 +19,8 @@ public class SocialService {
         SocialPost socialpost = new SocialPost(product, "placeholder");
         return socialPostRepository.save(socialpost);
     }
+
+    public void deleteSocialPostByProductId(Long id){
+        socialPostRepository.deleteByProductId(id);
+    }
 }

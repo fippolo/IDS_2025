@@ -4,6 +4,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
+import unicam.filierafanesicardinali.model.utenti.Seller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,8 @@ public class Bundle extends Product {
         this.listaProdotti = new ArrayList<>();
     }
 
-    public Bundle(String name, double price, String descrizione, Long sellerId, Position productionSite, List<Product> listaProdotti) {
-        super(name, price, descrizione, sellerId, productionSite);
+    public Bundle(String name, double price, String descrizione, Seller seller, Position productionSite, List<Product> listaProdotti) {
+        super(name, price, descrizione, seller, productionSite, "bundle");
         this.listaProdotti = listaProdotti;
     }
 

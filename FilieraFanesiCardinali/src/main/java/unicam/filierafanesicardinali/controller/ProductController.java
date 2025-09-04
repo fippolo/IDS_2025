@@ -7,10 +7,11 @@ import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.social.SocialPost;
 import unicam.filierafanesicardinali.service.ProductService;
+import unicam.filierafanesicardinali.controller.DTO.ProductCreateRequest;
 
 import java.util.List;
 
-//TODO: gestire eccezzioni
+
 @RestController
 @RequestMapping("/api/v1/Product")
 public class ProductController {
@@ -22,10 +23,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> addProduct(@RequestBody boolean isBundle,@RequestBody String name,
-                                              @RequestBody double price,@RequestBody String description,
-                                              @RequestBody Position site) {
-        return ResponseEntity.ok(productService.createProduct(name,price,description, site, isBundle));
+    public ResponseEntity<Product> addProduct(@RequestBody ProductCreateRequest request) {
+        return ResponseEntity.ok(productService.createProduct(request.name(), request.price(), request.description(),
+                request.site(), request.isBundle(), request.sellerId()));
     }
 
     @DeleteMapping("/{id}")
@@ -34,22 +34,22 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable Long id){
+    public ResponseEntity<Product> getProduct(@PathVariable Long id){ //done
         return ResponseEntity.ok(productService.getProduct(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProduct(){
+    public ResponseEntity<List<Product>> getAllProduct(){ //done
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{id}/origin")
-    public ResponseEntity<Position> getProductOrigin(@PathVariable Long id){
+    public ResponseEntity<Position> getProductOrigin(@PathVariable Long id){ //done
         return ResponseEntity.ok(productService.getProductSite(id));
     }
 
     @GetMapping("/{id}/approve")
-    public ResponseEntity<Product> approveProduct(@PathVariable Long id){
+    public ResponseEntity<Product> approveProduct(@PathVariable Long id){ //done
         return ResponseEntity.ok(productService.approveProduct(id));
     }
 

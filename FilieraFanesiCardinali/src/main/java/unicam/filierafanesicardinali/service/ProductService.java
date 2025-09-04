@@ -7,6 +7,7 @@ import unicam.filierafanesicardinali.model.prodotti.Factory.BundleFactory;
 import unicam.filierafanesicardinali.model.prodotti.Factory.SimpleProductFactory;
 import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.social.SocialPost;
+import unicam.filierafanesicardinali.model.utenti.Seller;
 import unicam.filierafanesicardinali.repository.ProductRepository;
 
 import java.util.List;
@@ -17,26 +18,33 @@ public class ProductService {
     private final SimpleProductFactory simpleProductFactory;
     private final BundleFactory bundleFactory;
     private final SocialService socialService;
+    private final UserService userService;
 
     @Autowired
     public ProductService(ProductRepository productRepository, SimpleProductFactory simpleProductFactory,
-                          BundleFactory bundleFactory, SocialService socialService) {
+                          BundleFactory bundleFactory, SocialService socialService, UserService userService) {
         this.productRepository = productRepository;
+        this.userService = userService;
         this.simpleProductFactory = simpleProductFactory;
         this.bundleFactory = bundleFactory;
         this.socialService = socialService;
     }
 
-    public Product createProduct(String name, double price, String description, Position site, boolean isBundle){
+    public Product createProduct(String name, double price, String description, Position site, boolean isBundle, Long sellerId){
         if(isBundle){
-            return productRepository.save(bundleFactory.createProduct(name, price, description, null, site));
+            Product p = bundleFactory.createProduct(name, price, description, userService.getSeller(sellerId), site);
+            userService.addProductToSeller(sellerId, p);
+            return p; // non è necessario salvare il prodotto, il metodo addProductToSeller lo fa
         } else {
-            return productRepository.save(simpleProductFactory.createProduct(name, price, description, null, site));
+            Product p = simpleProductFactory.createProduct(name, price, description, userService.getSeller(sellerId), site);
+            userService.addProductToSeller(sellerId, p);
+            return p;
         }
     }
 
     public Product deleteProduct(Long id){
         Product toDel = getProduct(id);
+        socialService.deleteSocialPostByProductId(toDel.getId());
         productRepository.deleteById(id);
         return toDel;
     }
