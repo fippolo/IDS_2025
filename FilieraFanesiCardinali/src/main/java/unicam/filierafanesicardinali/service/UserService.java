@@ -2,8 +2,8 @@ package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unicam.filierafanesicardinali.model.utenti.GenericUser;
-import unicam.filierafanesicardinali.model.utenti.User;
+import unicam.filierafanesicardinali.model.utenti.*;
+import unicam.filierafanesicardinali.repository.BuyerRepository;
 import unicam.filierafanesicardinali.repository.UserRepository;
 
 import java.util.List;
@@ -11,10 +11,11 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-
+    private final BuyerRepository buyerRepository;
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BuyerRepository buyerRepository) {
         this.userRepository = userRepository;
+        this.buyerRepository = buyerRepository;
     }
 
     public GenericUser createUser(GenericUser user){
@@ -30,6 +31,20 @@ public class UserService {
     }
 
     //TODO: role requests
+
+    public User assignRole(Long id, byte role){
+        User user = getUser(id);
+        userRepository.deleteById(id);
+        return switch (role) {
+            case 0 -> userRepository.save((Authenticator) user);
+            case 1 -> buyerRepository.save((Buyer) user);
+            case 2 -> userRepository.save((Entertainer) user);
+            case 3 -> userRepository.save((GenericUser) user);
+            case 4 -> userRepository.save((Seller) user);
+            default -> throw new RuntimeException("Role not found");
+        };
+    }
+
 
     public User deleteUser(Long id){
         User user = getUser(id);

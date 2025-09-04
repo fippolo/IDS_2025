@@ -29,4 +29,13 @@ public class Seller extends User{
     public List<Product> getOnSaleProducts() {
         return onSaleProducts;
     }
+    public void setOnSaleProducts(List<Product> onSaleProducts) {
+        this.onSaleProducts = onSaleProducts;
+    }
+    public Position getPosition() {
+        return position;
+    }
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 }

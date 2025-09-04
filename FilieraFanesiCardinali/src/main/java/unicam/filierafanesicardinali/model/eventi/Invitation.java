@@ -40,4 +40,16 @@ public class Invitation {
     public void setEvent(Event event){
         this.event = event;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public User getInvitedUser() {
+        return invitedUser;
+    }
 }

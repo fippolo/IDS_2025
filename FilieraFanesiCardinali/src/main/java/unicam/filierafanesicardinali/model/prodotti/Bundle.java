@@ -27,4 +27,8 @@ public class Bundle extends Product {
     public void addProduct(Product p){
         listaProdotti.add(p);
     }
+
+    public List<Product> getListaProdotti() {
+        return listaProdotti;
+    }
 }

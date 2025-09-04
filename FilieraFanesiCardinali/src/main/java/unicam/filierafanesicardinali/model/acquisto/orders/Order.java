@@ -54,4 +54,12 @@ public class Order {
     public Long getId() {
         return id;
     }
+
+    public Long getIdBuyer() {
+        return idBuyer;
+    }
+
+    public double getTotal() {
+        return total;
+    }
 }

@@ -47,4 +47,52 @@ public abstract class Product {
 	public void setStato(boolean stato) {
 		this.stato = stato;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getProductType() {
+		return productType;
+	}
+
+	public void setProductType(String productType) {
+		this.productType = productType;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public boolean isStato() {
+		return stato;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public Long getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(Long sellerId) {
+		this.sellerId = sellerId;
+	}
+
+	public void setProductionSite(Position productionSite) {
+		this.productionSite = productionSite;
+	}
 }

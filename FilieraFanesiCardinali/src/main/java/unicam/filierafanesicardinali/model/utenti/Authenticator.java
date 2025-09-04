@@ -24,4 +24,7 @@ public class Authenticator extends User{
     public List<Product> getAuthenticatedProducts() {
         return authenticatedProducts;
     }
+    public void setAuthenticatedProducts(List<Product> authenticatedProducts) {
+        this.authenticatedProducts = authenticatedProducts;
+    }
 }

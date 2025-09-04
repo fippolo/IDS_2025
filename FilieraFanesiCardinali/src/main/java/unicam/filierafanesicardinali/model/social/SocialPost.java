@@ -3,6 +3,8 @@ package unicam.filierafanesicardinali.model.social;
 import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.prodotti.Product;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class SocialPost {
     @Id
@@ -22,5 +24,34 @@ public class SocialPost {
         this.product = product;
         this.linkToPost = linkToPost;
         this.dataCreazione = java.time.LocalDateTime.now();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public String getLinkToPost() {
+        return linkToPost;
+    }
+
+    public void setLinkToPost(String linkToPost) {
+        this.linkToPost = linkToPost;
+    }
+
+    public LocalDateTime getDataCreazione() {
+        return dataCreazione;
+    }
+
+    public void setDataCreazione(LocalDateTime dataCreazione) {
+        this.dataCreazione = dataCreazione;
     }
 }

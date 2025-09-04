@@ -26,4 +26,7 @@ public class Cart {
 	public void emptyCart() {
 		CartItemList.clear();
 	}
+	public Long getId() {
+		return id;
+	}
 }

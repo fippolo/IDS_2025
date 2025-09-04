@@ -49,4 +49,28 @@ public class Event {
 		invitationList.remove(inv);
 		inv.setEvent(null);
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public List<Invitation> getInvitationList() {
+		return invitationList;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Long getEntertainerID() {
+		return entertainerID;
+	}
 }

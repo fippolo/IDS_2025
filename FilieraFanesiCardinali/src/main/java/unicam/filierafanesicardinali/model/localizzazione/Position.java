@@ -11,16 +11,13 @@ public class Position {
 	private String citta;
 	private String provincia;
 
-//    @Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-
 	public Position() {
 
 	}
 
-	public Position(String via, String civico, String citta, String provincia) {
+	public Position(String via,String CAP, String civico, String citta, String provincia) {
 		this.via = via;
+		this.CAP = CAP;
 		this.civico = civico;
 		this.citta = citta;
 		this.provincia = provincia;
@@ -65,11 +62,4 @@ public class Position {
 		this.provincia = provincia;
 	}
 
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
 }

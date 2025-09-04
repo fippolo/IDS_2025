@@ -23,5 +23,8 @@ public class Entertainer extends User{
     public List<Event> getEventsList() {
         return eventsList;
     }
+    public void setEventsList(List<Event> eventsList) {
+        this.eventsList = eventsList;
+    }
 }
 
