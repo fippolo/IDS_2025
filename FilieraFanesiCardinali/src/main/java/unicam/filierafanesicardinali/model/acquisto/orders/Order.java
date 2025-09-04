@@ -2,14 +2,15 @@ package unicam.filierafanesicardinali.model.acquisto.orders;
 
 import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.acquisto.CartItem;
-import unicam.filierafanesicardinali.model.prodotti.Product;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "orders")  // Modificato il nome della tabella da "order" an "orders"
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private double total;
