@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import unicam.filierafanesicardinali.model.eventi.Event;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
-import unicam.filierafanesicardinali.model.utenti.Entertainer;
-import unicam.filierafanesicardinali.model.utenti.User;
 import unicam.filierafanesicardinali.repository.EventRepository;
 
 import java.time.LocalDateTime;
