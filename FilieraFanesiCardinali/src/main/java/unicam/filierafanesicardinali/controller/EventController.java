@@ -1,6 +1,7 @@
 package unicam.filierafanesicardinali.controller;
 
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,14 @@ public class EventController {
 
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody String name, @RequestBody LocalDateTime date, @RequestBody Position position, @RequestBody Long entertainerID) {
-        return ResponseEntity.ok(eventService.createEvent(name, date, position, entertainerID));
+    public ResponseEntity<Event> createEvent(@RequestBody Event e) {
+        return ResponseEntity.ok(eventService.createEvent(e.getName(), e.getData(), e.getPosition(), e.getEntertainerID()));
+    }
+
+    @GetMapping("test")
+    public ResponseEntity<Event> test(){
+        Event e = new Event("Test", LocalDateTime.now(), new Position("via test", "test", "test","test", "ancona"), 1L);
+        return ResponseEntity.ok(e);
     }
 
     @GetMapping("/{id}")

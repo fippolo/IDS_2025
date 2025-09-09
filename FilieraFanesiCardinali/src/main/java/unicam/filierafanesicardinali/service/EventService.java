@@ -15,6 +15,7 @@ import java.util.List;
 public class EventService {
     EventRepository eventRepository;
     UserService userService;
+
     @Autowired
     public EventService(EventRepository eventRepository, UserService userService) {
         this.eventRepository = eventRepository;
@@ -22,9 +23,10 @@ public class EventService {
     }
 
     public Event createEvent(String name, LocalDateTime date, Position position, Long entertainerID){
-        Entertainer entertainer = getEventCreator(entertainerID);
-        Event event = new Event(name, date, position, entertainer.getId());
-        return eventRepository.save(event);
+        Event e = new Event(name, date, position, entertainerID);
+        eventRepository.save(e);
+        userService.addEventToEntertrainer(e.getEntertainerID(), e);
+        return e;
     }
 
     public Event getEvent(Long id){
@@ -33,23 +35,16 @@ public class EventService {
     public Event deleteEvent(Long eventId) {
         Event event = getEvent(eventId);
         // This will delete the event AND all its invitations due to cascade/orphanRemoval
-        eventRepository.deleteById(eventId);
+        userService.removeEventFromEntertrainer(event.getEntertainerID(), event);
+        eventRepository.deleteById(eventId); // double check
         return event;
     }
     public List<Event> getAllEvents(){
         return eventRepository.findAll();
     }
     public List<Event> getEventsByCreator(Long id){
-        return getEventCreator(id).getEventsList();
+        return userService.getEventCreator(id).getEventsList();
     }
 
-    //helper methods
-    private Entertainer getEventCreator(Long id){
-        User user = userService.getUser(id);
-        if(user instanceof Entertainer){
-            return (Entertainer) user;
-        } else {
-            throw new RuntimeException("User is not an entertainer");
-        }
-    }
+
 }

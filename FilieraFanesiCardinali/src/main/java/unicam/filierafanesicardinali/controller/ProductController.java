@@ -8,6 +8,7 @@ import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.social.SocialPost;
 import unicam.filierafanesicardinali.service.ProductService;
 import unicam.filierafanesicardinali.controller.DTO.ProductCreateRequest;
+import unicam.filierafanesicardinali.service.SocialService;
 
 import java.util.List;
 
@@ -15,11 +16,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/Product")
 public class ProductController {
+    private final SocialService socialService;
     ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, SocialService socialService) {
         this.productService = productService;
+        this.socialService = socialService;
     }
 
     @PostMapping
@@ -33,8 +36,13 @@ public class ProductController {
         return ResponseEntity.ok(productService.deleteProduct(id));
     }
 
+    @GetMapping("/social")
+    public ResponseEntity<List<SocialPost>> getAllProductForSocial(){
+        return ResponseEntity.ok(socialService.getAllSocialPosts());
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable Long id){ //done
+    public ResponseEntity<Product> getProduct(@PathVariable Long id){
         return ResponseEntity.ok(productService.getProduct(id));
     }
 

@@ -2,6 +2,7 @@ package unicam.filierafanesicardinali.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import unicam.filierafanesicardinali.model.eventi.Event;
 import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.utenti.*;
 import unicam.filierafanesicardinali.repository.BuyerRepository;
@@ -57,7 +58,7 @@ public class UserService {
     }
 
     public void addProductToSeller(Long SellerId, Product product){
-        Seller seller = (Seller) getUser(SellerId);
+        Seller seller = getSeller(SellerId);
         seller.addOnSaleProduct(product);
         userRepository.save(seller);
     }
@@ -65,5 +66,26 @@ public class UserService {
     public Seller getSeller(Long id){
         if(!(getUser(id) instanceof Seller)) throw new RuntimeException("User is not a Seller");
         return (Seller) getUser(id);
+    }
+
+    public Entertainer getEventCreator(Long id){
+        User user = getUser(id);
+        if(user instanceof Entertainer){
+            return (Entertainer) user;
+        } else {
+            throw new RuntimeException("User is not an entertainer");
+        }
+    }
+
+    public void addEventToEntertrainer(Long EntertainerId, Event event){
+        Entertainer entertainer = getEventCreator(EntertainerId);
+        entertainer.addEvent(event);
+        userRepository.save(entertainer);
+    }
+
+    public void removeEventFromEntertrainer(Long EntertainerId, Event event){
+        Entertainer entertainer = getEventCreator(EntertainerId);
+        entertainer.removeEvent(event);
+        userRepository.save(entertainer);
     }
 }

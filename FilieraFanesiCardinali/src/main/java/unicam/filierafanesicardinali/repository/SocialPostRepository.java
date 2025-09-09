@@ -6,5 +6,5 @@ import unicam.filierafanesicardinali.model.social.SocialPost;
 
 @Repository
 public interface SocialPostRepository extends JpaRepository<SocialPost, Long> {
-    void deleteByProductId(Long productId);
+    SocialPost findByProductId(Long productId);
 }

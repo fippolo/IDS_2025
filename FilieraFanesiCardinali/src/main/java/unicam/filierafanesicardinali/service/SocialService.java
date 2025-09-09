@@ -6,6 +6,8 @@ import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.social.SocialPost;
 import unicam.filierafanesicardinali.repository.SocialPostRepository;
 
+import java.util.List;
+
 @Service
 public class SocialService {
     private final SocialPostRepository socialPostRepository;
@@ -21,6 +23,11 @@ public class SocialService {
     }
 
     public void deleteSocialPostByProductId(Long id){
-        socialPostRepository.deleteByProductId(id);
+        SocialPost sp = socialPostRepository.findByProductId(id);
+        socialPostRepository.deleteById(sp.getId());
+    }
+
+    public List<SocialPost> getAllSocialPosts(){
+        return socialPostRepository.findAll();
     }
 }
