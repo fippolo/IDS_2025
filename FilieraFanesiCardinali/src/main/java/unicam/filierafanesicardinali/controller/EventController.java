@@ -24,6 +24,7 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event e) {
+<<<<<<< HEAD
         return ResponseEntity.ok(eventService.createEvent(e.getName(), e.getData(), e.getPosition(), e.getEntertainerID()));
     }
 
@@ -31,6 +32,9 @@ public class EventController {
     public ResponseEntity<Event> test(){
         Event e = new Event("Test", LocalDateTime.now(), new Position("via test", "test", "test","test", "ancona"), 1L);
         return ResponseEntity.ok(e);
+=======
+        return ResponseEntity.ok(eventService.createEvent(e.getName() , e.getData() , e.getPosition(), e.getEntertainerID()));
+>>>>>>> 6d26245 (Modifiche controller carrello)
     }
 
     @GetMapping("/{id}")

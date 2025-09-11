@@ -29,5 +29,6 @@ public class Entertainer extends User{
     public void removeEvent(Event e){
         eventsList.remove(e);
     }
+
 }
 

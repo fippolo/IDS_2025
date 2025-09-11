@@ -1,15 +1,15 @@
 package unicam.filierafanesicardinali.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unicam.filierafanesicardinali.controller.DTO.AddToCartDTO;
+import unicam.filierafanesicardinali.controller.DTO.SetItemQtyDTO;
 import unicam.filierafanesicardinali.model.acquisto.Cart;
 import unicam.filierafanesicardinali.model.acquisto.orders.Receipt;
 import unicam.filierafanesicardinali.service.CartService;
 
 import java.util.List;
-//TODO: gestire eccezzioni
 @RestController
 @RequestMapping("/api/v1/Cart")
 public class CartController {
@@ -21,24 +21,24 @@ public class CartController {
     }
 
 
-    @PostMapping("/{id}/add")
-    public ResponseEntity<Cart> addToCart(@PathVariable Long id, @RequestBody Long productId, @RequestBody int qty){
-        return ResponseEntity.ok(cartService.addToCart(id, productId, qty));
+    @PostMapping("/{idBuyer}/add")
+    public ResponseEntity<Cart> addToCart(@PathVariable Long idBuyer, @RequestBody AddToCartDTO addToCart){
+        return ResponseEntity.ok(cartService.addToCart(idBuyer, addToCart.productId(), addToCart.qty()));
     }
 
-    @PostMapping("/{id}/setItemQty")
-    public ResponseEntity<Cart> setItemQty(@PathVariable Long id,@RequestBody Integer productIndex, @RequestBody Integer qty){
-        return ResponseEntity.ok(cartService.setCartItemQty(id, productIndex, qty));
+    @PostMapping("/{idBuyer}/setItemQty")
+    public ResponseEntity<Cart> setItemQty(@PathVariable Long idBuyer, @RequestBody SetItemQtyDTO setItemQty){
+        return ResponseEntity.ok(cartService.setCartItemQty(idBuyer, setItemQty.productIndex(), setItemQty.qty() ));
     }
 
-    @PostMapping("/{id}/buy")
-    public ResponseEntity<Receipt> buyCart(@PathVariable Long id){
-        return ResponseEntity.ok(cartService.buyCart(id));
+    @PostMapping("/{idBuyer}/buy")
+    public ResponseEntity<Receipt> buyCart(@PathVariable Long idBuyer){
+        return ResponseEntity.ok(cartService.buyCart(idBuyer));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Cart> getCart(@PathVariable Long id){
-        return ResponseEntity.ok(cartService.getCart(id));
+    @GetMapping("/{idBuyer}")
+    public ResponseEntity<Cart> getCart(@PathVariable Long idBuyer){
+        return ResponseEntity.ok(cartService.getCart(idBuyer));
     }
 
     @GetMapping

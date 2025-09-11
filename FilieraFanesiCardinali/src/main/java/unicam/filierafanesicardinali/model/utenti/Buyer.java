@@ -5,7 +5,7 @@ import unicam.filierafanesicardinali.model.acquisto.Cart;
 
 @Entity
 public class Buyer extends User{
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Cart cart;
 
 	public Buyer(String nome, String email, String password) {
