@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.eventi.Event;
-import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.service.EventService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -21,20 +19,10 @@ public class EventController {
         this.eventService = eventService;
     }
 
-
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event e) {
-<<<<<<< HEAD
-        return ResponseEntity.ok(eventService.createEvent(e.getName(), e.getData(), e.getPosition(), e.getEntertainerID()));
-    }
-
-    @GetMapping("test")
-    public ResponseEntity<Event> test(){
-        Event e = new Event("Test", LocalDateTime.now(), new Position("via test", "test", "test","test", "ancona"), 1L);
-        return ResponseEntity.ok(e);
-=======
-        return ResponseEntity.ok(eventService.createEvent(e.getName() , e.getData() , e.getPosition(), e.getEntertainerID()));
->>>>>>> 6d26245 (Modifiche controller carrello)
+        return ResponseEntity.ok(eventService.createEvent(e.getName(), e.getData(),
+                e.getPosition(), e.getEntertainerID()));
     }
 
     @GetMapping("/{id}")
@@ -56,8 +44,4 @@ public class EventController {
     public ResponseEntity<List<Event>> getEventsByCreator(@PathVariable Long id) {
         return ResponseEntity.ok(eventService.getEventsByCreator(id));
     }
-
-
-
-
 }

@@ -20,14 +20,13 @@ public class CartController {
         this.cartService = cartService;
     }
 
-
     @PostMapping("/{idBuyer}/add")
-    public ResponseEntity<Cart> addToCart(@PathVariable Long idBuyer, @RequestBody AddToCartDTO addToCart){
+    public ResponseEntity<Cart> addToCart(@PathVariable Long idBuyer, @RequestBody AddToCartDTO addToCart){ // funziona
         return ResponseEntity.ok(cartService.addToCart(idBuyer, addToCart.productId(), addToCart.qty()));
     }
 
     @PostMapping("/{idBuyer}/setItemQty")
-    public ResponseEntity<Cart> setItemQty(@PathVariable Long idBuyer, @RequestBody SetItemQtyDTO setItemQty){
+    public ResponseEntity<Cart> setItemQty(@PathVariable Long idBuyer, @RequestBody SetItemQtyDTO setItemQty){ // funziona
         return ResponseEntity.ok(cartService.setCartItemQty(idBuyer, setItemQty.productIndex(), setItemQty.qty() ));
     }
 

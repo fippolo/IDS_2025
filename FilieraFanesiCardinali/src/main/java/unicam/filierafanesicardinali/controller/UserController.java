@@ -3,11 +3,9 @@ package unicam.filierafanesicardinali.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import unicam.filierafanesicardinali.model.eventi.Event;
 import unicam.filierafanesicardinali.model.utenti.User;
 import unicam.filierafanesicardinali.service.UserService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -33,8 +31,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id){
-        User toret=userService.getUser(id);
-        return ResponseEntity.ok(toret);
+        User toRet=userService.getUser(id);
+        return ResponseEntity.ok(toRet);
     }
 
     @GetMapping

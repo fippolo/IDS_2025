@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.acquisto.CartItem;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,13 +14,18 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private double total;
     private LocalDateTime insertionDate;
     private Long idBuyer;
     private boolean isPaid;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<CartItem> orderItems;
+    @ElementCollection
+    @CollectionTable(
+            name = "order_items",
+            joinColumns = @JoinColumn(name = "order_id")
+    )
+    private List<CartItem> orderItems = new ArrayList<>();
 
     public Order(){isPaid = false;}
 

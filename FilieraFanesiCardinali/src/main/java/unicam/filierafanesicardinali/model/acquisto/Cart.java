@@ -8,25 +8,22 @@ import java.util.List;
 @Entity
 public class Cart {
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<CartItem> CartItemList;
-
-    @Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	private Long id;
 
-	public Cart() {
-		CartItemList = new ArrayList<CartItem>();
-	}
+	@ElementCollection
+	@CollectionTable(
+			name = "cart_items",
+			joinColumns = @JoinColumn(name = "cart_id"),
+			uniqueConstraints = @UniqueConstraint(columnNames = { "cart_id", "product_id" })
+	)
+	private List<CartItem> cartItemList = new ArrayList<>();
 
-	public List<CartItem> getCartItemList() {
-		return CartItemList;
-	}
+	public Cart() {}
 
-	public void emptyCart() {
-		CartItemList.clear();
-	}
-	public Long getId() {
-		return id;
-	}
+	public List<CartItem> getCartItemList() { return cartItemList; }
+	public void emptyCart() { cartItemList.clear(); }
+	public Long getId() { return id; }
+	
 }

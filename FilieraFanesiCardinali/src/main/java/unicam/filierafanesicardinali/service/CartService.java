@@ -31,12 +31,20 @@ public class CartService {
         this.paymentService = paymentService;
     }
 
-    public Cart addToCart(Long buyerId, Long ProductId, int qty) {
+    public Cart addToCart(Long buyerId, Long productId, int qty) {
         Buyer buyer = getBuyer(buyerId);
-        Product product = getProduct(ProductId);
-        buyer.getCart().getCartItemList().add(new CartItem(product, qty));
-        buyerRepository.save(buyer);
-        return buyer.getCart();
+        Product product = getProduct(productId);
+        Cart cart = buyer.getCart();
+
+        for (CartItem item : cart.getCartItemList()) {
+            if (item.getProduct().getId().equals(productId)) {
+                item.setQuantity(item.getQuantity() + qty);
+                return buyerRepository.save(buyer).getCart();
+            }
+        }
+
+        cart.getCartItemList().add(new CartItem(product, qty));
+        return buyerRepository.save(buyer).getCart();
     }
 
     public Cart setCartItemQty(Long buyerID, int productIndex, int qty) {
@@ -50,7 +58,6 @@ public class CartService {
             }
             buyer.getCart().getCartItemList().get(productIndex).setQuantity(qty);
         }
-        buyer.getCart().getCartItemList().get(productIndex).setQuantity(qty);
         buyerRepository.save(buyer);
         return buyer.getCart();
     }
@@ -74,6 +81,7 @@ public class CartService {
         return buyerRepository.findAll().stream().map(Buyer::getCart).toList();
     }
     // helper methods
+    //TODO: move them into appropriate class
     private Buyer getBuyer(Long buyerID) {
         return buyerRepository.findById(buyerID).orElseThrow(() -> new RuntimeException("Buyer not found with id: " + buyerID));
     }
@@ -81,4 +89,5 @@ public class CartService {
     private Product getProduct(Long ProductId) {
         return productRepository.findById(ProductId).orElseThrow(() -> new RuntimeException("Product not found with id: " + ProductId));
     }
+
 }
