@@ -1,11 +1,19 @@
 package unicam.filierafanesicardinali.model.utenti;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.eventi.Invitation;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 
+
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "id")
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -19,7 +27,7 @@ public class User {
 	private String email;
 	private String password;
 
-	@OneToMany(mappedBy = "invitedUser")
+	@OneToMany(mappedBy = "invitedUser", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Invitation> invites;
 
 	User(String nome, String email, String password) {
@@ -65,5 +73,9 @@ public class User {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public void addInvite(Invitation inv){
+		this.invites.add(inv);
 	}
 }

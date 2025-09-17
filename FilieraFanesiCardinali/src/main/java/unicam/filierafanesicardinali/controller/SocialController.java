@@ -23,7 +23,7 @@ public class SocialController {
         this.productService = productService;
     }
 
-    //TODO: translate to product ID instead of Product object
+
     @PostMapping
     public ResponseEntity<SocialPost> createSocialPost(@RequestBody Long productId) {
         return ResponseEntity.ok(socialService.createSocialPost(productService.getProduct(productId)));

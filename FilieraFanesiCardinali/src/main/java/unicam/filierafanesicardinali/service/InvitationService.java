@@ -15,30 +15,29 @@ import java.time.LocalDateTime;
 //TODO: refactor
 @Service
 public class InvitationService {
-    private final EventRepository eventRepository;
-    private final UserRepository userRepository;
+    private final EventService eventService;
+    private final UserService userService;
     private final InvitationRepository invitationRepository;
 
     @Autowired
-    public InvitationService(EventRepository eventRepository, UserRepository userRepository,
+    public InvitationService(EventService eventService, UserService userService,
                              InvitationRepository invitationRepository){
-        this.eventRepository = eventRepository;
-        this.userRepository = userRepository;
+        this.eventService = eventService;
+        this.userService = userService;
         this.invitationRepository = invitationRepository;
     }
 
 
-    @Transactional
+
     public Invitation sendInvitation(Long EventId, Long UserId, LocalDateTime expiry){
         if (invitationRepository.existsByEventIdAndInvitedUser_Id(EventId, UserId)) {
             throw new IllegalStateException("User already invited to this event.");
         }
-        Event event = eventRepository.getReferenceById(EventId);
-        User user = userRepository.getReferenceById(UserId);
+        Event event = eventService.getEvent(EventId);
+        User user = userService.getUser(UserId);
         Invitation inv = event.addInvitation(user, expiry);
         // Because of CascadeType.ALL on Event->Invitation, saving the event is enough:
-        eventRepository.save(event);
-        return inv;
+        return eventService.saveEvent(event).getInvitationList().get(event.getInvitationList().size() - 1);
     }
 
 }

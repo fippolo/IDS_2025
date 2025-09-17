@@ -44,5 +44,7 @@ public class EventService {
         return userService.getEventCreator(id).getEventsList();
     }
 
-
+    public Event saveEvent(Event event){
+        return eventRepository.save(event);
+    }
 }

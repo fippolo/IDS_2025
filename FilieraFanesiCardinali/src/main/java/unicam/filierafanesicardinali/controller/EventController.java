@@ -4,8 +4,11 @@ package unicam.filierafanesicardinali.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unicam.filierafanesicardinali.controller.DTO.InvitationDto;
 import unicam.filierafanesicardinali.model.eventi.Event;
+import unicam.filierafanesicardinali.model.eventi.Invitation;
 import unicam.filierafanesicardinali.service.EventService;
+import unicam.filierafanesicardinali.service.InvitationService;
 
 import java.util.List;
 
@@ -13,10 +16,11 @@ import java.util.List;
 @RequestMapping("/api/v1/Event")
 public class EventController {
     EventService eventService;
-
+    InvitationService invitationService;
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, InvitationService invitationService) {
         this.eventService = eventService;
+        this.invitationService = invitationService;
     }
 
     @PostMapping
@@ -43,5 +47,10 @@ public class EventController {
     @GetMapping("/creator/{id}")
     public ResponseEntity<List<Event>> getEventsByCreator(@PathVariable Long id) {
         return ResponseEntity.ok(eventService.getEventsByCreator(id));
+    }
+
+    @PostMapping("/{id}/invitation")
+    public ResponseEntity<Invitation> inviteEvent(@PathVariable Long id, @RequestBody InvitationDto invitation) {
+        return ResponseEntity.ok(invitationService.sendInvitation(id,invitation.userId(), invitation.expiry()));
     }
 }
