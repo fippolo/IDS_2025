@@ -31,15 +31,13 @@ public class ProductService {
     }
 
     public Product createProduct(String name, double price, String description, Position site, boolean isBundle, Long sellerId){
+        Product p;
         if(isBundle){
-            Product p = bundleFactory.createProduct(name, price, description, userService.getSeller(sellerId), site);
-            userService.addProductToSeller(sellerId, p);
-            return p; // non è necessario salvare il prodotto, il metodo addProductToSeller lo fa
+            p = bundleFactory.createProduct(name, price, description, userService.getSeller(sellerId), site);
         } else {
-            Product p = simpleProductFactory.createProduct(name, price, description, userService.getSeller(sellerId), site);
-            userService.addProductToSeller(sellerId, p);
-            return p;
+            p = simpleProductFactory.createProduct(name, price, description, userService.getSeller(sellerId), site);
         }
+        return userService.addProductToSeller(sellerId, p);
     }
 
     public Product deleteProduct(Long id){

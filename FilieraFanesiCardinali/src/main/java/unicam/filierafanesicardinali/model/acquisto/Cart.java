@@ -21,9 +21,13 @@ public class Cart {
 	private List<CartItem> cartItemList = new ArrayList<>();
 
 	public Cart() {}
+	public Cart(List<CartItem> cartItemList, Long id) {
+		this.cartItemList = cartItemList;
+		this.id = id;
+	}
 
 	public List<CartItem> getCartItemList() { return cartItemList; }
-	public void emptyCart() { cartItemList.clear(); }
 	public Long getId() { return id; }
-	
+	public void emptyCart() { cartItemList.clear(); }
+
 }

@@ -71,7 +71,7 @@ public class CartService {
         }
         cart.emptyCart();
         buyerRepository.save(buyer);
-        return new Receipt();
+        return receipt;
     }
 
     public Cart getCart(Long buyerID){

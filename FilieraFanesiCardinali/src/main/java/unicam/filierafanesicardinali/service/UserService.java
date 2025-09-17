@@ -57,10 +57,11 @@ public class UserService {
         return user;
     }
 
-    public void addProductToSeller(Long SellerId, Product product){
+    public Product addProductToSeller(Long SellerId, Product product){
         Seller seller = getSeller(SellerId);
         seller.addOnSaleProduct(product);
-        userRepository.save(seller);
+        // return product added to the list
+        return userRepository.save(seller).getOnSaleProducts().get(seller.getOnSaleProducts().size() - 1);
     }
 
     public Seller getSeller(Long id){

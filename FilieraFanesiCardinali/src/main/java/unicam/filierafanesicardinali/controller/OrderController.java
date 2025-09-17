@@ -9,7 +9,6 @@ import unicam.filierafanesicardinali.service.OrderService;
 
 import java.util.List;
 
-//TODO: gestire eccezzioni
 @RestController
 @RequestMapping("/api/v1/Order")
 public class OrderController {

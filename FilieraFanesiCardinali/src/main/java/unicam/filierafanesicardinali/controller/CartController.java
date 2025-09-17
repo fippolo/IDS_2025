@@ -30,14 +30,14 @@ public class CartController {
         return ResponseEntity.ok(cartService.setCartItemQty(idBuyer, setItemQty.productIndex(), setItemQty.qty() ));
     }
 
-    @PostMapping("/{idBuyer}/buy")
+    @GetMapping("/{idBuyer}/buy")
     public ResponseEntity<Receipt> buyCart(@PathVariable Long idBuyer){
         return ResponseEntity.ok(cartService.buyCart(idBuyer));
     }
 
     @GetMapping("/{idBuyer}")
     public ResponseEntity<Cart> getCart(@PathVariable Long idBuyer){
-        return ResponseEntity.ok(cartService.getCart(idBuyer));
+        return ResponseEntity.ok( cartService.getCart(idBuyer));
     }
 
     @GetMapping
