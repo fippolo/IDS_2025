@@ -57,8 +57,8 @@ public class UserService {
         return user;
     }
 
-    public Product addProductToSeller(Long SellerId, Product product){
-        Seller seller = getSeller(SellerId);
+    public Product addProductToSeller(Long sellerId, Product product){
+        Seller seller = getSeller(sellerId);
         seller.addOnSaleProduct(product);
         // return product added to the list
         return userRepository.save(seller).getOnSaleProducts().get(seller.getOnSaleProducts().size() - 1);
@@ -78,14 +78,14 @@ public class UserService {
         }
     }
 
-    public void addEventToEntertrainer(Long EntertainerId, Event event){
-        Entertainer entertainer = getEventCreator(EntertainerId);
+    public void addEventToEntertrainer(Long entertainerId, Event event){
+        Entertainer entertainer = getEventCreator(entertainerId);
         entertainer.addEvent(event);
         userRepository.save(entertainer);
     }
 
-    public void removeEventFromEntertrainer(Long EntertainerId, Event event){
-        Entertainer entertainer = getEventCreator(EntertainerId);
+    public void removeEventFromEntertrainer(Long entertainerId, Event event){
+        Entertainer entertainer = getEventCreator(entertainerId);
         entertainer.removeEvent(event);
         userRepository.save(entertainer);
     }

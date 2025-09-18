@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.model.utenti.Seller;
 
-//TODO: Product Type Enumerator
+
 @Entity
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

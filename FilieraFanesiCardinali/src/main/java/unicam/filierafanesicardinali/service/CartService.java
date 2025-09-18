@@ -86,8 +86,8 @@ public class CartService {
         return buyerRepository.findById(buyerID).orElseThrow(() -> new RuntimeException("Buyer not found with id: " + buyerID));
     }
 
-    private Product getProduct(Long ProductId) {
-        return productRepository.findById(ProductId).orElseThrow(() -> new RuntimeException("Product not found with id: " + ProductId));
+    private Product getProduct(Long productId) {
+        return productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
     }
 
 }

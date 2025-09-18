@@ -66,7 +66,5 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public SocialPost shareProduct(Long id){
-        return socialService.createSocialPost(getProduct(id));
-    }
+
 }
