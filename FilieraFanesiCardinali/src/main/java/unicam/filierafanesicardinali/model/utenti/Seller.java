@@ -23,11 +23,7 @@ public class Seller extends User{
     @JsonManagedReference("seller-products")
     List<Product> onSaleProducts;
 
-    public Seller(String nome, String email, String password, Position position) {
-        super(nome, email, password);
-        this.position = position;
-        this.onSaleProducts = new ArrayList<Product>();
-    }
+
     public Seller(String nome, String email, String password) {
         super(nome, email, password);
         this.onSaleProducts = new ArrayList<Product>();

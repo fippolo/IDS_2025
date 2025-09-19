@@ -15,15 +15,15 @@ public class SocialPost {
     private Product product;
 
     private String linkToPost;
-    private java.time.LocalDateTime dataCreazione;
+    private java.time.LocalDateTime dateOfPosting;
     
     public SocialPost() {
-        this.dataCreazione = java.time.LocalDateTime.now();
+        this.dateOfPosting = java.time.LocalDateTime.now();
     }
     public SocialPost(Product product, String linkToPost) {
         this.product = product;
         this.linkToPost = linkToPost;
-        this.dataCreazione = java.time.LocalDateTime.now();
+        this.dateOfPosting = java.time.LocalDateTime.now();
     }
 
     public Long getId() {
@@ -47,11 +47,11 @@ public class SocialPost {
         this.linkToPost = linkToPost;
     }
 
-    public LocalDateTime getDataCreazione() {
-        return dataCreazione;
+    public LocalDateTime getDateOfPosting() {
+        return dateOfPosting;
     }
 
-    public void setDataCreazione(LocalDateTime dataCreazione) {
-        this.dataCreazione = dataCreazione;
+    public void setDateOfPosting(LocalDateTime dataCreazione) {
+        this.dateOfPosting = dataCreazione;
     }
 }

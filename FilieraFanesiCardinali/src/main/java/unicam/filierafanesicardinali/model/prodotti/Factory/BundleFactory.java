@@ -16,7 +16,5 @@ public class BundleFactory implements ProductFactory{
         return new Bundle(name, price, descrizione, seller, productionSite, List.of()); // creat intial without any item
     }
 
-    public Product createProduct(String name, double price, String descrizione,Seller seller, Position productionSite, List<Product> listaProdotti) {
-        return new Bundle(name, price, descrizione, seller, productionSite, listaProdotti);
-    }
+
 }

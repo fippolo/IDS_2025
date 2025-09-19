@@ -13,23 +13,23 @@ import java.util.List;
 public class Bundle extends Product {
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Product> listaProdotti;
+    private List<Product> productList;
 
     public Bundle() {
         super();
-        this.listaProdotti = new ArrayList<>();
+        this.productList = new ArrayList<>();
     }
 
-    public Bundle(String name, double price, String descrizione, Seller seller, Position productionSite, List<Product> listaProdotti) {
+    public Bundle(String name, double price, String descrizione, Seller seller, Position productionSite, List<Product> productList) {
         super(name, price, descrizione, seller, productionSite, "bundle");
-        this.listaProdotti = listaProdotti;
+        this.productList = productList;
     }
 
     public void addProduct(Product p){
-        listaProdotti.add(p);
+        productList.add(p);
     }
 
-    public List<Product> getListaProdotti() {
-        return listaProdotti;
+    public List<Product> getProductList() {
+        return productList;
     }
 }
