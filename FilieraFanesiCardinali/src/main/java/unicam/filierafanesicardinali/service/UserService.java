@@ -12,8 +12,10 @@ import java.util.List;
 
 @Service
 public class UserService {
+
     private final UserRepository userRepository;
     private final BuyerRepository buyerRepository;
+
     @Autowired
     public UserService(UserRepository userRepository, BuyerRepository buyerRepository) {
         this.userRepository = userRepository;

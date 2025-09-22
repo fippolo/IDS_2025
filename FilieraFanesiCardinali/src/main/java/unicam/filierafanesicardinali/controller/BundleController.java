@@ -10,7 +10,7 @@ import unicam.filierafanesicardinali.service.BundleService;
 @RestController
 @RequestMapping("/api/v1/Bundle")
 public class BundleController {
-    BundleService bundleService;
+    private final BundleService bundleService;
 
     @Autowired
     public BundleController(BundleService bundleService) {

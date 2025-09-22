@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/v1/Product")
 public class ProductController {
     private final SocialService socialService;
-    ProductService productService;
+    private final ProductService productService;
 
     @Autowired
     public ProductController(ProductService productService, SocialService socialService) {
@@ -36,10 +36,6 @@ public class ProductController {
         return ResponseEntity.ok(productService.deleteProduct(id));
     }
 
-    @GetMapping("/social")
-    public ResponseEntity<List<SocialPost>> getAllProductForSocial(){
-        return ResponseEntity.ok(socialService.getAllSocialPosts());
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable Long id){
@@ -62,8 +58,5 @@ public class ProductController {
     }
 
 
-    @GetMapping("/{id}/share")
-    public ResponseEntity<SocialPost> share(@PathVariable Long id) {
-        return ResponseEntity.ok(productService.shareProduct(id));
-    }
+
 }

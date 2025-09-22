@@ -11,9 +11,11 @@ import java.util.List;
 
 @Repository
 public class PaymentService {
+
     private final ReceiptRepository receiptRepository;
     private final ReceiptNumberGenerator numberGenerator;
     private final OrderService orderService;
+
 
     @Autowired
     public PaymentService(ReceiptRepository receiptRepository, ReceiptNumberGenerator receiptNumberGenerator,
@@ -33,6 +35,7 @@ public class PaymentService {
     public Receipt getReceipt(Long id){
         return receiptRepository.findById(id).orElseThrow(() -> new RuntimeException("Receipt not found with id: " + id));
     }
+
 
     public List<Receipt> getReceipts(){
         return receiptRepository.findAll();

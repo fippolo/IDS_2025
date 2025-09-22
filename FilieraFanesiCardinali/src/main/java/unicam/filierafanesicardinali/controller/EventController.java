@@ -15,8 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/Event")
 public class EventController {
-    EventService eventService;
-    InvitationService invitationService;
+    private final EventService eventService;
+    private final InvitationService invitationService;
     @Autowired
     public EventController(EventService eventService, InvitationService invitationService) {
         this.eventService = eventService;

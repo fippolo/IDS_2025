@@ -19,6 +19,8 @@ public class CartService {
 
     private final BuyerRepository buyerRepository;
     private final ProductRepository productRepository;
+
+
     private final OrderService orderservice;
     private final PaymentService paymentService;
 
@@ -61,6 +63,7 @@ public class CartService {
         buyerRepository.save(buyer);
         return buyer.getCart();
     }
+
     public Receipt buyCart(Long buyerID) {
         Buyer buyer = getBuyer(buyerID);
         Cart cart = buyer.getCart();
@@ -86,6 +89,7 @@ public class CartService {
         return buyerRepository.findById(buyerID).orElseThrow(() -> new RuntimeException("Buyer not found with id: " + buyerID));
     }
 
+    //sostituire la repo con il service
     private Product getProduct(Long productId) {
         return productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
     }

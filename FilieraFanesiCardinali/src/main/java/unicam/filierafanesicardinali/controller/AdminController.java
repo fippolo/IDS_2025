@@ -7,6 +7,9 @@ import unicam.filierafanesicardinali.service.UserService;
 @RestController
 @RequestMapping("/api/v1/RoleRequest")
 public class AdminController {
-    UserService userService;
+    private final UserService userService;
 
+    public AdminController(UserService userService) {
+        this.userService = userService;
+    }
 }

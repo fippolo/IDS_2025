@@ -11,8 +11,8 @@ import java.util.List;
 
 @Service
 public class EventService {
-    EventRepository eventRepository;
-    UserService userService;
+    private final EventRepository eventRepository;
+    private final UserService userService;
 
     @Autowired
     public EventService(EventRepository eventRepository, UserService userService) {
@@ -47,4 +47,5 @@ public class EventService {
     public Event saveEvent(Event event){
         return eventRepository.save(event);
     }
+
 }
