@@ -1,9 +1,6 @@
 package unicam.filierafanesicardinali.model.utenti;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import unicam.filierafanesicardinali.model.ruoli.RoleRequest;
 
 import java.util.List;
@@ -14,6 +11,7 @@ public class PlatformAdmin extends User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @OneToMany
     List<RoleRequest> requestsList;
 
     public PlatformAdmin(String nome, String email, String password, List<RoleRequest> requestsList) {

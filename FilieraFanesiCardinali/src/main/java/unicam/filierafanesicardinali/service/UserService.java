@@ -35,7 +35,7 @@ public class UserService {
     }
 
     //TODO: role requests
-
+    // evntualmente va cancellatto e rimpiazzato con la logica corretta
     public User assignRole(Long id, byte role){
         User user = getUser(id);
         String nome = user.getNome();
@@ -90,5 +90,21 @@ public class UserService {
         Entertainer entertainer = getEventCreator(entertainerId);
         entertainer.removeEvent(event);
         userRepository.save(entertainer);
+    }
+
+    public void addAuthenticatedProduct(Long authenticatorId, Product product){
+        Authenticator authenticator = getAuthenticator(authenticatorId);
+        authenticator.addAuthenticatedProduct(product);
+        userRepository.save(authenticator);
+    }
+
+    //helper method
+    private Authenticator getAuthenticator(Long id){
+        User user = getUser(id);
+        if(user instanceof Authenticator){
+            return (Authenticator) user;
+        } else {
+            throw new RuntimeException("User is not an authenticator");
+        }
     }
 }

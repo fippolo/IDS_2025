@@ -7,6 +7,7 @@ import unicam.filierafanesicardinali.model.prodotti.Factory.BundleFactory;
 import unicam.filierafanesicardinali.model.prodotti.Factory.SimpleProductFactory;
 import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.social.SocialPost;
+import unicam.filierafanesicardinali.model.utenti.Authenticator;
 import unicam.filierafanesicardinali.model.utenti.Seller;
 import unicam.filierafanesicardinali.repository.ProductRepository;
 
@@ -59,10 +60,11 @@ public class ProductService {
         return getProduct(id).getProductionSite();
     }
 
-    public Product approveProduct(Long id){
-        // TODO: salvare l'authenticator che approva il prodotto, aggiungendo id authenticator nel metodo
+    public Product approveProduct(Long id, Long authId){
+
         Product product = getProduct(id);
         product.setStato(true);
+        userService.addAuthenticatedProduct(authId, product);
         return productRepository.save(product);
     }
 

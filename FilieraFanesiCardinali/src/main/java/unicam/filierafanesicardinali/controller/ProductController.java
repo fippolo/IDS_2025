@@ -53,8 +53,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}/approve")
-    public ResponseEntity<Product> approveProduct(@PathVariable Long id){ //done
-        return ResponseEntity.ok(productService.approveProduct(id));
+    public ResponseEntity<Product> approveProduct(@PathVariable Long id, @RequestBody Long authId){ //done
+        return ResponseEntity.ok(productService.approveProduct(id, authId));
     }
 
 

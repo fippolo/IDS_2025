@@ -12,6 +12,7 @@ public class RoleRequest {
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
+    @Enumerated(EnumType.ORDINAL)
     UserRole role;
 
     public RoleRequest() {
@@ -28,6 +29,10 @@ public class RoleRequest {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public UserRole getRole() {

@@ -1,5 +1,6 @@
 package unicam.filierafanesicardinali.model.ruoli;
 
+
 public enum UserRole {
     ADMIN(0),
     MODERATOR(1),
