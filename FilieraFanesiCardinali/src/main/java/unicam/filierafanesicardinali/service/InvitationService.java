@@ -12,7 +12,7 @@ import unicam.filierafanesicardinali.repository.UserRepository;
 
 import java.time.LocalDateTime;
 
-//TODO: refactor
+
 @Service
 public class InvitationService {
     private final EventService eventService;

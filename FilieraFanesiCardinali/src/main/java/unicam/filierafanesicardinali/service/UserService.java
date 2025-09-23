@@ -1,10 +1,14 @@
 package unicam.filierafanesicardinali.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import unicam.filierafanesicardinali.model.eventi.Event;
 import unicam.filierafanesicardinali.model.prodotti.Product;
+import unicam.filierafanesicardinali.model.ruoli.RoleRequest;
+import unicam.filierafanesicardinali.model.ruoli.UserRole;
 import unicam.filierafanesicardinali.model.utenti.*;
+import unicam.filierafanesicardinali.repository.AuthenticatorRepository;
 import unicam.filierafanesicardinali.repository.BuyerRepository;
 import unicam.filierafanesicardinali.repository.UserRepository;
 
@@ -12,14 +16,15 @@ import java.util.List;
 
 @Service
 public class UserService {
-
     private final UserRepository userRepository;
     private final BuyerRepository buyerRepository;
+    private final AuthenticatorRepository authenticatorRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, BuyerRepository buyerRepository) {
-        this.userRepository = userRepository;
-        this.buyerRepository = buyerRepository;
+    public UserService(UserRepository userRepository, BuyerRepository buyerRepository
+    , AuthenticatorRepository authenticatorRepository) {
+        this.userRepository = userRepository; this.buyerRepository = buyerRepository;
+        this.authenticatorRepository = authenticatorRepository;
     }
 
     public User createUser(User user){
@@ -34,23 +39,20 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    //TODO: role requests
-    // evntualmente va cancellatto e rimpiazzato con la logica corretta
-    public User assignRole(Long id, byte role){
+    public User assignRole(Long id, UserRole role){
         User user = getUser(id);
         String nome = user.getNome();
         String email = user.getEmail();
         String password = user.getPassword();
         userRepository.deleteById(id);
-        return switch (role) {
+        return switch (role.getCode()) {
             case 0 -> userRepository.save(new Authenticator(nome, email, password));
             case 1 -> buyerRepository.save(new Buyer(nome, email, password));
             case 2 -> userRepository.save(new Entertainer(nome, email, password));
-            case 4 -> userRepository.save(new Seller(nome, email, password));
+            case 3 -> userRepository.save(new Seller(nome, email, password));
             default -> throw new RuntimeException("Role not found");
         };
     }
-
 
     public User deleteUser(Long id){
         User user = getUser(id);
@@ -80,13 +82,13 @@ public class UserService {
         }
     }
 
-    public void addEventToEntertrainer(Long entertainerId, Event event){
+    public void addEventToEntertainer(Long entertainerId, Event event){
         Entertainer entertainer = getEventCreator(entertainerId);
         entertainer.addEvent(event);
         userRepository.save(entertainer);
     }
 
-    public void removeEventFromEntertrainer(Long entertainerId, Event event){
+    public void removeEventFromEntertainer(Long entertainerId, Event event){
         Entertainer entertainer = getEventCreator(entertainerId);
         entertainer.removeEvent(event);
         userRepository.save(entertainer);
@@ -98,13 +100,37 @@ public class UserService {
         userRepository.save(authenticator);
     }
 
-    //helper method
+    public void removeAuthenticatedProduct(Product product){
+        Authenticator authenticator = authenticatorRepository.findAllByProductId(product.getId()).get(0);
+        authenticator.removeAuthenticatedProduct(product);
+        authenticatorRepository.save(authenticator);
+    }
+
+    public void addRoleRequestToAdmin(Long adminId, RoleRequest roleRequest){
+        PlatformAdmin platformAdmin = getPlatformAdmin(adminId);
+        platformAdmin.addAcceptedRequest(roleRequest);
+        userRepository.save(platformAdmin);
+    }
+
+    //helper methods
     private Authenticator getAuthenticator(Long id){
         User user = getUser(id);
         if(user instanceof Authenticator){
             return (Authenticator) user;
-        } else {
-            throw new RuntimeException("User is not an authenticator");
-        }
+        } else { throw new RuntimeException("User is not an authenticator"); }
+    }
+
+    private PlatformAdmin getPlatformAdmin(Long id){
+        User user = getUser(id);
+        if(user instanceof PlatformAdmin){
+            return (PlatformAdmin) user;
+        } else  { throw new RuntimeException("User is not an platform admin"); }
+    }
+
+    @PostConstruct
+    public void init(){
+        // inizializzazione admin, TODO: implementare acquisizione dati da un file di config esterno
+        PlatformAdmin platformAdmin = new PlatformAdmin("admin", "admin", "admin");
+        userRepository.save(platformAdmin);
     }
 }

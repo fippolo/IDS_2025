@@ -15,6 +15,8 @@ public class RoleRequest {
     @Enumerated(EnumType.ORDINAL)
     UserRole role;
 
+    boolean approved;
+
     public RoleRequest() {
     }
 
@@ -42,4 +44,9 @@ public class RoleRequest {
     public void setRole(UserRole role) {
         this.role = role;
     }
+
+    public boolean getApproved() { return approved; }
+
+    public void setApproved(boolean approved) { this.approved = approved; }
+
 }

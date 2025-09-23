@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.prodotti.Bundle;
 import unicam.filierafanesicardinali.service.BundleService;
 
-//TODO: gestire eccezzioni
+
 @RestController
 @RequestMapping("/api/v1/Bundle")
 public class BundleController {

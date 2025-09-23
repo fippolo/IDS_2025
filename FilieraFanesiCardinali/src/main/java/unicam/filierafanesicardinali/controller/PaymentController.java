@@ -11,7 +11,7 @@ import unicam.filierafanesicardinali.service.PaymentService;
 
 import java.util.List;
 
-//TODO: gestire eccezzioni
+
 @RestController
 @RequestMapping("/api/v1/Receipt")
 public class PaymentController {

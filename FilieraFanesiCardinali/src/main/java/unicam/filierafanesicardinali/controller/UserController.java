@@ -24,10 +24,7 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(genericUser));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<User> assignRole(@PathVariable Long id, @RequestBody byte role){
-        return ResponseEntity.ok(userService.assignRole(id,role));
-    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id){

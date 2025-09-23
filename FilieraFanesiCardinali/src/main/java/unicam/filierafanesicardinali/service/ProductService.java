@@ -43,7 +43,13 @@ public class ProductService {
 
     public Product deleteProduct(Long id){
         Product toDel = getProduct(id);
-        socialService.deleteSocialPostByProductId(toDel.getId());
+        try {
+            socialService.deleteSocialPostByProductId(toDel.getId());
+        }
+        catch(Exception ignored){}
+        try {
+            userService.removeAuthenticatedProduct(toDel);
+        } catch(Exception ignored){}
         productRepository.deleteById(id);
         return toDel;
     }

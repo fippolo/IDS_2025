@@ -84,7 +84,7 @@ public class CartService {
         return buyerRepository.findAll().stream().map(Buyer::getCart).toList();
     }
     // helper methods
-    //TODO: move them into appropriate class
+
     private Buyer getBuyer(Long buyerID) {
         return buyerRepository.findById(buyerID).orElseThrow(() -> new RuntimeException("Buyer not found with id: " + buyerID));
     }

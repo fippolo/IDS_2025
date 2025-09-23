@@ -23,7 +23,7 @@ public class EventService {
     public Event createEvent(String name, LocalDateTime date, Position position, Long entertainerID){
         Event e = new Event(name, date, position, entertainerID);
         eventRepository.save(e);
-        userService.addEventToEntertrainer(e.getEntertainerID(), e);
+        userService.addEventToEntertainer(e.getEntertainerID(), e);
         return e;
     }
 
@@ -33,7 +33,7 @@ public class EventService {
     public Event deleteEvent(Long eventId) {
         Event event = getEvent(eventId);
         // This will delete the event AND all its invitations due to cascade/orphanRemoval
-        userService.removeEventFromEntertrainer(event.getEntertainerID(), event);
+        userService.removeEventFromEntertainer(event.getEntertainerID(), event);
         eventRepository.deleteById(eventId); // double check
         return event;
     }

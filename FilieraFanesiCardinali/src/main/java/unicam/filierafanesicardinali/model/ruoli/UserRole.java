@@ -2,11 +2,10 @@ package unicam.filierafanesicardinali.model.ruoli;
 
 
 public enum UserRole {
-    ADMIN(0),
-    MODERATOR(1),
-    USER(2),
-    GUEST(3);
-
+    AUTHENTICATOR(0),
+    BUYER(1),
+    ENTERTAINER(2),
+    SELLER(3);
     private final int code;
 
     UserRole(int code) {
@@ -19,10 +18,10 @@ public enum UserRole {
 
     public static UserRole fromCode(int code) {
         return switch (code) {
-            case 0 -> ADMIN;
-            case 1 -> MODERATOR;
-            case 2 -> USER;
-            case 3 -> GUEST;
+            case 0 -> AUTHENTICATOR;
+            case 1 -> BUYER;
+            case 2 -> ENTERTAINER;
+            case 3 -> SELLER;
             default -> throw new IllegalArgumentException("Invalid code: " + code);
         };
     }

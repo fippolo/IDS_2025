@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Authenticator extends User{
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany()
     private List<Product> authenticatedProducts;
 
     public Authenticator(String nome, String email, String password) {
@@ -30,5 +30,9 @@ public class Authenticator extends User{
 
     public void addAuthenticatedProduct(Product p){
         authenticatedProducts.add(p);
+    }
+
+    public void removeAuthenticatedProduct(Product p){
+        authenticatedProducts.remove(p);
     }
 }
