@@ -3,6 +3,7 @@ package unicam.filierafanesicardinali.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import unicam.filierafanesicardinali.model.utenti.Seller;
 import unicam.filierafanesicardinali.model.utenti.User;
 import unicam.filierafanesicardinali.service.UserService;
 
@@ -40,5 +41,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable Long id){
         return ResponseEntity.ok(userService.deleteUser(id));
+    }
+
+    @GetMapping("/sellers")
+    public ResponseEntity<List<Seller>> getAllSellers(){
+        return ResponseEntity.ok(userService.getSellers());
     }
 }

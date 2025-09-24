@@ -10,6 +10,7 @@ import unicam.filierafanesicardinali.model.ruoli.UserRole;
 import unicam.filierafanesicardinali.model.utenti.*;
 import unicam.filierafanesicardinali.repository.AuthenticatorRepository;
 import unicam.filierafanesicardinali.repository.BuyerRepository;
+import unicam.filierafanesicardinali.repository.SellerRepository;
 import unicam.filierafanesicardinali.repository.UserRepository;
 
 import java.util.List;
@@ -19,12 +20,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final BuyerRepository buyerRepository;
     private final AuthenticatorRepository authenticatorRepository;
-
+    private final SellerRepository sellerRepository;
     @Autowired
     public UserService(UserRepository userRepository, BuyerRepository buyerRepository
-    , AuthenticatorRepository authenticatorRepository) {
+    , AuthenticatorRepository authenticatorRepository, SellerRepository sellerRepository) {
         this.userRepository = userRepository; this.buyerRepository = buyerRepository;
         this.authenticatorRepository = authenticatorRepository;
+        this.sellerRepository = sellerRepository;
     }
 
     public User createUser(User user){
@@ -110,6 +112,10 @@ public class UserService {
         PlatformAdmin platformAdmin = getPlatformAdmin(adminId);
         platformAdmin.addAcceptedRequest(roleRequest);
         userRepository.save(platformAdmin);
+    }
+
+    public List<Seller> getSellers(){
+        return sellerRepository.findAll();
     }
 
     //helper methods
