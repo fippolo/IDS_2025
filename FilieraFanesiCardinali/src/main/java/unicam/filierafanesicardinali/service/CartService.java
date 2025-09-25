@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import unicam.filierafanesicardinali.model.acquisto.Cart;
 import unicam.filierafanesicardinali.model.acquisto.CartItem;
-import unicam.filierafanesicardinali.model.acquisto.orders.Receipt;
 import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.acquisto.orders.Order;
 import unicam.filierafanesicardinali.model.acquisto.orders.Receipt;

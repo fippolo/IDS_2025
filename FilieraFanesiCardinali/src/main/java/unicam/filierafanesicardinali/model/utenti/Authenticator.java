@@ -1,9 +1,7 @@
 package unicam.filierafanesicardinali.model.utenti;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import unicam.filierafanesicardinali.model.prodotti.Product;
 
 import java.util.ArrayList;

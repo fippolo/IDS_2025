@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<?> handleRuntime(RuntimeException e) {
-        // Puoi anche loggare l'errore
+
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST) // o altro codice HTTP
                 .body(Map.of(

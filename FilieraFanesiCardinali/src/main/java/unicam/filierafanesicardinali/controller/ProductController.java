@@ -16,13 +16,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/Product")
 public class ProductController {
-    private final SocialService socialService;
+
     private final ProductService productService;
 
     @Autowired
     public ProductController(ProductService productService, SocialService socialService) {
         this.productService = productService;
-        this.socialService = socialService;
+
     }
 
     @PostMapping

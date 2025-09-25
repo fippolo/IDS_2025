@@ -47,10 +47,10 @@ public class OrderService {
                 .isPaid();
     }
 
-    public Order updateOrderStatus(Long id, boolean status){
+    public void updateOrderStatus(Long id, boolean status){
         Order order = orderRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
         order.setPaid(status);
-        return orderRepository.save(order);
+        orderRepository.save(order);
     }
 }

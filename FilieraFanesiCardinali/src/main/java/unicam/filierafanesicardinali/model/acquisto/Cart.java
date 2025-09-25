@@ -1,7 +1,6 @@
 package unicam.filierafanesicardinali.model.acquisto;
 
 import jakarta.persistence.*;
-import unicam.filierafanesicardinali.model.prodotti.Product;
 
 import java.util.ArrayList;
 import java.util.List;
