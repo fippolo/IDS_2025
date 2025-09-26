@@ -38,10 +38,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable Long id){
-        return ResponseEntity.ok(userService.deleteUser(id));
-    }
+
 
     @GetMapping("/sellers")
     public ResponseEntity<List<Seller>> getAllSellers(){

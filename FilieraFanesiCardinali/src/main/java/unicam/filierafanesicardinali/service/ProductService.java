@@ -18,17 +18,19 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final SimpleProductFactory simpleProductFactory;
     private final BundleFactory bundleFactory;
-    private final SocialService socialService;
+    private final OrderService orderService;
     private final UserService userService;
+    private final CartService cartService;
 
     @Autowired
     public ProductService(ProductRepository productRepository, SimpleProductFactory simpleProductFactory,
-                          BundleFactory bundleFactory, SocialService socialService, UserService userService) {
+                          BundleFactory bundleFactory, UserService userService, OrderService orderService, CartService cartService) {
         this.productRepository = productRepository;
         this.userService = userService;
+        this.orderService = orderService;
         this.simpleProductFactory = simpleProductFactory;
         this.bundleFactory = bundleFactory;
-        this.socialService = socialService;
+        this.cartService = cartService;
     }
 
     public Product createProduct(String name, double price, String description, Position site, boolean isBundle, Long sellerId){
@@ -42,11 +44,9 @@ public class ProductService {
     }
 
     public Product deleteProduct(Long id){
+        orderService.deleteCartItemsByProductId(id);
+        cartService.removeCartItemsByProductId(id);
         Product toDel = getProduct(id);
-        try {
-            socialService.deleteSocialPostByProductId(toDel.getId());
-        }
-        catch(Exception ignored){}
         try {
             userService.removeAuthenticatedProduct(toDel);
         } catch(Exception ignored){}

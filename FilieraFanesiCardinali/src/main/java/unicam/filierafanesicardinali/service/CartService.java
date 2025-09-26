@@ -9,15 +9,18 @@ import unicam.filierafanesicardinali.model.acquisto.orders.Order;
 import unicam.filierafanesicardinali.model.acquisto.orders.Receipt;
 import unicam.filierafanesicardinali.model.utenti.Buyer;
 import unicam.filierafanesicardinali.repository.BuyerRepository;
+import unicam.filierafanesicardinali.repository.CartRepository;
 import unicam.filierafanesicardinali.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CartService {
 
     private final BuyerRepository buyerRepository;
     private final ProductRepository productRepository;
+    private final CartRepository cartRepository;
 
 
     private final OrderService orderservice;
@@ -25,9 +28,10 @@ public class CartService {
 
     @Autowired
     public CartService(BuyerRepository buyerRepository, ProductRepository productRepository
-    , OrderService orderservice, PaymentService paymentService) {
+    , OrderService orderservice, PaymentService paymentService, CartRepository cartRepository) {
         this.buyerRepository = buyerRepository;
         this.productRepository = productRepository;
+        this.cartRepository = cartRepository;
         this.orderservice = orderservice;
         this.paymentService = paymentService;
     }
@@ -82,6 +86,18 @@ public class CartService {
     public List<Cart> getAllCarts() {
         return buyerRepository.findAll().stream().map(Buyer::getCart).toList();
     }
+
+    public void removeCartItemsByProductId(Long id){
+        List<Cart> carts = getCartItemsByProductId(id);
+        for (Cart cart : carts) {
+            boolean changed = cart.getCartItemList().removeIf(item ->
+                    Objects.equals(item.getProduct().getId(), id)
+            );
+            if(changed){
+                cartRepository.save(cart);
+            }
+        }
+    }
     // helper methods
 
     private Buyer getBuyer(Long buyerID) {
@@ -93,4 +109,7 @@ public class CartService {
         return productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
     }
 
+    private List<Cart> getCartItemsByProductId(Long id){
+        return cartRepository.findDistinctBycartItemList_product_id(id);
+    }
 }

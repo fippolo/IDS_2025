@@ -28,4 +28,10 @@ public class OrderController {
     public ResponseEntity<List<Order>> getAllBuyersOrders(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.getBuyersOrders(id));
     }
+
+
+    @GetMapping("/fromCart/{id}")
+    public ResponseEntity<List<Order>> getOrderWithProduct(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.getOrderWithProductId(id));
+    }
 }

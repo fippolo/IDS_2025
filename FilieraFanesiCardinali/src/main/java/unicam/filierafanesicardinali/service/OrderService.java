@@ -9,6 +9,7 @@ import unicam.filierafanesicardinali.model.acquisto.orders.OrderBuilder;
 import unicam.filierafanesicardinali.repository.OrderRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class OrderService {
@@ -52,5 +53,22 @@ public class OrderService {
                 orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
         order.setPaid(status);
         orderRepository.save(order);
+    }
+
+    public List<Order> getOrderWithProductId(Long id){
+        return orderRepository.findDistinctByorderItems_product_id(id);
+    }
+
+
+    public void deleteCartItemsByProductId(Long id){
+        List<Order> orders = getOrderWithProductId(id);
+        for (Order order : orders) {
+            boolean changed = order.getOrderItems().removeIf(item ->
+                    Objects.equals(item.getProduct().getId(), id)
+            );
+            if (changed) {
+                orderRepository.save(order); // save once per order
+            }
+        }
     }
 }

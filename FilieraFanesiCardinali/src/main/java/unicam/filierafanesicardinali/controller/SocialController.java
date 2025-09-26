@@ -26,7 +26,7 @@ public class SocialController {
 
     @PostMapping
     public ResponseEntity<SocialPost> createSocialPost(@RequestBody Long productId) {
-        return ResponseEntity.ok(socialService.createSocialPost(productService.getProduct(productId)));
+        return ResponseEntity.ok(socialService.createSocialPost(productId));
     }
 
     @GetMapping

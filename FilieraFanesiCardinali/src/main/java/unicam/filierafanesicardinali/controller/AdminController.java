@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.controller.DTO.RoleRequestDTO;
 import unicam.filierafanesicardinali.model.ruoli.RoleRequest;
+import unicam.filierafanesicardinali.model.utenti.User;
 import unicam.filierafanesicardinali.service.AdminService;
 
 import java.util.List;
@@ -42,5 +43,10 @@ public class AdminController {
     @GetMapping
     public ResponseEntity<List<RoleRequest>>  getRoleRequests(){
         return ResponseEntity.ok(adminService.getRoleRequests());
+    }
+
+    @DeleteMapping("/{id}/deleteUser")
+    public ResponseEntity<User>  deleteUser(@PathVariable Long id){
+        return ResponseEntity.ok( adminService.deleteUser(id));
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import unicam.filierafanesicardinali.model.localizzazione.Position;
 import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.social.SocialPost;
+import unicam.filierafanesicardinali.service.OrderService;
 import unicam.filierafanesicardinali.service.ProductService;
 import unicam.filierafanesicardinali.controller.DTO.ProductCreateRequest;
 import unicam.filierafanesicardinali.service.SocialService;
@@ -18,11 +19,11 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-
+    private final OrderService orderService;
     @Autowired
-    public ProductController(ProductService productService, SocialService socialService) {
+    public ProductController(ProductService productService, OrderService orderService) {
         this.productService = productService;
-
+        this.orderService = orderService;
     }
 
     @PostMapping
@@ -33,6 +34,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable Long id) {
+
         return ResponseEntity.ok(productService.deleteProduct(id));
     }
 

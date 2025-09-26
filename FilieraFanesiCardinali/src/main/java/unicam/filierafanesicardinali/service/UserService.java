@@ -8,10 +8,7 @@ import unicam.filierafanesicardinali.model.prodotti.Product;
 import unicam.filierafanesicardinali.model.ruoli.RoleRequest;
 import unicam.filierafanesicardinali.model.ruoli.UserRole;
 import unicam.filierafanesicardinali.model.utenti.*;
-import unicam.filierafanesicardinali.repository.AuthenticatorRepository;
-import unicam.filierafanesicardinali.repository.BuyerRepository;
-import unicam.filierafanesicardinali.repository.SellerRepository;
-import unicam.filierafanesicardinali.repository.UserRepository;
+import unicam.filierafanesicardinali.repository.*;
 
 import java.util.List;
 
@@ -21,10 +18,12 @@ public class UserService {
     private final BuyerRepository buyerRepository;
     private final AuthenticatorRepository authenticatorRepository;
     private final SellerRepository sellerRepository;
+
     @Autowired
     public UserService(UserRepository userRepository, BuyerRepository buyerRepository
     , AuthenticatorRepository authenticatorRepository, SellerRepository sellerRepository) {
-        this.userRepository = userRepository; this.buyerRepository = buyerRepository;
+        this.userRepository = userRepository;
+        this.buyerRepository = buyerRepository;
         this.authenticatorRepository = authenticatorRepository;
         this.sellerRepository = sellerRepository;
     }
@@ -56,11 +55,8 @@ public class UserService {
         };
     }
 
-    public User deleteUser(Long id){
-        User user = getUser(id);
-        userRepository.deleteById(user.getId());
-        user.setInvites(null);
-        return user;
+    public void removeUser(Long id){
+        userRepository.deleteById(id);
     }
 
     public Product addProductToSeller(Long sellerId, Product product){
@@ -108,11 +104,9 @@ public class UserService {
         authenticatorRepository.save(authenticator);
     }
 
-    public void addRoleRequestToAdmin(Long adminId, RoleRequest roleRequest){
-        PlatformAdmin platformAdmin = getPlatformAdmin(adminId);
-        platformAdmin.addAcceptedRequest(roleRequest);
-        userRepository.save(platformAdmin);
-    }
+
+
+
 
     public List<Seller> getSellers(){
         return sellerRepository.findAll();
@@ -126,12 +120,8 @@ public class UserService {
         } else { throw new RuntimeException("User is not an authenticator"); }
     }
 
-    private PlatformAdmin getPlatformAdmin(Long id){
-        User user = getUser(id);
-        if(user instanceof PlatformAdmin){
-            return (PlatformAdmin) user;
-        } else  { throw new RuntimeException("User is not an platform admin"); }
-    }
+
+
 
     @PostConstruct
     public void init(){

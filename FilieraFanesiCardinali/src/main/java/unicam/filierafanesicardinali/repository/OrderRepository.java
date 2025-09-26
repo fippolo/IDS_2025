@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<List<Order>> findByIdBuyer(Long id);
+    List<Order> findDistinctByorderItems_product_id(Long id);
 }
