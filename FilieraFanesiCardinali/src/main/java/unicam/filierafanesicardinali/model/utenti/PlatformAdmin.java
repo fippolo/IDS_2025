@@ -26,7 +26,8 @@ public class PlatformAdmin extends User{
         acceptedRequestsList.add(roleRequest);
     }
 
-    public void removeRoleRequestFromUserId(Long id){
-        acceptedRequestsList.removeIf(roleRequest -> roleRequest.getUser().getId().equals(id));
+
+    public void removeRoleRequestFromId(Long id){
+        acceptedRequestsList.removeIf(roleRequest -> roleRequest.getId().equals(id));
     }
 }

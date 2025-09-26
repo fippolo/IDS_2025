@@ -6,5 +6,5 @@ import unicam.filierafanesicardinali.model.utenti.PlatformAdmin;
 import java.util.List;
 
 public interface AdminRepository extends JpaRepository<PlatformAdmin, Long> {
-    List<PlatformAdmin> findByAcceptedRequestsListUserId(Long userId);
+    List<PlatformAdmin> findByAcceptedRequestsListId(Long userId);
 }

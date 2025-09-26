@@ -51,41 +51,40 @@ public class AdminService {
         addRoleRequestToAdmin(adminId, RR);
         return roleRequestRepository.save(RR);
     }
-
-    public RoleRequest deleteRoleRequest(Long roleRequestId){
-        RoleRequest RR = getRoleRequest(roleRequestId);
-        RR.setApproved(false);
-        removeRoleRequestFromUserId(RR.getUser().getId());
-        roleRequestRepository.delete(RR);
-        return RR;
-    }
-
     private void addRoleRequestToAdmin(Long adminId, RoleRequest roleRequest){
         PlatformAdmin platformAdmin = getPlatformAdmin(adminId);
         platformAdmin.addAcceptedRequest(roleRequest);
         adminRepository.save(platformAdmin);
     }
-
-    private List<PlatformAdmin> findPlatformAdminbyRoleRequestUserId(Long id){
-        return adminRepository.findByAcceptedRequestsListUserId(id);
-    }
-
     private PlatformAdmin getPlatformAdmin(Long id){
         return adminRepository.findById(id).orElseThrow(() -> new RuntimeException("Admin not found with id: " + id));
     }
-    public void  removeRoleRequestFromUserId(Long id){
-        List<PlatformAdmin> admins = findPlatformAdminbyRoleRequestUserId(id);
+
+    // deletion logic
+
+    public RoleRequest deleteRoleRequest(Long roleRequestId){
+        RoleRequest RR = getRoleRequest(roleRequestId);
+        RR.setApproved(false);
+        decoupleRoleRequestFromAdmins(RR.getId());
+        roleRequestRepository.delete(RR);
+        return RR;
+    }
+    private void decoupleRoleRequestFromAdmins(Long id){
+        List<PlatformAdmin> admins = adminRepository.findByAcceptedRequestsListId(id);
         for (PlatformAdmin admin : admins) {
-            admin.removeRoleRequestFromUserId(id);
+            admin.removeRoleRequestFromId(id);
             adminRepository.save(admin);
         }
-        roleRequestRepository.deleteByUserId(id);
     }
+
     public User deleteUser(Long id){
         User user = userService.getUser(id);
-        removeRoleRequestFromUserId(id);
-        userService.removeUser(user.getId());
+        List<RoleRequest> roleRequests = roleRequestRepository.findByUserId(id);
+        for(RoleRequest request : roleRequests){
+            deleteRoleRequest(request.getId());
+        };
         user.setInvites(null);
+        userService.removeUser(user.getId());
         return user;
     }
 
